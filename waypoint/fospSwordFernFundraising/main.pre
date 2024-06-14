@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Research Fundraising </title>
+    <!--  link rel="stylesheet" href="fosp.css" -->
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/waypoints/2.0.2/waypoints.min.js'></script>
+    <script src="fosp.js"></script>
+<style>
+
+body{
+   margin: 0px;
+   margin-top: 0px;
+   margin-bottom: 1000px;
+   font-family: "New York Times-Roman";
+   font-size: 22px;
+   height: 100vh;
+   }
+
+img{
+  max-width: 100%;
+  width: 100%;
+  }
+
+#mainDiv{
+  padding: 10px;
+  }
+#textDiv{
+    width: 20%;
+   border: 1px solid black;
+   border-radius: 10px;
+   height: 300px;
+   display: inline-block;
+   position: fixed;
+   top: 10%;
+   left: 3%;
+   padding: 10px;
+   float: left;
+
+   }
+#imageDiv{
+   display: inline-block;
+   margin-left: 30%;
+   }
+
+</style>
+
+</head>
+<body>
+<div id="mainDiv">
+<h2> Sword Fern Die-Off Research Fundraising</h2>
+  <div id="textDiv" ></div>
+  <div id="imageDiv">
+   
+m4_include(section1.html)
+m4_include(section2.html)
+m4_include(section2a.html)
+m4_include(section2b.html)
+m4_include(section2c.html)
+m4_include(section4.html)
+m4_include(section5.html)
+</div>
+</div>
+</body>
+
+

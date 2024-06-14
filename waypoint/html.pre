@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Research Fundraising </title>
+    <!--  link rel="stylesheet" href="fosp.css" -->
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/waypoints/2.0.2/waypoints.min.js'></script>
+    <script src="app.js"></script>
+<style>
+
+body{
+   margin: 0px;
+   margin-top: 0px;
+   margin-bottom: 1000px;
+   font-family: "New York Times-Roman";
+   font-size: 22px;
+   height: 100vh;
+   }
+
+img{
+  max-width: 100%;
+  width: 100%;
+  }
+
+h3{
+   text-align: center;
+   }
+
+.includedTextBlock{
+    margin: 100px;
+    margin-top: 30px;
+    font-size: 24px;
+    //border: 1px solid gray;
+    //border-radius: 10px;
+}
+
+#mainDiv{
+  padding: 10px;
+  }
+#textDiv{
+   width: 20%;
+   border: 1px solid black;
+   border-radius: 10px;
+   height: 300px;
+   display: inline-block;
+   position: fixed;
+   top: 100;
+   left: 30;
+   padding: 10px;
+   }
+#imageDiv{
+   display: inline-block;
+   margin-left: 300px;
+   float: right;
+   }
+
+</style>
+
+</head>
+<body>
+<div id="mainDiv">
+
+  <div id="textDiv" ></div>
+  <div id="imageDiv">
+m4_include(html.txt)   
+
+</div>
+</div>
+</body>
+
+
