@@ -1,0 +1,17 @@
+sections:
+   - section: 0
+     associatedText: "This is the text of a one-page summary
+          inserted into Claude Levi-Strauss's Pensee Sauvage,
+          1962. 'Savage Mind' was the original English translation
+          of the title, revised in the 2021 translatin by Mehlman and Leavitt."
+     mainText: levi-strauss-prospectus.html
+
+   - section: 1
+     associatedText: Concluding lines of Gary Snyder's 1974 poem, Front Lines.
+     mainText: garySnyderFrontLines.html
+   
+   - section: 3
+     associatedText: Warren KingGeorge
+     img:
+     video: "https://www.youtube.com/embed/NRlrcbBItVQ?si=NpiYNEkGbBWx9GaD&amp;start=955&amp;end=957&rel=0"
+        

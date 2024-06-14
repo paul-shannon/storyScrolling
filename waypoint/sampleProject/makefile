@@ -6,7 +6,7 @@ default:
 
 
 fromYaml:
-	python ../readWaypoints.py data.yaml
+	python ../readWaypoints.py story.yaml
 
 assemble:
 	m4 -P ../html.pre > app.html

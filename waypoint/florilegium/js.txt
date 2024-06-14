@@ -1,0 +1,64 @@
+$('#section1').waypoint({
+       handler: function(direction){
+          if(direction === 'down'){
+             $('#textDiv').text("This is the text of a one-page summary inserted into Claude Levi-Strauss's Pensee Sauvage, 1962. 'Savage Mind' was the original English translation of the title, revised in the 2021 translatin by Mehlman and Leavitt.")
+             }
+          },
+      offset: 200
+     })
+$('#section1').waypoint({
+       handler: function(direction){
+          if(direction === 'up'){
+             $('#textDiv').text("This is the text of a one-page summary inserted into Claude Levi-Strauss's Pensee Sauvage, 1962. 'Savage Mind' was the original English translation of the title, revised in the 2021 translatin by Mehlman and Leavitt.")
+             }
+          },
+      offset: '-50%'
+     })
+$('#section2').waypoint({
+       handler: function(direction){
+          if(direction === 'down'){
+             $('#textDiv').text("Concluding lines of Gary Snyder's 1974 poem, Front Lines.")
+             }
+          },
+      offset: 200
+     })
+$('#section2').waypoint({
+       handler: function(direction){
+          if(direction === 'up'){
+             $('#textDiv').text("Concluding lines of Gary Snyder's 1974 poem, Front Lines.")
+             }
+          },
+      offset: '-50%'
+     })
+$('#section3').waypoint({
+       handler: function(direction){
+          if(direction === 'down'){
+             $('#textDiv').text("windfall trail looking east, tim & others")
+             }
+          },
+      offset: 200
+     })
+$('#section3').waypoint({
+       handler: function(direction){
+          if(direction === 'up'){
+             $('#textDiv').text("windfall trail looking east, tim & others")
+             }
+          },
+      offset: '-50%'
+     })
+$('#section4').waypoint({
+       handler: function(direction){
+          if(direction === 'down'){
+             $('#textDiv').text("Warren KingGeorge")
+             }
+          },
+      offset: 200
+     })
+$('#section4').waypoint({
+       handler: function(direction){
+          if(direction === 'up'){
+             $('#textDiv').text("Warren KingGeorge")
+             }
+          },
+      offset: '-50%'
+     })
