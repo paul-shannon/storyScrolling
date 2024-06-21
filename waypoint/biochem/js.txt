@@ -1,0 +1,64 @@
+$('#section1').waypoint({
+       handler: function(direction){
+          if(direction === 'down'){
+             $('#textDiv').text("Tetrahedral CH4 has 109.5 degree angles, average bond length of 0.134 nm")
+             }
+          },
+      offset: 200
+     })
+$('#section1').waypoint({
+       handler: function(direction){
+          if(direction === 'up'){
+             $('#textDiv').text("Tetrahedral CH4 has 109.5 degree angles, average bond length of 0.134 nm")
+             }
+          },
+      offset: '-50%'
+     })
+$('#section2').waypoint({
+       handler: function(direction){
+          if(direction === 'down'){
+             $('#textDiv').text("")
+             }
+          },
+      offset: 200
+     })
+$('#section2').waypoint({
+       handler: function(direction){
+          if(direction === 'up'){
+             $('#textDiv').text("")
+             }
+          },
+      offset: '-50%'
+     })
+$('#section3').waypoint({
+       handler: function(direction){
+          if(direction === 'down'){
+             $('#textDiv').text("")
+             }
+          },
+      offset: 200
+     })
+$('#section3').waypoint({
+       handler: function(direction){
+          if(direction === 'up'){
+             $('#textDiv').text("")
+             }
+          },
+      offset: '-50%'
+     })
+$('#section4').waypoint({
+       handler: function(direction){
+          if(direction === 'down'){
+             $('#textDiv').text("")
+             }
+          },
+      offset: 200
+     })
+$('#section4').waypoint({
+       handler: function(direction){
+          if(direction === 'up'){
+             $('#textDiv').text("")
+             }
+          },
+      offset: '-50%'
+     })

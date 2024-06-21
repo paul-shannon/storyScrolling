@@ -1,0 +1,19 @@
+sections:
+   - section: x
+     associatedText: Tetrahedral CH4 has 109.5 degree angles, average bond length of 0.134 nm
+     mainText: carbonBondingGeometry.html
+     
+   - section: x
+     associatedText: ""
+     mainText: hydrocarbonMolecules.html
+     
+   - section: x
+     associatedText: ""
+     mainText: alcohols.html
+     
+   - section: x
+     associatedText: ""
+     mainText: cholesterol.html
+     
+
+ 
