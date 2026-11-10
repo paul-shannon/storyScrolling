@@ -30,19 +30,29 @@ def writeHTML(x, divID):
        img = x['img']
        if(img != None):
           if(len(x['img'].strip()) > 0):
-             s += "%s\n" % x['img']
+             s += x['img']
+             # s += "<img src='%s'>" % x['img']
 
     if('video' in x.keys()):
        video = x['video']
+       print("video: %s" % video)
        if(video != None):
-          if (len(x['video'].strip()) > 0):
+          if(len(video) > 0):
+             s += """<video width='800' controls preload muted>
+                      <source src="%s">
+                    </video>""" % video
+
+    if('youtube' in x.keys()):
+       video = x['youtube']
+       if(video != None):
+          if (len(x['youtube'].strip()) > 0):
              s += """<iframe width="1200" height="800"
-  src="%s"
-  title="YouTube video player" frameborder="0" allow="accelerometer;
-  autoplay; clipboard-write; encrypted-media; gyroscope;
-  picture-in-picture; web-share"
-  referrerpolicy="strict-origin-when-cross-origin"
-  allowfullscreen></iframe>""" % x['video']
+                      src="%s"
+                      title="YouTube video player" frameborder="0" allow="accelerometer;
+                      autoplay; clipboard-write; encrypted-media; gyroscope;
+                      picture-in-picture; web-share"
+                      referrerpolicy="strict-origin-when-cross-origin"
+                      allowfullscreen></iframe>""" % video
 
     if('link' in x.keys()):
        link = x['link']
@@ -64,7 +74,7 @@ def writeJavascript(x, divID):
    s = """$('%s').waypoint({
        handler: function(direction){
           if(direction === 'down'){
-             $('#textDiv').text("%s")
+             $('#textDiv').html("%s")
              }
           },
       offset: 200
@@ -73,7 +83,7 @@ def writeJavascript(x, divID):
    s += """$('%s').waypoint({
        handler: function(direction){
           if(direction === 'up'){
-             $('#textDiv').text("%s")
+             $('#textDiv').html("%s")
              }
           },
       offset: '-50%%'
@@ -107,4 +117,4 @@ with open(outfile, 'w') as f:
       s = writeJavascript(section, nextDiv)
       f.write(s)
    
- 
+print("wrote %s" % outfile) 
