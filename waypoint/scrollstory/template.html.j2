@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{{ title }}</title>
+<link rel="icon" href="data:,">
+<link rel="stylesheet" href="story.css">
+</head>
+<body>
+<div id="progress" aria-hidden="true"></div>
+{% macro media_html(m) -%}
+  {%- if m.ok -%}
+    {%- if m.video -%}<video src="{{ m.video }}"{% if m.poster %} poster="{{ m.poster }}"{% endif %} muted loop playsinline preload="metadata" aria-label="{{ m.alt }}"></video>
+    {%- elif m.img -%}<img src="{{ m.img }}" alt="{{ m.alt }}" loading="lazy">
+    {%- elif m.youtube -%}<iframe src="https://www.youtube.com/embed/{{ m.youtube }}?rel=0{% if m.start %}&amp;start={{ m.start }}{% endif %}{% if m.end %}&amp;end={{ m.end }}{% endif %}" title="{{ m.alt or 'Video' }}" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+    {%- endif -%}
+  {%- endif -%}
+{%- endmacro %}
+<main>
+{% for sc in scenes %}
+{%- if sc.layout == 'full' %}
+<section class="scene full" id="{{ sc.id }}" style="{{ sc.style }}">
+  <div class="pin-media">{{ media_html(sc.media) }}</div>
+  <div class="full-text"><h1>{{ sc.heading }}</h1>{% if sc.subheading %}<p>{{ sc.subheading }}</p>{% endif %}</div>
+</section>
+{%- elif sc.layout == 'overlay' %}
+<section class="scene overlay" id="{{ sc.id }}" style="{{ sc.style }}">
+  <div class="pin-media">{{ media_html(sc.media) }}</div>
+  <div class="steps">
+    {%- for s in sc.steps %}
+    <article class="step card">{{ s.html|safe }}{% if s.note %}<p class="note">{{ s.note }}</p>{% endif %}</article>
+    {%- endfor %}
+  </div>
+</section>
+{%- elif sc.layout == 'split' %}
+<section class="scene split" id="{{ sc.id }}">
+  <div class="pin-media">{{ media_html(sc.media) }}</div>
+  <div class="col">
+    {%- for s in sc.steps %}
+    <article class="step">{{ s.html|safe }}{% if s.note %}<p class="note">{{ s.note }}</p>{% endif %}</article>
+    {%- endfor %}
+  </div>
+</section>
+{%- else %}
+<section class="scene reading" id="{{ sc.id }}">
+  <div class="col">
+    {%- for s in sc.steps %}
+    <article class="step">{{ s.html|safe }}{% if s.note %}<p class="note">{{ s.note }}</p>{% endif %}</article>
+    {%- endfor %}
+  </div>
+</section>
+{%- endif %}
+{% endfor %}
+</main>
+<script src="story.js"></script>
+</body>
+</html>

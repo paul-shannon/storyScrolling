@@ -1,0 +1,43 @@
+title: Florilegium
+scenes:
+  - layout: full
+    id: title
+    fallback: "linear-gradient(160deg, #18261f, #2e4a3c)"
+    heading: Florilegium
+    subheading: Passages gathered from the green world
+
+  - layout: overlay
+    id: snyder
+    fallback: "linear-gradient(180deg, #1b2a3a, #0f1a14)"
+    media: {img: media/night-forest.jpg, alt: "Forest at night, trunks dark against the sky"}   # drop your own photo here
+    steps:
+      - text: ../florilegium/garySnyderFrontLines.html
+        note: Concluding lines of Gary Snyder's 1974 poem, Front Lines.
+
+  - layout: reading
+    id: rexroth
+    steps:
+      - text: ../florilegium/kennethRexrothPoetics.html
+        note: Quoted in David Hinton, The Wilds of Poetry, p. 76.
+
+  - layout: overlay
+    id: mitochondria
+    fallback: "linear-gradient(180deg, #2a1b33, #120d18)"
+    media: {img: media/mitochondria.webp, alt: "Illustration accompanying the passage on mitochondrial membranes"}
+    steps:
+      - text: text/mitochondria.md
+        note: Nick Lane, Transformer - The Deep Chemistry of Life and Death, p. 66.
+
+  - layout: split
+    id: big-trees
+    media:
+      - video: https://sewardpark.org/wp-content/uploads/2025/03/bigTree-7.mov
+        controls: true
+        muted: true
+        alt: "Video of the mature Douglas-fir"
+      - youtube: NRlrcbBItVQ
+        start: 955
+        end: 957
+        alt: "The mature Douglas-fir of the Seward Park peninsula"
+    steps:
+      - text: text/big-trees.html

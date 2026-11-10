@@ -1,0 +1,79 @@
+--- note 2, showing how to add a <video> link
+
+Your `<video>` is now supported, and a scene can hold it, the YouTube embed, or both. I rebuilt the page and the output contains the `<video>` tag, its `<source>`, and the YouTube iframe. As before, I haven't played it in a browser. The changes are in `story.yaml`, `template.html.j2`, `build.py`, `story.css` and `story.js`.
+
+In `story.yaml`, the Big Trees scene now lists both items, stacked in the pinned panel:
+
+```yaml
+    media:
+      - video: https://sewardpark.org/wp-content/uploads/2025/03/bigTree-7.mov
+        controls: true
+        muted: true
+        alt: "Video of the mature Douglas-fir"
+      - youtube: NRlrcbBItVQ
+        start: 955
+        end: 957
+```
+
+Drop either entry to show just one. A remote video link needs no CORS setup, because the browser's `<video>` element can play a file from another site. The options are:
+- **`controls: true`** gives a player the reader controls. Without it, a video is a muted looping background that plays only while its scene is on screen.
+- **`muted: true`** matches your original snippet. The reader can unmute.
+- **`poster:`** is an optional still image shown before play. I'd add one, since iPhones often show a blank frame without it.
+
+Two differences from your HTML, both deliberate:
+- **`preload="metadata"`** replaces your bare `preload`. A bare `preload` means "download it all", which would pull a large `.mov` over a phone connection as soon as the page loaded. Metadata mode fetches only the start.
+- **Reader-controlled videos never autoplay.** They also pause when scrolled out of view.
+
+I left the `<source>` without a `type` attribute, as in your snippet. A `type="video/quicktime"` attribute can make Chrome skip the file.
+
+**The format is the main risk.** A `.mov` from an iPhone is often HEVC, which won't play in Chrome or Firefox, and a regular H.264 `.mov` plays in most browsers but isn't guaranteed everywhere. Check it with:
+
+```bash
+ffprobe -v error -show_entries stream=codec_name -of csv=p=0 bigTree-7.mov
+```
+
+If you see `hevc`, or want a smaller file and fast start, make a web copy and a poster frame:
+
+```bash
+ffmpeg -i bigTree-7.mov -c:v libx264 -crf 23 -preset slow -c:a aac -movflags +faststart bigTree-7.mp4
+ffmpeg -ss 5 -i bigTree-7.mov -frames:v 1 bigTree-7-poster.jpg
+```
+
+Then point `video:` at the `.mp4` and add `poster:`. Hosting the video
+on sewardpark.org keeps it independent of your story site, but the
+page depends on that file staying at that address.
+
+
+
+--- first demo (10 nov 2026)
+
+I've built the starter as a `scrollstory/` folder, and it builds, but I haven't opened the page in a browser, so the look and the scrolling are untested. Put the folder inside your `waypoint/` directory, next to `florilegium/`, so the relative paths work. The build output confirms five scenes, and the JavaScript passes a syntax check.
+
+```bash
+pip install jinja2 markdown pyyaml
+cd waypoint/scrollstory
+make all        # link media, build index.html, serve at http://localhost:4441
+```
+
+Keep `make` in that folder and open it over `http://localhost`, not `file://`, so the YouTube video loads.
+
+The five scenes use your florilegium passages:
+1. **Title** (`full` layout): a gradient with the heading.
+2. **Snyder, "Front Lines"** (`overlay`): the poem sits on a card over a pinned full-bleed image.
+3. **Rexroth** (`reading`): a plain paper column with no media, as the poem and the essay passages want.
+4. **Nick Lane on mitochondria** (`overlay`): your `mitochondria.webp` is pinned behind the card.
+5. **Big Trees, Burned Bark** (`split`): your side-by-side layout with the YouTube video (`start: 955`, `end: 957`, the 2-second range from your commented-out line) and the passage.
+
+**What's missing.** Your repo has one image, `mitochondria.webp`, and no local video. The Snyder scene points to `media/night-forest.jpg`, which doesn't exist. The build reports it and the scene falls back to a dark gradient. Drop any photo or `.mp4` into `media/` (the makefile links it to `../florilegium/img`) and set the `img:` or `video:` field in `story.yaml`. For a video, add `poster:` as well. Videos play muted and only while their scene is on screen, and they stay still if the visitor prefers reduced motion.
+
+**How it works**
+- **Text:** Passages come from your existing HTML fragments, from new `.md` files, or from the Big Trees text I extracted out of your old YAML.
+- **Active card:** The card nearest the middle of the screen brightens and the others fade. Without JavaScript, everything stays fully readable.
+- **Progress bar:** The thin bar at the top follows the page scroll using CSS only. Firefox doesn't show it yet, which is harmless.
+- **Layouts:** Each scene's `layout:` field picks `full`, `overlay`, `reading` or `split`. Adding a new one means one block in `template.html.j2` and some rules in `story.css`.
+
+Things worth checking when you first open it: whether the cards have
+enough contrast on your real photos, how long the 55vh gaps between
+cards feel, and whether the sticky image behaves on your phone and
+iPad. If any of these look wrong, tell me what you see and I'll
+adjust.
