@@ -1,12 +1,44 @@
 <div id='section1'>
 <div class="includedTextBlock">
+  <h4>Neil Claremon asks: </h4>
+<p>
+
+Don't you think reality is an aggregate, an accretion of the
+perceptions of all creatures?
+
+
+<p>
+
+</div>
+
+</div>
+<div id='section2'>
+<div class="includedTextBlock">
+<hr>
+<h4>Contra Kant</h4>
+The grandiosity of Kant's transcendental deduction - that,
+after Hume woke him from his slumbers, he realized he had no
+foundation for knowledge.  He promoted human biological/cultural
+a prioris (time, Euclidean space, causality) to transcendence.
+And humankind to autonomy.
+<p>
+
+</div>
+
+
+</div>
+<div id='section3'>
+<div class="includedTextBlock" style="height: 2000px">
   <h3> Wild Thought</h3>
 "Wild thought" and not "the thought of wild men." For this book
 departs from traditional ethnology in taking as its theme a universal
 aspect of the human mind: thought in its wild state, flourishing in
-every human mind -contemporary or ancient, near or far-insofar as it
-has not been cultivated and domesticated to increase its yield.
-<p>
+every human mind - contemporary or ancient, near or far - insofar as it
+has
+  <blockquote><i><b>not been cultivated and domesticated to increase its
+    yield.</i></b>
+  </blockquote>
+
 <p>  
 Certainly, one can seek examples of wild thought among societies
 without writing and without machines; even here, this thought
@@ -31,7 +63,51 @@ real, and that for this very reason permitted men to grasp it.
 </div>
 
 </div>
-<div id='section2'>
+<div id='section4'>
+<div class="includedTextBlock">
+  <hr>
+
+  <h4>Kenneth Rexroth: Identity with a beneficient environment</h4>
+
+  
+  Western European man characteristically regards himself not only as an
+  independent entity in a fundamentally hostile environment but as the
+  relatively permanent factor in a perishing world and the sole source in it of
+  value. Most Western European poetry is, even in its erotic lyric "Gather ye
+  rosebuds while ye may" concerned with the tragedy of the waste of value in a
+  world of fact.
+
+  <p>There is nothing of this in American Indian poetry. The intense
+  aesthetic realization which precedes the poem is a realization of identity
+  with a beneficent environment. Often this is focused in a dream or vision,
+  waking or sleeping, after long lonely fast and vigil in the forest or
+  desert. An aspect of the environment, an animal or a natural object or force,
+  appears to the Indian, waiting in a trance state, and gives him the song,
+  which remains his most precious possession and the pivot of his life forever
+  after. As such, however simple, these songs always express mutual acceptance
+  and approval of the self and the other, focused but also generalized,
+    amounting to identification.
+
+    <p>In other words, the holy is not the
+  Judeo-Protestant "utterly other" a term of Otto's but the utterly same. They
+  also express the accompanying emotional state - a feeling of extraordinarily
+  intense hyperesthesia, concentration of all faculties in one realization, and
+  the emotional tone of the realization itself - what we call transfiguration
+  and transcendence - the kind of general sacramentalism we identify with
+  St. Francis's Canticles and certain poems of Wordsworth or Francis James.
+
+      (from David Hinton, The Wilds of Poetry, p76, quoted
+      <a href="https://www.bopsecrets.org/rexroth/indiansongs.htm"
+         target="_blank">here</a>.
+
+    <p> Essay is from Rexroth's "Assays", excerpted at some length
+      in a
+      <a href="https://poemsandpoetics.blogspot.com/2009/10/kenneth-resroth-american-indian-songs.html"
+      target="_blank">blogpost</a> by Jerome Rothenberg.
+</div>
+
+</div>
+<div id='section5'>
 <div class="includedTextBlock">
 
   <hr>
@@ -49,16 +125,95 @@ Gary Snyder
 </div>
 
 </div>
-<div id='section3'>
-<img src="windfall-2019-looking-east-100-women-who-care.png">
+<div id='section6'>
+<div class="includedTextBlock">
+
+  <hr>
+<h3>Mitochondrial Energetics</h3>
+
+<div>
+<img style="display: block;
+            margin: 0 auto;
+            width: 800px;
+            max-width: 100%; /* Keeps it responsive on mobile */
+            height: auto"
+     src="img/mitochondria.webp">
+</div>
+<p>
+If we were to iron out all the mitochondrial membranes in the body,
+all 50 trillion of them, so that they were flat, they would cover an
+area equivalent to about four football pitches (7 acres) - all charged
+with the power of a bolt of lightning (3 million volts per square
+foot).
+
 
 </div>
-<div id='section4'>
-<iframe width="1200" height="800"
-  src="https://www.youtube.com/embed/NRlrcbBItVQ?si=NpiYNEkGbBWx9GaD&amp;start=955&amp;end=957&rel=0"
-  title="YouTube video player" frameborder="0" allow="accelerometer;
-  autoplay; clipboard-write; encrypted-media; gyroscope;
-  picture-in-picture; web-share"
-  referrerpolicy="strict-origin-when-cross-origin"
-  allowfullscreen></iframe>
+
+</div>
+<div id='section7'>
+<div class="includedTextBlock" style="height:1800px">
+
+<h3>Thinking with an old-growth forest</h3>
+
+<div style="margin: 100px; margin-top: 20px; margin-bottom: 0">
+<center>
+  <video controls preload muted>
+    <source src="https://sewardpark.org/wp-content/uploads/2025/03/bigTree-7.mov">
+  </video>
+</center>
+</div>
+<p>
+
+  We humans tend to think with, and to use metaphors inspired by the
+  compelling items in our environment, especially when novel -
+  surprising - and   powerful.  They excite analogies which sometimes then
+  diffuse through the culture, picked up as explanatory
+  strategies in other domains.  Our imaginations
+  are shaped by the compelling objects, forces, processes that surround us.  This is, to
+  adopt the term, the <b>imaginary</b> in which we live.  It is various, it is historical,
+  yet trends over time can be seen. 
+
+  <p>
+  Trees and forests in urban life are rarely surprising, powerful or
+  compelling.
+  <p>
+  But Seward Park's urban old-growth forest can be all three.
+
+  <p> Here are a few examples of this phenomenon.  I suggest we
+  should add this old-growth forest to the list.
+
+  <ul>
+    <li> Aristotle:  his close study of the animals in bay of Kallonis on the Greek
+      island of Lesbos, shaped the "biological" metaphysics for which he is known.
+    <li> Darwin:  Lyell's uniformitarianism, the lands visited during his
+      five years sailing on the Beagle, Malthus on population all influenced his evolutionary ideas.
+    <li> Freud:  the energy flows and regulation in the steam engine,
+    along with 19th century advances in hydraulics, offered models for the human mind.
+    <li> Cogntive psychology: brains were modeled after computers.
+   </ul>
+<p>
+In the last 500 years, with Luther's and Calvin's Reformation, the
+rise of early capitalism, the nation state, and the growing presence
+of machines in our lives, we have new imaginaries to think with.
+
+<p>
+
+Especially for urban citizens of techological cultures, who live in
+an almost entirely human-built world, with straight lines everywhere - the
+carpentered environment - often, too often perhaps,  where the primary
+forces and agents of change are human.   One common imaginary
+of the present day is organized around buying and selling, humans as
+customers, everything a commodity best understood in terms of its
+value in the market.  Something special is attributed to humans; all
+other species are ancillary, surbordinate, of only passing interest.
+
+<p> But just down the hill, a fifteen minute walk, lies quite a different "compelling
+item", one that draws my attention, and which I use to think with. It
+provides metaphors which guide me, models to reason with: 120 acres of
+Douglas-Fir old-growth forest.  In what follows I explore this forest
+and I explore the imaginary it has shaped in me.
+
+
+</div>
+
 </div>

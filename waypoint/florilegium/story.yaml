@@ -1,17 +1,64 @@
 sections:
+   - section: x
+     associatedText: Novelist Jim Harrison quotes Neil Claremon, in
+       his foreword to Robert Bringhurt's Tree of Meaning -
+       Language, Mind and Ecology.
+     mainText: neilClaremonAnswersKant.html
+
+
+   - section: x
+     associatedText: need to track down sources
+     mainText: contraKant.html
+
+
    - section: 0
      associatedText: "This is the text of a one-page summary
           inserted into Claude Levi-Strauss's Pensee Sauvage,
           1962. 'Savage Mind' was the original English translation
           of the title, revised in the 2021 translatin by Mehlman and Leavitt."
      mainText: levi-strauss-prospectus.html
-
+   - section: 5
+     associatedText: kenneth rexroth once described the source of Native
+         American poetry   in a way that perfectly describes the source of
+         his own mountain poems (from david hinton, the wilds of poetry, p76)
+     mainText: kennethRexrothPoetics.html
+   
    - section: 1
      associatedText: Concluding lines of Gary Snyder's 1974 poem, Front Lines.
      mainText: garySnyderFrontLines.html
    
+   - section: 2
+     associatedText: From Transformer - The Deep Chemistry of Life and Death, Nick
+       Lane, p66
+     mainText: mitochondriaStretchedOutFlat.html
+   
+#   - section: 3
+#     associatedText: Warren KingGeorge
+#     youtube: "https://www.youtube.com/embed/NRlrcbBItVQ?si=NpiYNEkGbBWx9GaD&amp;start=955&amp;end=957&rel=0"
+
    - section: 3
-     associatedText: Warren KingGeorge
-     img:
-     video: "https://www.youtube.com/embed/NRlrcbBItVQ?si=NpiYNEkGbBWx9GaD&amp;start=955&amp;end=957&rel=0"
-        
+     associatedText: "<h3>Big Trees, Burned Bark</h3>
+          Doug-firs start out as tiny seedlings – like the one
+          pictured below – taking root in bare ground beneath an open
+          sky after a stand-replacing fire.  They then live for
+          centuries. <p>After 200 years, with thick furrowed bark, they
+          can survive all but the most severe fires.  <p>The mature tree
+          in the video, like many of its cousins, started life on the
+          Seward (Lushootseed “sbəqʷábs“) peninsula after a huge
+          regional fire in 1508. <p>The seedling pictured above shows
+          how our big firs looked one year after that fire, sprouting
+          on bare ground in mineralize soil beneath an open sky. In
+          the concluding drone shot, our tree is at the center with a
+          broken top, other big firs all around. <p>Another regional
+          fire – not quite so severe – followed two hundred years
+          later, in 1701. Our “class of 1500” firs had by then
+          acquired thick, fire-resistant, deeply furrowed bark.  This
+          second fire left the burn marks which we see today, 300
+          years later. Almost everything else burned to the ground in
+          that 1701 fire. <p>A hundred firs and a few cedars
+          survived. The woody rhizomes of sword ferns, tucked away
+          safely underground, probably allowed them to survive the
+          fire as well."
+     mainText: thinkingWithTheForest.html
+
+
