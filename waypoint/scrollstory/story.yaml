@@ -30,6 +30,11 @@ scenes:
 
   - layout: split
     id: big-trees
-    media: {youtube: NRlrcbBItVQ, start: 955, end: 957, alt: "The mature Douglas-fir of the Seward Park peninsula"}
+    media:
+      - video: https://sewardpark.org/wp-content/uploads/2025/03/bigTree-7.mov
+        controls: false
+        muted: true
+        loop: true
+        alt: "Video of Douglas-fir life history"
     steps:
       - text: text/big-trees.html

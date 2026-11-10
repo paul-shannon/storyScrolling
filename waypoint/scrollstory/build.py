@@ -24,13 +24,15 @@ def main(yaml_file):
     for i, sc in enumerate(story['scenes']):
         sc.setdefault('id', f'scene{i + 1}')
         sc['style'] = '--fallback: %s' % sc.get('fallback', '#1f2d26')
-        m = sc.setdefault('media', {}) or {}
-        m.setdefault('alt', '')
-        m['ok'] = bool(m.get('youtube'))
-        for key in ('video', 'img'):
-            if m.get(key):
-                if exists(m[key]): m['ok'] = True
-                else: print(f'  MISSING media: {m[key]} (scene "{sc["id"]}" uses its fallback background)')
+        raw = sc.get('media') or {}
+        sc['medias'] = raw if isinstance(raw, list) else [raw]      # a scene may hold one item or a list
+        for m in sc['medias']:
+            m.setdefault('alt', '')
+            m['ok'] = bool(m.get('youtube'))
+            for key in ('video', 'img'):
+                if m.get(key):
+                    if exists(m[key]): m['ok'] = True
+                    else: print(f'  MISSING media: {m[key]} (scene "{sc["id"]}" uses its fallback background)')
         for s in sc.get('steps') or []:
             s['html'] = text_of(s['text'])
     env = Environment(loader=FileSystemLoader(str(here)), autoescape=True)

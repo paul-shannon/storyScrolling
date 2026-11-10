@@ -30,7 +30,8 @@ img { max-width: 100%; height: auto; }
 
 /* split: pinned media left, text right (the old layout, kept as an option) */
 .split { display: grid; grid-template-columns: 1fr 1fr; }
-.split .pin-media { position: sticky; top: 0; height: 100vh; display: flex; align-items: center; padding: 2rem; }
+.split .pin-media { position: sticky; top: 0; height: 100vh; display: flex; flex-direction: column; justify-content: center; gap: 1rem; padding: 2rem; }
+.split .pin-media video { width: 100%; height: auto; aspect-ratio: 16 / 9; object-fit: contain; background: #000; }
 .split .pin-media iframe, .split .pin-media img { width: 100%; height: auto; aspect-ratio: 16 / 9; border: 0; }
 .split .col { padding: 14vh 3rem; max-width: 40rem; }
 

@@ -1,6 +1,6 @@
 default:
 	@echo link 
-	@echo digest
+	@echo build
 	@echo server
 	@echo view-local
 	@echo all
@@ -8,7 +8,7 @@ default:
 link:
 	ln -sfn ../florilegium/img media
 
-digest:
+build:
 	python build.py story.yaml
 
 PORT = 4441
@@ -22,4 +22,4 @@ pid:
 view-local:
 	open http://localhost:$(PORT)/
 
-all: link digest view-local
+all: build view-local
