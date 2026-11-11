@@ -99,6 +99,54 @@ $('#section4').waypoint({
           },
       offset: '-50%'
      })
+$('#section5').waypoint({
+       handler: function(direction){
+          if(direction === 'down'){
+             $('#textDiv').text("")
+             }
+          },
+      offset: 200
+     })
+$('#section5').waypoint({
+       handler: function(direction){
+          if(direction === 'up'){
+             $('#textDiv').text("")
+             }
+          },
+      offset: '-50%'
+     })
+$('#section6').waypoint({
+       handler: function(direction){
+          if(direction === 'down'){
+             $('#textDiv').text("")
+             }
+          },
+      offset: 200
+     })
+$('#section6').waypoint({
+       handler: function(direction){
+          if(direction === 'up'){
+             $('#textDiv').text("")
+             }
+          },
+      offset: '-50%'
+     })
+$('#section7').waypoint({
+       handler: function(direction){
+          if(direction === 'down'){
+             $('#textDiv').text("")
+             }
+          },
+      offset: 200
+     })
+$('#section7').waypoint({
+       handler: function(direction){
+          if(direction === 'up'){
+             $('#textDiv').text("")
+             }
+          },
+      offset: '-50%'
+     })
 
 
 })

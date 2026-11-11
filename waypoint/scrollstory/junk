@@ -1,0 +1,11 @@
+	git add   build.py
+	git add   index.html
+	git add   makefile
+	git add   story.css
+	git add   story.js
+	git add   story.yaml
+	git add   template.html.j2
+	git add   text/big-trees.html
+	git rm    text/#big-trees.html#
+   git rm    text/.#big-trees.html
+   

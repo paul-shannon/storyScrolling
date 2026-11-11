@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8"/>
+    <title> waypoints demo </title>
+    <!-- link rel="stylesheet" href="demo.css" -->
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/waypoints/2.0.2/waypoints.min.js'></script>
+    <script src="demo.js"></script>
+<style>
+
+body{
+   margin: 100px;
+   margin-top: 30px;
+   font-family: "New York Times-Roman";
+   font-size: 22px;
+   height: 100%;
+   background: beige;
+   }
+
+div{
+  width: 100%;
+  max-width: fit-content;
+  margin-left: auto;
+  margin-right: auto;
+  height: auto;
+  background: beige;
+  }
+
+.waypointSection{
+  width: 100%;
+  margin-bottom: 50px;
+  height: auto;
+  max-width: fit-content;
+  margin-left: auto;
+  margin-right: auto;
+  height: auto;
+  background: beige;
+
+   }
+
+
+</style>
+
+</head>
+<body>
+
+m4_include(title.html)
+m4_include(deadCrown.html)
+m4_include(intro.html)
+m4_include(sew101-sep22-feb25.html)
+m4_include(researchBegins.html)
+</body>
+</html>

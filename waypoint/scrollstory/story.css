@@ -45,6 +45,13 @@ img { max-width: 100%; height: auto; }
 .note { font-size: .85rem; opacity: .75; font-style: italic; margin-bottom: 0; }
 h3, h4 { margin: .2em 0 .5em; }
 
+/* molecular viewer */
+.ngl-stage { width: 100%; height: 100%; }
+@media (hover: hover) and (pointer: fine) {          /* with a mouse, the molecule can be dragged between the cards */
+  .overlay .steps { pointer-events: none; }
+  .card { pointer-events: auto; }
+}
+
 /* with JavaScript, the step in view is bright and the rest recede; without it everything stays readable */
 html.js .card { opacity: .3; transition: opacity .5s; }
 html.js .card.is-active { opacity: 1; }

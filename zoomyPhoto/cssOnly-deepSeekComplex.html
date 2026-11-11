@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Zoomed Image - Top-Right Quadrant</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+            background: #f0f0f0;
+        }
+        
+        h1 {
+            margin-bottom: 30px;
+            color: #333;
+            text-align: center;
+        }
+        
+        .container {
+            max-width: 800px;
+            width: 100%;
+            margin: 0 auto;
+        }
+        
+        .image-container {
+            overflow: hidden;
+            width: 100%;
+            height: 400px;
+            position: relative;
+            border: 2px solid #333;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            background: #000;
+            margin-bottom: 30px;
+        }
+        
+        .zoomed-image {
+            /* CORRECTED: For top-right quadrant at 2x zoom */
+            transform: scale(2);
+            transform-origin: 100% 0%; /* top-right corner */
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+        
+        .explanation {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            margin-bottom: 20px;
+        }
+        
+        .explanation h2 {
+            margin-bottom: 10px;
+            color: #333;
+        }
+        
+        .explanation p {
+            margin-bottom: 15px;
+            line-height: 1.6;
+            color: #555;
+        }
+        
+        .explanation code {
+            background: #f5f5f5;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-family: monospace;
+            color: #d63384;
+        }
+        
+        .original-image {
+            width: 100%;
+            max-width: 400px;
+            border: 2px solid #333;
+            border-radius: 8px;
+            margin: 20px auto;
+            display: block;
+        }
+        
+        .caption {
+            text-align: center;
+            color: #666;
+            font-style: italic;
+            margin-top: 10px;
+            margin-bottom: 30px;
+        }
+        
+        /* Visual guide overlay to show the quadrant */
+        .quadrant-guide {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 10;
+        }
+        
+        .quadrant-guide::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 50%;
+            width: 2px;
+            height: 100%;
+            background: rgba(255, 0, 0, 0.5);
+        }
+        
+        .quadrant-guide::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: rgba(255, 0, 0, 0.5);
+        }
+        
+        .quadrant-label {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: rgba(255, 255, 255, 0.8);
+            padding: 5px 10px;
+            border-radius: 4px;
+            font-weight: bold;
+            color: #d63384;
+            z-index: 11;
+        }
+        
+        @media (max-width: 600px) {
+            .image-container {
+                height: 300px;
+            }
+            
+            h1 {
+                font-size: 24px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Zoomed Image - Top-Right Quadrant (Corrected)</h1>
+        
+        <div class="explanation">
+            <h2>How it works:</h2>
+            <p>This image is zoomed 2x and shows <strong>only the top-right quadrant</strong>.</p>
+            <p><strong>CSS Properties:</strong></p>
+            <p><code>transform: scale(2);</code> - Zooms the image 2x</p>
+            <p><code>transform-origin: 100% 0%;</code> - Sets the zoom origin to the top-right corner</p>
+            <p>The red lines show the quadrants. We're showing only the top-right section.</p>
+            <p><strong>Why this works:</strong> When we scale from the top-right corner, the image expands in all directions from that point. Since the container hides overflow, we only see the part that fits in the container - which is the top-right quadrant.</p>
+        </div>
+        
+        <div class="image-container">
+            <!-- Replace with your own image URL -->
+            <img src="https://images.unsplash.com/photo-1506744038136-46273834b3fb" 
+                 alt="Zoomed mountain landscape" 
+                 class="zoomed-image">
+            
+            <!-- Visual guide overlay -->
+            <div class="quadrant-guide"></div>
+            <div class="quadrant-label">Top-Right Quadrant</div>
+        </div>
+        
+        <p class="caption">↑ Zoomed 2x, showing ONLY the top-right quadrant ↑</p>
+        
+        <!-- Optional: Show the original image for comparison -->
+        <img src="https://images.unsplash.com/photo-1506744038136-46273834b3fb" 
+             alt="Original mountain landscape" 
+             class="original-image">
+        <p class="caption">Original image for comparison</p>
+    </div>
+    
+    <script>
+        // Optional: Add interactivity to toggle zoom
+        document.addEventListener('DOMContentLoaded', function() {
+            const zoomedImage = document.querySelector('.zoomed-image');
+            const container = document.querySelector('.image-container');
+            const guide = document.querySelector('.quadrant-guide');
+            const label = document.querySelector('.quadrant-label');
+            
+            container.addEventListener('click', function() {
+                const isZoomed = zoomedImage.style.transform !== 'scale(1)';
+                
+                if (isZoomed) {
+                    zoomedImage.style.transform = 'scale(1)';
+                    guide.style.opacity = '0';
+                    label.style.opacity = '0';
+                    container.style.cursor = 'zoom-in';
+                } else {
+                    zoomedImage.style.transform = 'scale(2)';
+                    guide.style.opacity = '1';
+                    label.style.opacity = '1';
+                    container.style.cursor = 'zoom-out';
+                }
+            });
+            
+            container.style.cursor = 'zoom-out';
+        });
+    </script>
+</body>
+</html>

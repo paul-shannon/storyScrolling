@@ -1,4 +1,4 @@
-<div id='section1'>
+<div id='section1' class='sectionDiv'>
 <div class="includedTextBlock">
   <h3> Wild Thought</h3>
 "Wild thought" and not "the thought of wild men." For this book
@@ -31,20 +31,12 @@ real, and that for this very reason permitted men to grasp it.
 </div>
 
 </div>
-<div id='section2'>
+<div id='section2' class='sectionDiv'>
 <img src="hatcheryValleyFromTheSouth-2011-jordanJackson.jpg" width=1200>
-
 </div>
-<div id='section3'>
+<div id='section3' class='sectionDiv'>
 <img src="windfall-2019-looking-east-100-women-who-care.png">
-
 </div>
-<div id='section4'>
-<iframe width="1200" height="800"
-  src="https://www.youtube.com/embed/NRlrcbBItVQ?si=NpiYNEkGbBWx9GaD&amp;start=955&amp;end=957&rel=0"
-  title="YouTube video player" frameborder="0" allow="accelerometer;
-  autoplay; clipboard-write; encrypted-media; gyroscope;
-  picture-in-picture; web-share"
-  referrerpolicy="strict-origin-when-cross-origin"
-  allowfullscreen></iframe>
+<div id='section4' class='sectionDiv'>
+<video width='800' controls> <source src='https://slexildata.artsrn.ualberta.ca/misc/garden/kingGeorgeOnForms-small.mp4' type="video/mp4"> </video>
 </div>

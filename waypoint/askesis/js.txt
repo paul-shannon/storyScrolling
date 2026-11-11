@@ -1,0 +1,64 @@
+$('#section1').waypoint({
+       handler: function(direction){
+          if(direction === 'down'){
+             $('#commentsDiv').text("From the Greek, literally 'exercise', here 'self-formation' is the connation I am after.")
+             }
+          },
+      offset: 300
+     })
+$('#section1').waypoint({
+       handler: function(direction){
+          if(direction === 'up'){
+             $('#commentsDiv').text("From the Greek, literally 'exercise', here 'self-formation' is the connation I am after.")
+             }
+          },
+      offset: '-50%'
+     })
+$('#section2').waypoint({
+       handler: function(direction){
+          if(direction === 'down'){
+             $('#commentsDiv').text("Hazelnut branch")
+             }
+          },
+      offset: 300
+     })
+$('#section2').waypoint({
+       handler: function(direction){
+          if(direction === 'up'){
+             $('#commentsDiv').text("Hazelnut branch")
+             }
+          },
+      offset: '-50%'
+     })
+$('#section3').waypoint({
+       handler: function(direction){
+          if(direction === 'down'){
+             $('#commentsDiv').text("windfall trail looking east, tim & others")
+             }
+          },
+      offset: 300
+     })
+$('#section3').waypoint({
+       handler: function(direction){
+          if(direction === 'up'){
+             $('#commentsDiv').text("windfall trail looking east, tim & others")
+             }
+          },
+      offset: '-50%'
+     })
+$('#section4').waypoint({
+       handler: function(direction){
+          if(direction === 'down'){
+             $('#commentsDiv').text("Warren KingGeorge")
+             }
+          },
+      offset: 300
+     })
+$('#section4').waypoint({
+       handler: function(direction){
+          if(direction === 'up'){
+             $('#commentsDiv').text("Warren KingGeorge")
+             }
+          },
+      offset: '-50%'
+     })

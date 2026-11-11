@@ -1,0 +1,21 @@
+sections:
+
+   - section: 0
+     associatedText: "From the Greek, literally 'exercise', here 'self-formation' is the connation I
+        am after."
+     mainText: intro.html
+     height: 800
+
+   - section: 1
+     associatedText: Hazelnut branch
+     img: <img src="hazelnutInLeaf.png" width=1200>
+     height: 800
+   
+   - section: 2
+     associatedText: windfall trail looking east, tim & others
+     img: <img src="windfall-2019-looking-east-100-women-who-care.png">
+     video:
+   
+   - section: 3
+     associatedText: Warren KingGeorge
+     mp4: "https://slexildata.artsrn.ualberta.ca/misc/garden/kingGeorgeOnForms-small.mp4"

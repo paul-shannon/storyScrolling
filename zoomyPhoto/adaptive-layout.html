@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8"/>
+    <title>adaptive layout</title>
+    <script src="https://code.jquery.com/jquery-3.6.3.min.js"></script>
+<style>
+
+body{
+   margin: 100px;
+   margin-top: 30px;
+   font-family: "New York Times-Roman";
+   font-size: 22px;
+   height: 100%;
+   }
+
+@media (min-width: 800px) {
+
+#main-div-1{
+  display: grid;
+  grid-template-areas:
+    'media'
+    'text';
+  background-color: white;
+  gap: 0px;
+  grid-template-rows: 1fr 1fr 1fr;
+  grid-template-columns: 1fr 1fr 1fr;
+  }
+
+#media-div{
+  grid-area: media;
+  border: 1px solid red;
+  padding: 10px;
+  }
+
+#text-div{
+  grid-area: text;
+  border: 1px solid blue;
+  padding: 10px;
+  }
+
+/* 1: grid-row-start: The starting row line.
+   2: grid-column-start: The starting column line.
+   3: grid-row-end: The ending row line.
+   4: grid-column-end: The ending column line.
+
+      1    2    3
+   -----------------
+1  |     |    |    |
+   |     |    |    |
+   -----------------
+2  |     |    |    |
+   |     |    |    |
+   -----------------
+3  |     |    |    |
+   |     |    |    |
+   -----------------
+
+ */
+
+
+@media (min-width: 800px) {
+   #media  {grid-area 1 1 3 2}
+   #text   {grid-area 1 3 3 3}
+   }
+
+@media (max-width: 799px) {
+   #media  {grid-area 1 1 2 3}
+   #text   {grid-area 3 1 3 3}
+   }
+
+
+
+</style>
+
+<script>
+$(document).ready(function(){
+  console.log("document ready")
+  });
+
+</script>
+
+</head>
+<body>
+
+<div id="main-div-1">
+
+  <div id="media-div">
+    image
+  </div>
+
+  <div id="text-div">
+    text
+   </div>
+
+</div>
+
+</body>
+</html>

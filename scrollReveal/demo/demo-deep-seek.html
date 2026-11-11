@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ScrollReveal.js Interactive Demo</title>
+    <!-- Load ScrollReveal from a CDN (as mentioned in the docs)[citation:1][citation:5] -->
+    <script src="https://unpkg.com/scrollreveal"></script>
+    <style>
+        /* Basic demo styling */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', sans-serif;
+        }
+        body {
+            background: #f5f7fa;
+            color: #333;
+            line-height: 1.6;
+            padding: 20px;
+        }
+        .container {
+            max-width: 800px;
+            margin: 40px auto;
+        }
+        .demo-section {
+            background: white;
+            border-radius: 10px;
+            padding: 40px;
+            margin-bottom: 40px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            /* Initial state to prevent flicker while loading[citation:4] */
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.5s, transform 0.5s;
+        }
+        .demo-section.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        h1, h2, h3 {
+            margin-bottom: 15px;
+            color: #2c3e50;
+        }
+        p {
+            margin-bottom: 20px;
+            font-size: 1.1rem;
+        }
+        .highlight-box {
+            background: #e8f4fc;
+            border-left: 4px solid #3498db;
+            padding: 20px;
+            margin: 25px 0;
+            border-radius: 0 5px 5px 0;
+        }
+        .demo-element {
+            background: #3498db;
+            color: white;
+            padding: 25px;
+            text-align: center;
+            border-radius: 5px;
+            margin: 20px 0;
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+        .controls {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 8px;
+            margin-top: 30px;
+            border: 1px solid #dee2e6;
+        }
+        button {
+            background: #2c3e50;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            margin: 5px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 0.9rem;
+        }
+        button:hover {
+            background: #3498db;
+        }
+        .code-block {
+            background: #2d3436;
+            color: #dfe6e9;
+            padding: 15px;
+            border-radius: 5px;
+            font-family: monospace;
+            margin: 20px 0;
+            overflow-x: auto;
+            font-size: 0.9rem;
+            white-space: pre-wrap;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🔍 ScrollReveal.js Interactive Demo</h1>
+        <p>Scroll down this page to see various animation effects triggered by the ScrollReveal library. Each colored box below has a different configuration.</p>
+        
+        <!-- Demo Section 1: Basic Fade Up (Default) -->
+        <section class="demo-section" id="section1">
+            <h2>1. Basic Default Animation</h2>
+            <p>The default animation fades elements in from the bottom as you scroll[citation:1][citation:5].</p>
+            <div class="demo-element sr-default">Default: Fades up from bottom</div>
+            <div class="highlight-box">
+                <strong>JavaScript Code:</strong>
+                <div class="code-block">ScrollReveal().reveal('.sr-default');</div>
+            </div>
+        </section>
+
+        <!-- Demo Section 2: Custom Origin and Distance -->
+        <section class="demo-section" id="section2">
+            <h2>2. Custom Origin & Distance</h2>
+            <p>You can control the direction and distance of the animation[citation:2][citation:5].</p>
+            <div class="demo-element sr-left" style="background:#e74c3c;">From Left - 100px</div>
+            <div class="demo-element sr-right" style="background:#9b59b6;">From Right - 150px</div>
+            <div class="highlight-box">
+                <strong>JavaScript Code:</strong>
+                <div class="code-block">ScrollReveal().reveal('.sr-left', {
+  distance: '100px',
+  origin: 'left',
+  duration: 1000
+});
+
+ScrollReveal().reveal('.sr-right', {
+  distance: '150px',
+  origin: 'right',
+  duration: 1200
+});</div>
+            </div>
+        </section>
+
+        <!-- Demo Section 3: Rotate and Scale -->
+        <section class="demo-section" id="section3">
+            <h2>3. Rotate & Scale Effects</h2>
+            <p>Elements can also rotate and scale as they enter the viewport[citation:5].</p>
+            <div class="demo-element sr-rotate" style="background:#f39c12;">Rotating Element</div>
+            <div class="demo-element sr-scale" style="background:#1abc9c;">Scaling Element</div>
+            <div class="highlight-box">
+                <strong>JavaScript Code:</strong>
+                <div class="code-block">ScrollReveal().reveal('.sr-rotate', {
+  rotate: { x: 20, y: 20, z: 5 },
+  duration: 1500
+});
+
+ScrollReveal().reveal('.sr-scale', {
+  scale: 0.5,
+  duration: 1200
+});</div>
+            </div>
+        </section>
+
+        <!-- Demo Section 4: Sequential Animation -->
+        <section class="demo-section" id="section4">
+            <h2>4. Sequential Animations</h2>
+            <p>You can stagger animations for multiple elements using the <code>interval</code> option[citation:2][citation:5].</p>
+            <div class="demo-element sr-seq" style="background:#7f8c8d;">Sequence Item 1</div>
+            <div class="demo-element sr-seq" style="background:#7f8c8d;">Sequence Item 2</div>
+            <div class="demo-element sr-seq" style="background:#7f8c8d;">Sequence Item 3</div>
+            <div class="highlight-box">
+                <strong>JavaScript Code:</strong>
+                <div class="code-block">ScrollReveal().reveal('.sr-seq', {
+  interval: 200, // 200ms between each element's start
+  origin: 'bottom'
+});</div>
+            </div>
+        </section>
+
+        <!-- Demo Section 5: Reset and Mobile -->
+        <section class="demo-section" id="section5">
+            <h2>5. Reset on Scroll & Mobile Control</h2>
+            <p>Configure if the animation replays (<code>reset</code>) and whether it works on mobile[citation:5][citation:7].</p>
+            <div class="demo-element sr-reset" style="background:#d35400;">Animates each time you scroll past</div>
+            <div class="highlight-box">
+                <strong>JavaScript Code:</strong>
+                <div class="code-block">ScrollReveal().reveal('.sr-reset', {
+  reset: true, // Animation replays when element leaves/re-enters view
+  mobile: true // Enable animations on mobile devices
+});</div>
+            </div>
+        </section>
+
+        <div class="controls">
+            <h3>Demo Controls</h3>
+            <p>Use these buttons to interact with the demo:</p>
+            <button onclick="resetAnimations()">🔄 Reset All Animations</button>
+            <button onclick="scrollToTop()">⬆️ Scroll to Top</button>
+        </div>
+    </div>
+
+    <script>
+        // Initialize ScrollReveal
+        // The library uses a singleton pattern, so one instance controls everything[citation:1]
+        const sr = ScrollReveal();
+
+        // Prevent initial flicker: show sections once SR is loaded[citation:4]
+        document.addEventListener('DOMContentLoaded', function() {
+            document.querySelectorAll('.demo-section').forEach(section => {
+                section.classList.add('visible');
+            });
+        });
+
+        // 1. Basic Default Animation
+        sr.reveal('.sr-default');
+
+        // 2. Custom Origins
+        sr.reveal('.sr-left', {
+            distance: '100px',
+            origin: 'left',
+            duration: 1000
+        });
+        sr.reveal('.sr-right', {
+            distance: '150px',
+            origin: 'right',
+            duration: 1200
+        });
+
+        // 3. Rotate and Scale
+        sr.reveal('.sr-rotate', {
+            rotate: { x: 20, y: 20, z: 5 },
+            duration: 1500
+        });
+        sr.reveal('.sr-scale', {
+            scale: 0.5,
+            duration: 1200
+        });
+
+        // 4. Sequential Animation
+        sr.reveal('.sr-seq', {
+            interval: 200,
+            origin: 'bottom'
+        });
+
+        // 5. Reset and Mobile
+        sr.reveal('.sr-reset', {
+            reset: true,
+            mobile: true
+        });
+
+        // Control Functions
+        function resetAnimations() {
+            // Destroy and reinitialize to reset all animations
+            sr.destroy();
+            // Re-apply all reveal configurations (in a real scenario, you'd reinitialize)
+            location.reload(); // Simpler for demo purposes
+        }
+        function scrollToTop() {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+    </script>
+</body>
+</html>

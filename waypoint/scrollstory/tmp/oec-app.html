@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Photosystem II with OEC</title>
+<link rel="icon" href="data:,">
+<style>
+  body { margin: 0; font: 16px/1.4 system-ui, sans-serif; display: grid; grid-template-columns: 15rem 1fr; height: 100vh; }
+  #side { padding: .8rem; overflow-y: auto; background: #f3f0e6; }
+  #side h5 { margin: 1rem 0 .3rem; }
+  #side button { margin: 3px 3px 3px 0; padding: .4rem .6rem; font: inherit; background: white; border: 1px solid #888; border-radius: 6px; cursor: pointer; }
+  #side button[aria-pressed="false"] { opacity: .55; }
+  #viewport { width: 100%; height: 100%; }
+  @media (max-width: 700px) { body { grid-template-columns: 1fr; grid-template-rows: auto 1fr; } }
+</style>
+</head>
+<body>
+<div id="side">
+  <button id="demo">Demo</button><button id="fit">Fit</button><button id="spin">Spin start/stop</button>
+  <br><button id="hide">Hide All</button><button id="show">Show All</button>
+  <h5>Show/Hide</h5><div id="toggles"></div>
+  <h5>Zoom To</h5><div id="zooms"></div>
+</div>
+<div id="viewport"></div>
+<script src="https://cdn.jsdelivr.net/npm/ngl@2.4.0/dist/ngl.js"></script>
+<script src="ngl-scene.js"></script>
+<script>
+// the same named components as the Shiny app (oec.R, setup.components)
+const chl = n => ({name: `CLA.${n}`, selection: `[CLA] AND ${n} AND :A`, representation: 'ball+stick', colorScheme: 'element', visible: true});
+const components = [
+  {name: 'A.cartoon',    selection: ':A',          representation: 'cartoon',    colorScheme: 'residueIndex', visible: true},
+  {name: 'A.ballStick',  selection: ':A',          representation: 'ball+stick', colorScheme: 'residueIndex', visible: false},
+  {name: 'OEC.spacefill', selection: 'OEC AND :A', representation: 'spacefill',  colorScheme: 'element',      visible: true},
+  {name: 'OEC.line',     selection: 'OEC AND :A',  representation: 'ball+stick', colorScheme: 'element',      visible: true},
+  chl(348), chl(349), chl(350), chl(352)];
+const scene = new NglScene(document.getElementById('viewport'),
+  {structure: 'rcsb://1S5L', background: 'beige', components});
+const $ = id => document.getElementById(id);
+let spinning = false;
+const setSpin = on => scene.ready.then(() => { spinning = on; scene.spin(on); });
+
+$('demo').onclick = () => scene.apply({center: 'OEC AND :A'}).then(() => setSpin(true));
+$('fit').onclick  = () => scene.apply({fit: true});
+$('spin').onclick = () => setSpin(!spinning);
+$('hide').onclick = () => scene.ready.then(() => { scene.hideAll(); syncButtons(); });
+$('show').onclick = () => scene.ready.then(() => {
+  scene.setVisible(components.map(c => c.name).filter(n => n !== 'A.ballStick'), true); syncButtons(); });
+
+const label = {'A.cartoon': 'A (cartoon)', 'A.ballStick': 'A (ball+stick)', 'OEC.spacefill': 'OEC (spacefill)', 'OEC.line': 'OEC (line)'};
+for (const c of components) {
+  const b = document.createElement('button');
+  b.textContent = label[c.name] || c.name.replace('CLA.', 'CHL ');
+  b.dataset.name = c.name;
+  b.setAttribute('aria-pressed', String(c.visible));
+  b.onclick = () => scene.ready.then(() => { scene.toggle(c.name); syncButtons(); });
+  $('toggles').append(b);
+}
+const zoomTargets = [['A', ':A'], ['OEC', 'OEC AND :A'], ...[348, 349, 350, 352].map(n => [`CHL ${n}`, `[CLA] AND ${n} AND :A`])];
+for (const [text, sele] of zoomTargets) {
+  const b = document.createElement('button');
+  b.textContent = text; b.onclick = () => scene.apply({center: sele}); $('zooms').append(b);
+}
+function syncButtons() {
+  document.querySelectorAll('#toggles button').forEach(b => b.setAttribute('aria-pressed', String(scene.isVisible(b.dataset.name))));
+}
+</script>
+</body>
+</html>

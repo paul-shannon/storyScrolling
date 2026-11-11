@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8"/>
+    <title>zoomy photo 1 </title>
+    <script src="https://code.jquery.com/jquery-3.6.3.min.js"></script>
+    <script src="zp.js"></script>
+<style>
+
+body{
+   margin: 100px;
+   margin-top: 30px;
+   font-family: "New York Times-Roman";
+   font-size: 22px;
+   height: 100%;
+   }
+
+#horsemen-container{
+  height: 85vh; /* Container takes 90% of screen height */
+  overscroll-behavior: contain; /* Blocks scroll chaining */
+  }
+
+#horsemen-container img {
+  height: 100%; /* Image takes 100% height of its parent (90vh) */
+  width: auto; /* Maintains aspect ratio */
+  display: block;
+  object-fit: contain;
+  border: 3px solid black;
+  border-radius: 10px;
+  }
+
+</style>
+
+</head>
+<body>
+<div id="horsemen-container">
+  <img id="image" src="horsemen.jpg" width=800>
+</div>  
+</body>
+</html>

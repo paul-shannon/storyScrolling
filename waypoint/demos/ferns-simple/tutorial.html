@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>jQuery Waypoints Example</title>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></source>
+  <script src='https://cdnjs.cloudflare.com/ajax/libs/waypoints/2.0.2/waypoints.min.js'></script>
+  <style>
+    .section {
+      height: 500px;
+      background-color: #f0f0f0;
+      margin-bottom: 50px;
+      text-align: center;
+      line-height: 500px;
+      font-size: 24px;
+    }
+    .animated {
+      background-color: lightgreen;
+    }
+  </style>
+</head>
+<body>
+  <div class="section">Section 1</div>
+  <div class="section" id="waypoint-2">Section 2</div>
+  <div class="section">Section 3</div>
+
+  <script>
+    $(document).ready(function() {
+      new waypoint({
+        element: document.getElementById('waypoint-2'),
+        handler: function(direction) {
+          $(this.element).toggleClass('animated');
+          // Disable the waypoint after triggering once
+          this.destroy()
+        },
+        offset: '50%' // Trigger when the element is 50% from the top of the viewport
+      });
+    });
+  </script>
+</body>
+</html>

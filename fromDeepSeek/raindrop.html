@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simple Scrollytelling Example</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            color: #333;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        header {
+            background-color: #2c3e50;
+            color: white;
+            text-align: center;
+            padding: 60px 20px;
+            margin-bottom: 40px;
+        }
+        
+        header h1 {
+            font-size: 2.8rem;
+            margin-bottom: 15px;
+        }
+        
+        header p {
+            font-size: 1.2rem;
+            max-width: 700px;
+            margin: 0 auto;
+            opacity: 0.9;
+        }
+        
+        .story-container {
+            display: flex;
+            min-height: 100vh;
+            position: relative;
+        }
+        
+        .scrollytelling-content {
+            flex: 1;
+            padding-right: 30px;
+            position: sticky;
+            top: 20px;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .visualization {
+            width: 100%;
+            height: 500px;
+            background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            transition: all 0.5s ease;
+            padding: 30px;
+            text-align: center;
+        }
+        
+        .visualization h2 {
+            font-size: 2.2rem;
+            margin-bottom: 15px;
+        }
+        
+        .visualization p {
+            font-size: 1.1rem;
+            max-width: 500px;
+        }
+        
+        .steps-container {
+            flex: 1;
+            max-width: 600px;
+        }
+        
+        .step {
+            padding: 40px;
+            margin-bottom: 80vh;
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+            border-left: 5px solid #3498db;
+            opacity: 0.4;
+            transform: translateY(20px);
+            transition: all 0.5s ease;
+        }
+        
+        .step.active {
+            opacity: 1;
+            transform: translateY(0);
+            border-left-color: #2ecc71;
+        }
+        
+        .step h3 {
+            font-size: 1.8rem;
+            margin-bottom: 15px;
+            color: #2c3e50;
+        }
+        
+        .step p {
+            font-size: 1.1rem;
+            color: #555;
+        }
+        
+        .step-number {
+            display: inline-block;
+            background-color: #3498db;
+            color: white;
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            text-align: center;
+            line-height: 36px;
+            margin-right: 10px;
+            font-weight: bold;
+        }
+        
+        .step.active .step-number {
+            background-color: #2ecc71;
+        }
+        
+        footer {
+            text-align: center;
+            padding: 40px 20px;
+            background-color: #f8f9fa;
+            margin-top: 60px;
+            color: #666;
+        }
+        
+        .progress-container {
+            width: 100%;
+            height: 8px;
+            background-color: #ecf0f1;
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: 1000;
+        }
+        
+        .progress-bar {
+            height: 100%;
+            background-color: #2ecc71;
+            width: 0%;
+            transition: width 0.3s ease;
+        }
+        
+        .scroll-hint {
+            text-align: center;
+            color: #7f8c8d;
+            margin: 30px 0;
+            font-style: italic;
+            animation: bounce 2s infinite;
+        }
+        
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% {transform: translateY(0);}
+            40% {transform: translateY(-10px);}
+            60% {transform: translateY(-5px);}
+        }
+        
+        @media (max-width: 900px) {
+            .story-container {
+                flex-direction: column;
+            }
+            
+            .scrollytelling-content {
+                position: relative;
+                height: 400px;
+                margin-bottom: 40px;
+                padding-right: 0;
+            }
+            
+            .steps-container {
+                max-width: 100%;
+            }
+            
+            .step {
+                margin-bottom: 40px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="progress-container">
+        <div class="progress-bar"></div>
+    </div>
+    
+    <header>
+        <div class="container">
+            <h1>The Journey of a Raindrop</h1>
+            <p>Scroll down to follow a raindrop's journey from cloud to ocean. Watch the visualization change as you progress through the story.</p>
+        </div>
+    </header>
+    
+    <div class="scroll-hint">▼ Scroll to begin the story ▼</div>
+    
+    <div class="container">
+        <div class="story-container">
+            <div class="scrollytelling-content">
+                <div class="visualization" id="visualization">
+                    <h2>The Journey Begins</h2>
+                    <p>Start scrolling to follow the raindrop's adventure</p>
+                </div>
+            </div>
+            
+            <div class="steps-container">
+                <div class="step" data-step="1">
+                    <h3><span class="step-number">1</span> Formation in the Clouds</h3>
+                    <p>High in the atmosphere, water vapor condenses around tiny particles, forming droplets that come together to create clouds. Our raindrop begins its journey here, as one of millions of droplets in a cumulus cloud.</p>
+                </div>
+                
+                <div class="step" data-step="2">
+                    <h3><span class="step-number">2</span> The Descent Begins</h3>
+                    <p>As the droplets grow heavier, they begin to fall. Our raindrop joins others, merging as it descends through the cloud. Gravity pulls it downward at increasing speed toward the Earth below.</p>
+                </div>
+                
+                <div class="step" data-step="3">
+                    <h3><span class="step-number">3</span> Falling Through the Sky</h3>
+                    <p>The raindrop accelerates to terminal velocity—about 9 meters per second for a droplet of this size. As it falls, it encounters other droplets, sometimes merging, sometimes breaking apart in the turbulent air.</p>
+                </div>
+                
+                <div class="step" data-step="4">
+                    <h3><span class="step-number">4</span> Impact on the Land</h3>
+                    <p>The raindrop reaches the ground, landing on a leaf in a dense forest. Some droplets are absorbed by plants, but our raindrop rolls off and joins others forming a small stream that trickles downhill.</p>
+                </div>
+                
+                <div class="step" data-step="5">
+                    <h3><span class="step-number">5</span> Journey Downstream</h3>
+                    <p>Following the path of least resistance, the raindrop flows into a stream, then a river. It travels for days, passing through landscapes altered by its movement—eroding banks, depositing sediment, and nourishing ecosystems.</p>
+                </div>
+                
+                <div class="step" data-step="6">
+                    <h3><span class="step-number">6</span> Reaching the Ocean</h3>
+                    <p>After its long journey, the raindrop finally reaches the vast ocean. It merges with saltwater, becoming part of a global system that will eventually evaporate and begin the cycle again.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <footer>
+        <div class="container">
+            <p>Scrollytelling Example with JavaScript & jQuery | Created for educational purposes</p>
+            <p>Scroll progress: <span id="progress-text">0%</span></p>
+        </div>
+    </footer>
+
+    <script>
+        $(document).ready(function() {
+            // Cache DOM elements
+            const $steps = $('.step');
+            const $visualization = $('#visualization');
+            const $progressBar = $('.progress-bar');
+            const $progressText = $('#progress-text');
+            const $scrollHint = $('.scroll-hint');
+            
+            // Hide scroll hint after user starts scrolling
+            let hintHidden = false;
+            
+            // Define visualization content for each step
+            const stepContent = [
+                {
+                    title: "The Journey Begins",
+                    text: "Start scrolling to follow the raindrop's adventure",
+                    color: "linear-gradient(135deg, #6a11cb 0%, #2575fc 100%)"
+                },
+                {
+                    title: "Formation in the Clouds",
+                    text: "Water vapor condenses high in the atmosphere, forming clouds where our raindrop begins its journey.",
+                    color: "linear-gradient(135deg, #1a2980 0%, #26d0ce 100%)"
+                },
+                {
+                    title: "The Descent Begins",
+                    text: "Gravity pulls the raindrop downward as it grows heavier, beginning its fall to Earth.",
+                    color: "linear-gradient(135deg, #3a7bd5 0%, #00d2ff 100%)"
+                },
+                {
+                    title: "Falling Through the Sky",
+                    text: "The raindrop reaches terminal velocity, falling at about 9 meters per second toward the ground.",
+                    color: "linear-gradient(135deg, #00c6ff 0%, #0072ff 100%)"
+                },
+                {
+                    title: "Impact on the Land",
+                    text: "The raindrop lands on a leaf in the forest, then joins other droplets forming a small stream.",
+                    color: "linear-gradient(135deg, #2ebf91 0%, #8360c3 100%)"
+                },
+                {
+                    title: "Journey Downstream",
+                    text: "Flowing from stream to river, the raindrop travels for days through changing landscapes.",
+                    color: "linear-gradient(135deg, #4A00E0 0%, #8E2DE2 100%)"
+                },
+                {
+                    title: "Reaching the Ocean",
+                    text: "The raindrop merges with the vast ocean, becoming part of the global water cycle.",
+                    color: "linear-gradient(135deg, #0f2027 0%, #203a43 50%, #2c5364 100%)"
+                }
+            ];
+            
+            // Initialize scroll handler
+            $(window).on('scroll', function() {
+                // Hide scroll hint after user starts scrolling
+                if (!hintHidden && $(window).scrollTop() > 100) {
+                    $scrollHint.fadeOut();
+                    hintHidden = true;
+                }
+                
+                // Calculate scroll progress
+                const windowHeight = $(window).height();
+                const documentHeight = $(document).height();
+                const scrollTop = $(window).scrollTop();
+                const scrollPercent = (scrollTop / (documentHeight - windowHeight)) * 100;
+                
+                // Update progress bar
+                $progressBar.css('width', scrollPercent + '%');
+                $progressText.text(Math.round(scrollPercent) + '%');
+                
+                // Determine which step is active
+                let activeStep = 0;
+                const scrollPosition = scrollTop + (windowHeight / 3);
+                
+                // Check each step to see if it's in view
+                $steps.each(function(index) {
+                    const $step = $(this);
+                    const stepTop = $step.offset().top;
+                    const stepHeight = $step.outerHeight();
+                    
+                    if (scrollPosition > stepTop && scrollPosition < stepTop + stepHeight) {
+                        activeStep = index + 1; // +1 because step 0 is the intro
+                        $step.addClass('active');
+                    } else {
+                        $step.removeClass('active');
+                    }
+                });
+                
+                // Update visualization based on active step
+                updateVisualization(activeStep);
+            });
+            
+            // Function to update the visualization
+            function updateVisualization(stepIndex) {
+                const content = stepContent[stepIndex];
+                
+                // Animate the visualization change
+                $visualization.animate({
+                    opacity: 0.7
+                }, 200, function() {
+                    $(this).html(`
+                        <h2>${content.title}</h2>
+                        <p>${content.text}</p>
+                    `).css('background', content.color);
+                    
+                    $(this).animate({
+                        opacity: 1
+                    }, 300);
+                });
+                
+                // Add some dynamic effects based on step
+                if (stepIndex === 2 || stepIndex === 3) {
+                    // Falling effect
+                    $visualization.css('transform', 'translateY(20px)');
+                    setTimeout(() => {
+                        $visualization.css('transform', 'translateY(0)');
+                    }, 300);
+                } else if (stepIndex === 6) {
+                    // Ocean wave effect
+                    $visualization.css('transform', 'scale(1.05)');
+                    setTimeout(() => {
+                        $visualization.css('transform', 'scale(1)');
+                    }, 500);
+                }
+            }
+            
+            // Initialize with step 0 (intro)
+            updateVisualization(0);
+            
+            // Add click handlers for steps (for accessibility)
+            $steps.on('click', function() {
+                const step = $(this).data('step');
+                updateVisualization(step);
+                
+                // Scroll to the step
+                $('html, body').animate({
+                    scrollTop: $(this).offset().top - 100
+                }, 600);
+            });
+            
+            // Trigger initial scroll event to set correct state
+            $(window).trigger('scroll');
+        });
+    </script>
+</body>
+</html>

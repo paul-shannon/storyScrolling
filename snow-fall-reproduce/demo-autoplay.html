@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8"/>
+    <title>wild isle</title>
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.13.3/themes/smoothness/jquery-ui.css">
+    <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
+    <script src="https://code.jquery.com/ui/1.13.3/jquery-ui.js"></script>
+
+
+<script>
+$(document).ready(function() {
+
+    $("#houseImage").click(function(){
+        console.log("clicked house")
+        $("#dialog").dialog({
+           "body": "jQueryScript.net!",
+           "title": "jQuery Dialog Plugin Demo",
+           "show": true,
+           "modal": true,
+           "height": 200,
+           "dynamic": false
+         });
+       })
+ $('#mainDiv').on('scroll', function() {
+    // Code to execute when the div is scrolled
+    console.log('Div scrolled!');
+
+    // Get scroll position
+    var scrollTop = $(this).scrollTop();
+    console.log('Scroll Top:', scrollTop);
+
+    // Check if scrolled to bottom
+    if ($(this).scrollTop() + $(this).innerHeight() >= $(this)[0].scrollHeight) {
+      console.log('Reached bottom of div!');
+     }
+    });
+});
+
+</script>
+
+<style>
+
+body{
+   //margin: 100px;
+   margin-top: 30px;
+   font-family: "New York Times-Roman";
+   font-size: 22px;
+   overflow: scroll;
+   // overflow: hidden;
+   //height: 100%;
+   }
+
+#mainDiv{
+  overflow: hidden;
+  height: 5000px;
+  width: 100%;
+  //width: 100vw;
+  background-color: WhiteSmoke;
+  }
+
+video {
+  //width: 100%;
+  width: 100%;
+  height: 100%;
+  object-fit: scale-down; // cover; //contain; // cover; // scale-down;
+  float: left;
+  }
+
+
+#wildIsleVideoDiv {
+  //position: absolute;
+  //top: 0;
+  //left: 0;
+  //height: 500px;
+  //width: 100vw;
+  width; 100%;
+  background-color: WhiteSmoke;
+  overflow: hidden;
+}
+
+#textDiv1 {
+   margin-top: 100px;
+   margin-left: 200px;
+   margin-right: 200px;
+   background-color: WhiteSmoke;
+   }
+
+#cityViewDiv{
+    height: 1000px;
+    width: 100%;
+    background-color: WhiteSmoke;
+   }
+
+</style>
+
+</head>
+<body>
+   <div id="dialog" title="Dialog Title">I'm a dialog</div>
+
+   <div id="mainDiv">
+      <div id="wildIsleVideoDiv">
+         <video autoplay="autoplay" loop="true" muted>
+            <source src="wildIsleIntroSlow-cropped.mp4" width="100%" type="video/mp4">
+         </video>
+      </div>
+      <div id="textDiv1">
+        <center> <h3>Wild Isle in the City</h3></center>
+
+A few years ago I gave a minor scientific talk on Alzheimer's Disease in Los Angeles, at the USC
+Neuroimage and Informatics Institute.  Twenty scientists were in the room, each with a PhD, most
+with a strong history of research publications. Me?  I was there as an impostor.  I had no advanced
+degree, my publication record is sparse.  But my Seattle collaborators and I were funded by a grant
+funneled through this group, and I was asked to present our results.
+<p>
+We took our seats around a large table in a room with a massive 40' x 20' display screen occupying
+the entire wall at the front of the room.  The host asked me to introduce myself, explain my
+background and interests, when I first entered the meeting: everyone else already knew each other, I
+was the new guy.  In a setting like this, in which I had found myself before, I parade my
+unconventional career.  There is no sense in hiding where I come from.d I explain that I dropped out
+of college multiple times, spent most of my 20s working as a carpenter - for the poor, for the rich,
+sometimes self-employed, and finally teaching the trade to young men newly released from the city jail.
+Then, about to turn 30, I went back to school, got a bachelor's degree in math with the aim to
+write software in support of research.  I add that I had hoped from the beginning to work in biology and
+medicine - which became possible with the genomics revolution in the late 1990s.  I sometimes add
+that the craft of writing software is not unlike carpentry:  one designs, one builds, useful
+artifacts - sometimes beautiful - are the result.
+<p>
+
+My unconventional history was well received.  This is, in no small part, or so it seems to me,
+because many an acdemic scientist harbors fond and romantic notions of working in wood.  These
+notions, I hear, are especially likely when said scientist faces an endless run of committee
+meetings, grant applications, and department politics.  Daydreams of fine tools and good wood, of
+finishing a days work having created something tangible, maybe something beautiful, a shed, a chest,
+a house.  So starting out, at this meeting, I had some positive feelings from this group, despite my
+unconventional background, lack of an advanced degree, despite not being (as I like to say) a real
+biologist.
+<p>
+
+When it was my turn to present - some tentative findings, as I recall, on aberrant gene regulatory
+networks in Alzheimer's Disease - I was still apprehensive.  I am a lifelong stutterer.  Ny
+disfluency, my blocked speech, is intermittent, a lot less in recent years than during tortuous
+childhood.  So sometimes I am entirely fluent, while at other times I am painfully blocked and in
+obvious face-contorted distress, just trying to get the words out.  The present circumstance -
+giving a talk to experts when my own expertise is limited - this is exactly the circumstance in which
+anxiety and uncertainty make disfluency more likely.  Furthermore, once a stuttering block occurs, my
+anxiety goes up, and subsequent blocks then become all the more likely.  It can be quite a mess.  
+<p>
+
+So I walked with some trepidateion to the front of the room, took my place at the podium, launched
+my slides, then turned to the audience to explain all this.  I said, "I stutter.  You will likely
+see me struggle at times in this presentation.  But I'll get throught it - WE will get through it.
+I ask your patience when it needed."
+<p>
+
+By starting this way I prepared my audience for what lay ahead.  But equally, maybe more important,
+I freed myself from the ever-present ambition to avoid stuttering.  I had set a low bar by
+confessing my likely difficulties in advance.  I may have recruited some some sympathetic allies in
+the audience.  By the time I started into my talk, I had given up all of these things: my temptation
+to pretend that I am a normal speaker, of being credentialed biologist and a well-known researcher.
+I was just a regular guy, with an intermittent handicap, candid and hoping to do a good enough job.
+I then described some of our interesting gene reulation results.  I received and answered some good
+questions. I had a few minor disfluencies along the way, none of which snowballed into an inability
+to get the words out.  I learned that day what can be the benefits of admitting to one's modest
+standing in the world.
+<p>
+
+Turning to the present moment, and to the current ssay: I need to do the same thig.  I do not have
+professional - but instead only amateur - status in the disciplines I will employ here.  Natural
+history, molecular biology, forest ecology, plant physiology, forest stewardship: I am an amateur in
+all of these things.
+<p>
+
+Furthermore, I also have no training in what might be my central concern, a discipline recently
+emerged, environmental phenomenology.  I think of this as the exploration of the ways our physical,
+directly-experienced surroundings combine with philosophical or religious committments - conscious
+or otherwise - to produce a world experience, a world view.  
+<p>
+
+Regarding "world view".  Most of us are seldom aware that we speak with an accent: we only notice
+other speakers' accents.  Similarly, most of us are unaware most of the time that we THINK with an
+accent.  That mental accent is our world view, and despite the variety we encounter all around us,
+and all the political and cultural conflicts that result, I suggest that there is an underlying
+sameness to them, mostly unrecognized - and ready to be put in question - bold claim! - by visits to
+a neighborhood old-growth forest.
+<p>
+
+Let me begin.
+<p>
+
+       ------
+       <div id="houseImage" style="float: right;">
+         <img src="morganStreet.jpeg" width="150px;">
+         </div>
+
+I live in a 1907 bungalow in a neighborhood on a ridge above Lkee Wasington in southeast Seattle.
+Our houseold includes my partner Amy, a very old dog, a skittish cat, and three young adult children
+now all fledged and away, out in the world.  Down the hill, fifteen mintues by foot, five by bike or
+car, down the hill onto a peninsula, that most rare of places: an intct, 120 acre Pacific Northwest
+old-growth forest.  "old-growth" is narrowly defined as "older than 170 years" but in fact this
+forest has been relatively undisturbed for centuries.  That is, except for naturally occurring
+periodic fires - of varying severity, every 200-1000 years - this forest has grown undisturbed, and
+on its own terms, since the glaciers retreated from the peninsula 16000 years ago.
+<p>
+
+Once, in this region - the Puget lowlands - there were a million acres of such forest.  Only 1000
+acres remain.  Of those, 120 are found right here, just down the hill on the peninsula, in the
+middle of a thriving Pacific Rim metropolis.  Wild forest is not just for the hinterlands.
+<p>
+
+My 15-minute walk to the forest proceeds down staight streets, paved roads and sidewalks,
+right-angled intersections, power lines stretched between poles: everything is lines, corners and
+flat surfaces.  Everything I see is built, engineered, managed.  Even the trees and garden plants,
+some very beautiful, and beautifully arragned, are there only as a result of human choice and
+action.
+
+<p>
+
+All of this, as I will argue, conveys and instills an unspoken but pervasive message, an
+implicit world view: that we humans are the crucial actors, the indispensable architects, the actual
+creators of the world.  Plants and other animals have some status, but it is subordinate to us, and
+they are present only on our sufferance.
+<p>
+
+By contrast:  stepping into the forest, I encounter a jumble of green, leaf and branch - or rather:
+on first encounter it SEEMS to be a disordered jumble.
+<p>
+
+But with years of walking and looking another perspective and understanding emerges.  That cedar
+branch there, up in the canopy?  And that big leaf maple branch nearby?  They both seem to be headed
+for the same opening, the same shaft of sunlight.  Yet they did not collide.  They curve and reach
+in apparent recognition of each other, and with apparent respect for each other.  "recognition" and
+"respect" - here, you might suggest, are anthropomorphisms for sure.
+
+Plant intelligence - less contoversially called "plant signaling and behavior" - is increasingly
+reproted, documented and studied in recent years.  There is a famous time-lapse youtube video of a
+vine swinging in circles looking for, and finding a purchase on a support.  Suzanne Simard is
+well-known for her claims, indeed her evidence for, plant inter-species symbiosis.
+<p>
+
+We read or see these reports at second hand - or perhaps even less directly.  We cannot see Simard's
+mycorrhizal networks.  We cannot stand stock still and attentive long enough to witness a vine's
+pattern of search.  And since the our experience is mediated, via text or video, our experience is
+not likely to be felt - not felt with the immediacy of the urban environment, the straight lines,
+flat surfaces, and right angles of the built environment.   So these accounts of plant perception
+and plant behavior do not disturb our underlying felt experience that, for most of us, most of the
+time, we live in an engineered world of human agency.  
+<p>
+
+Now step into the old-growth forest.  Study existing branching patterns - pick one that catches your
+eye. Notice that collisions between branches and leaves are rare.  It takes then but a small
+imaginative stpe to see and feel branching as a dynamic process.  First find, on a big leaf maple
+tree trunk, where a long branch emerges.  Trace that branch's trajectory out to its furthest,
+smallest tips.  With a bit of luck, maybe a bit of practice, you can by imagination see that current
+physical trajectory as the path the branch took over time.  It positioned and placed its
+light-collecting leaves in optimal sunlight - but all the while avoiding conflict with its
+neighbors.  Look for - I suggest you will easily find - evidence of the non-agression pact to
+which these neighboring trees subscribe.   As this community of light-seeking plants grows together, 
+they reach for sunlight, the most beautiful, the most elegant arabesques of leaf and branch emerge.
+There are no straight lines, no human agency.  Instead, only robust, intricate and sustainable
+structures.
+<p>
+
+This is what an old-growth Pacific Northest forest puts on display.  Here you can see plant
+perception and behavior in action - spinning out acres and volumes of exquisite beauty, easily
+observed.   And, as I shall argue later in detail, that just as the when we spend our time only in
+human engineered environments, which elicit a view of the world; so does time spent, and
+understanding gained, in an old mature forest elicit another view of the world.   One where, no
+doubt, competition between individual plants and animals plays a role, but where non-agression and
+symbioses - mutual aid - also plays an important role.
+<p>
+
+In the final paragraph of The Origin of Species, Darwin speaks of
+<p>
+
+  "endless forms most beautiful and most wonderful have been, and are being evolved".
+<p>
+
+That, however, is not the half of it.  This old-growth forest, just down the hill, not tucked away
+in the hinterlands, often just for the privileged, in a distant preserve or national park, requiring
+automobile travel, a budget, and vacation time - no, right here in this place, cheek by jowl with
+our busy urban lives, we see also that
+<blockquote>
+
+  "endless RELATIONS most beautiful and most wonderful have been, and are being evolved".
+</blockquote>
+
+        </div>
+      <div id="cityViewDiv">
+        <h3> City View</h3>
+        </div>
+   </div>
+
+</body>
+</html>

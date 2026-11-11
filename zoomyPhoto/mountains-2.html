@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8"/>
+    <title> zoom and center</title>
+    <script src="https://code.jquery.com/jquery-3.6.3.min.js"></script>
+
+    <!--
+        with just those two properties (transform: scale(2) and
+        transform-origin: 100% 0%),
+        you get exactly the zoom effect you wanted.
+          Top-left: transform-origin: 0% 0%
+       Bottom-left: transform-origin: 0% 100%
+      Bottom-right: transform-origin: 100% 100%
+            Center: transform-origin: 50% 50%
+     -->
+
+<style>
+
+body{
+   margin: 100px;
+   margin-top: 30px;
+   font-family: "New York Times-Roman";
+   font-size: 22px;
+   height: 100%;
+   }
+
+.img-container {
+  overflow: hidden; 
+  margin: 0 auto;
+  width: 600px;
+  }
+
+.zoom-normal {
+    transform: scale(1);
+    transform-origin: 0% 0%; /* top-right corner */
+    width: 100%;
+    height: auto;
+}
+
+
+.zoom-top-right {
+    transform: scale(2);
+    transform-origin: 100% 0%; /* top-right corner */
+    width: 100%;
+    height: auto;
+}
+
+.zoom-low-left {
+   transform: scale(2);
+   transform-origin: 0% 100%; /* top-right corner */
+   width: 100%;
+   height: auto;
+   }
+
+.zoom-tall-trees {
+   transform: scale(3.5);
+   transform-origin: 2% 33%; /* top-right corner */
+   width: 100%;
+   height: auto;
+   }
+
+
+</style>
+
+<script>
+$(document).ready(function(){
+  console.log("document ready")
+  });
+
+</script>
+
+</head>
+<body>
+  <button id="normalZoomButton">default</button>
+  <button id="zoomTopRightButton">zoom top right</button>
+  <button id="zoomLowLeftButton">zoom low left</button>
+  <button id="zoomTallTreesButton">zoom tall trees</button>
+<br><br>              
+<div class="img-container">
+   <img src="https://images.unsplash.com/photo-1506744038136-46273834b3fb" 
+           alt="Original mountain landscape" 
+           class="original-image" width=800>
+</div>
+<script>
+  $("#zoomLowLeftButton").on("click", function(){
+      $(".img-container img").removeClass()
+      $(".img-container img").addClass('zoom-low-left')
+  })
+
+  $("#zoomTopRightButton").on("click", function(){
+      $(".img-container img").removeClass()
+      $(".img-container img").addClass('zoom-top-right')
+  })
+
+  $("#normalZoomButton").on("click", function(){
+      $(".img-container img").removeClass()
+      $(".img-container img").addClass('zoom-normal')
+  })
+
+  $("#zoomTallTreesButton").on("click", function(){
+      $(".img-container img").removeClass()
+      $(".img-container img").addClass('zoom-tall-trees')
+  })
+
+
+</script>
+</body>
+</html>

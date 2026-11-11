@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tiny ScrollReveal Demo</title>
+    <script src="https://unpkg.com/scrollreveal"></script>
+    <style>
+        body { font-family: sans-serif; margin: 0; padding: 20px; }
+        .item { 
+            background: #f0f0f0; 
+            padding: 60px 20px; 
+            margin: 40px 0; 
+            text-align: center;
+            border-radius: 8px;
+        }
+        .item:nth-child(odd) { background: #e0e0e0; }
+        h1 { text-align: center; margin-bottom: 60px; }
+    </style>
+</head>
+<body>
+    <h1>↓ Scroll Down ↓</h1>
+    
+    <div class="item">Item 1 (fades up)</div>
+    <div class="item">Item 2 (slides from left)</div>
+    <div class="item">Item 3 (slides from right)</div>
+    <div class="item">Item 4 (rotates in)</div>
+    <div class="item">Item 5 (staggered)</div>
+    <div class="item">Item 6 (staggered)</div>
+    
+    <script>
+        // Basic fade up (default)
+        ScrollReveal().reveal('.item:nth-child(1)');
+        
+        // Slide from left
+        ScrollReveal().reveal('.item:nth-child(2)', {
+            origin: 'left',
+            distance: '50px',
+            duration: 800
+        });
+        
+        // Slide from right
+        ScrollReveal().reveal('.item:nth-child(3)', {
+            origin: 'right',
+            distance: '50px',
+            duration: 800
+        });
+        
+        // Rotate in
+        ScrollReveal().reveal('.item:nth-child(4)', {
+            rotate: { x: 0, y: 0, z: 10 },
+            duration: 1000
+        });
+        
+        // Staggered items
+        ScrollReveal().reveal('.item:nth-child(5), .item:nth-child(6)', {
+            interval: 200,
+            origin: 'bottom'
+        });
+    </script>
+</body>
+</html>

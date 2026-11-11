@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>ScrollStory: Basic</title>
+    <script src="https://pshannon.net/story/js/jquery.min.js"></script>
+    <script src="https://pshannon.net/story/js/jquery.scrollstory.js"></script>
+    <link rel="stylesheet" href="css/base-examples.css">
+</head>
+
+<body>
+  <!-- Default markup style -->
+  <div id="container">
+    <div class="story scrollStoryItem"
+         style="background-color: lightgrey; height: 1300px;"
+         data-name="first div">
+      <h2>Story 1</h2>
+      <p>first item</p>
+    </div>
+    <div class="story scrollStoryItem"
+         style="background-color: lightgreen; height: 1300px;"
+         data-name="second div">
+      <h2>Story 2</h2>
+      <p>second item</p>
+    </div>
+  </div>
+
+  <script>
+    $(function(){
+      console.log("initializing scrollStory");
+      $("#container").scrollStory({triggerOffset: 200});
+      $("#container").on('itemfocus', function(event, item){
+         console.log("itemfocus: " + item.data.name);
+         });
+      $("#container").on('itemblur', function(event, item){
+         console.log("item focus lost: " + item.data.name);
+         });
+     }) // on load
+  </script>
+</body>
+

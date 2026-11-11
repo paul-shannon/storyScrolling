@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Story Scrolling: The Lost Temple</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: #0a0f1e;
+            color: #e0e0e0;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+        
+        .story-container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 40px 20px;
+            position: relative;
+        }
+        
+        .story-header {
+            text-align: center;
+            margin-bottom: 50px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .story-header h1 {
+            font-size: 2.8rem;
+            margin-bottom: 10px;
+            background: linear-gradient(90deg, #ff7e5f, #feb47b);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            letter-spacing: 1px;
+        }
+        
+        .story-header p {
+            font-size: 1.2rem;
+            color: #aaa;
+            font-style: italic;
+        }
+        
+        .story-section {
+            margin-bottom: 80px;
+            padding: 30px;
+            background: rgba(20, 25, 40, 0.7);
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            opacity: 0.9;
+            transform: translateY(20px);
+            transition: all 0.8s ease;
+        }
+        
+        .story-section.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .section-title {
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+            color: #ffb347;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .section-title i {
+            font-size: 1.5rem;
+        }
+        
+        .story-text {
+            font-size: 1.15rem;
+            margin-bottom: 25px;
+            text-align: justify;
+        }
+        
+        .media-container {
+            margin: 30px 0;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+        }
+        
+        .story-image {
+            width: 100%;
+            height: auto;
+            display: block;
+            transition: transform 0.5s ease;
+        }
+        
+        .story-image:hover {
+            transform: scale(1.03);
+        }
+        
+        .story-video {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+        
+        .media-caption {
+            padding: 10px 15px;
+            background: rgba(0, 0, 0, 0.6);
+            font-size: 0.9rem;
+            color: #ccc;
+            font-style: italic;
+            text-align: center;
+        }
+        
+        .scroll-indicator {
+            position: fixed;
+            right: 30px;
+            top: 50%;
+            transform: translateY(-50%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 15px;
+            z-index: 100;
+        }
+        
+        .scroll-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background-color: rgba(255, 255, 255, 0.2);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .scroll-dot.active {
+            background-color: #ff7e5f;
+            transform: scale(1.3);
+        }
+        
+        .progress-bar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 0%;
+            height: 5px;
+            background: linear-gradient(90deg, #ff7e5f, #feb47b);
+            z-index: 1000;
+            transition: width 0.3s ease;
+        }
+        
+        .story-footer {
+            text-align: center;
+            margin-top: 50px;
+            padding-top: 30px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: #888;
+            font-size: 0.9rem;
+        }
+        
+        @media (max-width: 768px) {
+            .story-container {
+                padding: 20px 15px;
+            }
+            
+            .story-header h1 {
+                font-size: 2.2rem;
+            }
+            
+            .story-section {
+                padding: 20px;
+            }
+            
+            .scroll-indicator {
+                right: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="progress-bar"></div>
+    
+    <div class="scroll-indicator">
+        <div class="scroll-dot active" data-section="0"></div>
+        <div class="scroll-dot" data-section="1"></div>
+        <div class="scroll-dot" data-section="2"></div>
+        <div class="scroll-dot" data-section="3"></div>
+        <div class="scroll-dot" data-section="4"></div>
+    </div>
+    
+    <div class="story-container">
+        <header class="story-header">
+            <h1>The Lost Temple of Zephyria</h1>
+            <p>An interactive scrolling story with images and video</p>
+        </header>
+        
+        <section id="section-0" class="story-section active">
+            <h2 class="section-title"><i class="fas fa-map-signs"></i> The Discovery</h2>
+            <div class="story-text">
+                <p>It was a humid Tuesday in July when Professor Alistair Finch first laid eyes on the ancient manuscript that would change everything. The parchment, brittle with age, contained a map to the legendary Temple of Zephyria - a civilization thought to be mere myth by modern historians.</p>
+                <p>For weeks, Professor Finch and his team poured over the manuscript, deciphering cryptic symbols and piecing together clues that pointed to a remote jungle region in South America. The temple was said to contain not only unimaginable treasures but also technological secrets lost to time.</p>
+            </div>
+            <div class="media-container">
+                <img src="https://images.unsplash.com/photo-1546182990-dffeafbe841d?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80" alt="Ancient manuscript with mysterious symbols" class="story-image">
+                <div class="media-caption">The ancient manuscript that started the journey (Image: Unsplash)</div>
+            </div>
+            <div class="story-text">
+                <p>The manuscript described the temple as a place where "the sky meets the earth," with architecture that defied the laws of physics. Most intriguing was the mention of the "Breath of Zephyria" - a device said to control weather patterns and purify the air of any toxins.</p>
+            </div>
+        </section>
+        
+        <section id="section-1" class="story-section">
+            <h2 class="section-title"><i class="fas fa-hiking"></i> The Journey Begins</h2>
+            <div class="story-text">
+                <p>The expedition team assembled in Manaus, Brazil - a diverse group of archaeologists, linguists, botanists, and survival experts. The journey up the Rio Negro would take them deep into uncharted territory, far from any modern settlements or communication networks.</p>
+                <p>Weeks of travel by boat, then on foot through dense jungle tested the team's endurance. Mosquitoes swarmed in clouds, rare jungle cats watched from the shadows, and the humidity was a constant companion. Yet the team pressed on, driven by the promise of discovery.</p>
+            </div>
+            <div class="media-container">
+                <div class="story-video">
+                    <!-- Using a video placeholder with poster image -->
+                    <img src="https://images.unsplash.com/photo-1516026672322-bc52d61a55d5?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80" alt="Jungle expedition video" class="story-image">
+                </div>
+                <div class="media-caption">The team navigates through dense Amazonian rainforest (Video placeholder)</div>
+            </div>
+            <div class="story-text">
+                <p>On the seventeenth day, local guide Mateo pointed to an unusual rock formation that matched a sketch in the manuscript. "This is it," whispered Professor Finch, his heart pounding. The entrance to the valley described in the ancient text lay just beyond a waterfall that seemed to flow upward against gravity itself.</p>
+            </div>
+        </section>
+        
+        <section id="section-2" class="story-section">
+            <h2 class="section-title"><i class="fas fa-monument"></i> The Temple Revealed</h2>
+            <div class="story-text">
+                <p>As the team cleared the thick vines, a sight took their breath away. The Temple of Zephyria wasn't a single building but an entire complex carved into the side of a massive quartz cliff. The structures glimmered with embedded crystals that refracted light into rainbow patterns across the clearing.</p>
+                <p>The architecture was unlike anything recorded in archaeological literature. Curved walls seemed to flow like liquid stone, and structures appeared to float without visible support. The most startling discovery was the complete absence of animal life within a hundred meters of the temple - not an insect, bird, or reptile in sight.</p>
+            </div>
+            <div class="media-container">
+                <img src="https://images.unsplash.com/photo-1531259683007-016a7b628fc3?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80" alt="Ancient temple ruins in jungle" class="story-image">
+                <div class="media-caption">The first view of the Temple of Zephyria (Image: Unsplash)</div>
+            </div>
+            <div class="story-text">
+                <p>Dr. Lena Chen, the team's physicist, noted strange gravitational anomalies around the complex. "Our equipment is registering slight fluctuations in gravity and magnetic fields," she reported, her voice filled with wonder. "This place shouldn't exist according to our understanding of physics."</p>
+            </div>
+        </section>
+        
+        <section id="section-3" class="story-section">
+            <h2 class="section-title"><i class="fas fa-dungeon"></i> Inside the Sanctum</h2>
+            <div class="story-text">
+                <p>The entrance chamber was a circular room with walls covered in luminescent fungi that emitted a soft blue light. In the center stood a pedestal with a perfectly spherical crystal that rotated slowly without any visible mechanism. As Professor Finch approached, the crystal began to glow brighter.</p>
+                <p>Suddenly, holographic symbols appeared in the air around the room - a language no one recognized yet somehow understood intuitively. The symbols told the story of Zephyria, a civilization that had mastered atmospheric energy manipulation but abandoned their city when their technology began affecting the planet's climate.</p>
+            </div>
+            <div class="media-container">
+                <div class="story-video">
+                    <!-- Using a video placeholder with poster image -->
+                    <img src="https://images.unsplash.com/photo-1518709268805-4e9042af2176?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80" alt="Ancient technology hologram" class="story-image">
+                </div>
+                <div class="media-caption">Holographic technology inside the temple (Video placeholder)</div>
+            </div>
+            <div class="story-text">
+                <p>The final message was a warning: the "Breath of Zephyria" could not be removed from the temple without catastrophic consequences. The device was maintaining a delicate balance in the region's ecosystem, and disturbing it would unleash weather anomalies across the continent.</p>
+            </div>
+        </section>
+        
+        <section id="section-4" class="story-section">
+            <h2 class="section-title"><i class="fas fa-book"></i> The Decision</h2>
+            <div class="story-text">
+                <p>The team gathered in the central chamber, faced with an impossible choice. They could document the temple and leave its secrets undisturbed, or they could attempt to study the technology with the potential to solve humanity's climate crisis but risk unleashing unknown environmental havoc.</p>
+                <p>Professor Finch looked at the faces of his team - each filled with awe at what they had discovered. "We came seeking knowledge," he said quietly. "But true wisdom lies in knowing when not to interfere."</p>
+            </div>
+            <div class="media-container">
+                <img src="https://images.unsplash.com/photo-1531259683007-016a7b628fc3?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80" alt="Team discussing at temple entrance" class="story-image">
+                <div class="media-caption">The team makes their fateful decision (Image: Unsplash)</div>
+            </div>
+            <div class="story-text">
+                <p>In the end, the team documented the temple with non-invasive technology, took atmospheric and energy readings that would keep physicists busy for decades, and carefully sealed the entrance as they left. The location remains a closely guarded secret, known only to the expedition members.</p>
+                <p>The Temple of Zephyria taught humanity an invaluable lesson: some mysteries are meant to be preserved, not solved. And sometimes, the greatest treasure is the wisdom to leave well enough alone.</p>
+            </div>
+        </section>
+        
+        <footer class="story-footer">
+            <p>© 2023 Interactive Story Example | The Lost Temple of Zephyria | Created with HTML, CSS & JavaScript</p>
+            <p>Scroll to experience the story • Click dots to navigate • All images from Unsplash</p>
+        </footer>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const sections = document.querySelectorAll('.story-section');
+            const dots = document.querySelectorAll('.scroll-dot');
+            const progressBar = document.querySelector('.progress-bar');
+            
+            // Function to check which section is in view
+            function checkSectionInView() {
+                let currentSection = '';
+                
+                sections.forEach(section => {
+                    const sectionTop = section.offsetTop;
+                    const sectionHeight = section.clientHeight;
+                    const scrollPosition = window.pageYOffset;
+                    
+                    // Check if section is in view
+                    if (scrollPosition >= (sectionTop - 300) && 
+                        scrollPosition < (sectionTop + sectionHeight - 100)) {
+                        currentSection = section.id;
+                    }
+                });
+                
+                // Update active states
+                sections.forEach(section => {
+                    if (section.id === currentSection) {
+                        section.classList.add('active');
+                    }
+                });
+                
+                // Update dots
+                dots.forEach(dot => {
+                    dot.classList.remove('active');
+                    
+                    const sectionIndex = dot.getAttribute('data-section');
+                    if (sections[sectionIndex].id === currentSection) {
+                        dot.classList.add('active');
+                    }
+                });
+                
+                // Update progress bar
+                const scrollPercentage = (window.pageYOffset / (document.documentElement.scrollHeight - window.innerHeight)) * 100;
+                progressBar.style.width = `${scrollPercentage}%`;
+            }
+            
+            // Scroll to section when dot is clicked
+            dots.forEach(dot => {
+                dot.addEventListener('click', function() {
+                    const sectionIndex = this.getAttribute('data-section');
+                    const targetSection = sections[sectionIndex];
+                    
+                    window.scrollTo({
+                        top: targetSection.offsetTop - 50,
+                        behavior: 'smooth'
+                    });
+                });
+            });
+            
+            // Add scroll event listener
+            window.addEventListener('scroll', checkSectionInView);
+            
+            // Trigger initial check
+            checkSectionInView();
+            
+            // Add some interactive effects for media elements
+            const images = document.querySelectorAll('.story-image');
+            images.forEach(image => {
+                image.addEventListener('click', function() {
+                    this.classList.toggle('zoom');
+                });
+            });
+            
+            // Simulate video play on click for video placeholders
+            const videoPlaceholders = document.querySelectorAll('.story-video .story-image');
+            videoPlaceholders.forEach(video => {
+                video.addEventListener('click', function() {
+                    alert("In a real implementation, this would play a video about the story section.");
+                });
+            });
+            
+            // Add parallax effect on scroll
+            window.addEventListener('scroll', function() {
+                const scrolled = window.pageYOffset;
+                const parallaxElements = document.querySelectorAll('.story-image');
+                
+                parallaxElements.forEach(element => {
+                    const speed = 0.3;
+                    const yPos = -(scrolled * speed);
+                    element.style.transform = `translateY(${yPos}px) scale(1.03)`;
+                });
+            });
+        });
+    </script>
+</body>
+</html>

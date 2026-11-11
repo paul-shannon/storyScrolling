@@ -2,9 +2,8 @@ $('document').ready(function(){
 
    var s = $('.section');
    var nav = $('ul li a');
-
    s.waypoint({
-      handler: function(direction){
+       handler: function(direction){
          var active = $(this);
          if(direction == 'up')
             active = active.prev();

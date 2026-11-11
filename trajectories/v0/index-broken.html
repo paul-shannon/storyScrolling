@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8"/>
+    <title>trajectories </title>
+    <script src="https://code.jquery.com/jquery-3.6.3.min.js"></script>
+<style>
+
+body{
+   font-family: "New York Times-Roman";
+   font-size: 22px;
+   }
+
+/* Basic styling for visibility */
+.container > * {
+  border: 2px solid #79b9e3;
+  padding: 10px;
+  border-radius: 5px;
+  background-color: #cfffe6;
+}
+
+.container {
+  display: grid;
+  gap: 10px; /* Provides space between items */
+  min-height: 95vh; /* Optional: ensures container takes full viewport height */
+  }
+
+/* Default layout (mobile-first approach, a single column stack) */
+.container {
+  grid-template-areas:
+    "header"
+    "nav"
+    "main";
+  grid-template-columns: 1fr; /* One column that takes up all available space */
+  grid-template-rows: auto auto 1fr; /* Auto-height for most, main content grows */
+}
+
+/* Assigning names to items */
+header { grid-area: header; }
+nav { grid-area: nav; }
+main { grid-area: main; }
+
+/* Adaptive layout for screens wider than 600px (e.g., tablet/desktop) */
+@media (min-width: 600px) {
+  .container {
+    grid-template-areas:
+      "header header"
+      "nav    main"
+      "footer footer";
+    grid-template-columns: 150px 1fr; /* Fixed width sidebars, growing content */
+    grid-template-rows: 200px 1fr; /* Auto height header/footer, growing middle row */
+  }
+}
+
+</style>
+
+<script>
+$(document).ready(function(){
+  console.log("document ready")
+  });
+
+</script>
+
+</head>
+<body>
+
+<div class="container">
+
+  <header>
+    <div style="margin: 20px;">Messy Trajectories: Disruptions and Response</div>
+  </header>
+
+
+  <nav>Navigation</nav>
+
+
+<main>
+  <div style="margin: 50px; margin-top: 0px; overflow-y: auto">
+  
+<h4>Bede's Plague</h4>
+
+After four centuries, Roman rule ended in Britain in 410 AD.  The army
+left Britain to DEFEND against the invasion of Rome by Visigoths.
+Unified administration in Roman Britain, road building, some
+urbanization and Christianity, the use of Latin, all gave way to
+decentralized, localized and less prosperous lives.  <p>
+
+Anglo-Saxon invasion ensued along with widespread return to paganism.
+<p>
+
+By the seventh century, with missionaries from Rome and Ireland, Christianity saw some resurgence.
+<p>
+
+In 686 Europe's first bubonic plague swept Ireland and England.   it
+"ravaged the country far and near, and destroyed a great multitude of
+men,"[10] and that "scarcely any inhabitants [were] left in villages
+and places which had been thickly populated, and some towns were
+wholly deserted."
+<p>
+Bede: 673-735
+<p>
+
+<img src="bede.jpg" style="float: right; margin: 10px; width: 200px;">
+<div style="margin: 10px;">
+Bede's "The Life of Ceolfrith", written in about 710, records that
+only two surviving monks were capable of singing the full offices; one
+was Ceolfrith and the other a young boy, who according to the
+anonymous writer had been taught by Ceolfrith. The two managed to do
+the entire service of the liturgy until others could be trained. The
+young boy was almost certainly Bede, who would have been about 14. <a
+href="https://en.wikipedia.org/wiki/Bede" target="_blank">w</a>
+</div>
+
+<div>
+Two lone survivors
+
+
+
+</main>
+
+
+</div>
+
+</body>
+</html>

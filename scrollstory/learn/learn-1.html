@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>ScrollStory: learn 1</title>
+    <script src="https://pshannon.net/story/js/jquery.min.js"></script>
+    <script src="https://pshannon.net/story/js/jquery.scrollstory.js"></script>
+    <link rel="stylesheet" href="learn-1.css">
+    <script>
+      window.x = {};
+    </script>
+</head>
+
+<body>
+  <!-- Default markup style -->
+  <div id="container">
+    <div class="story scrollStoryItem"
+         style="background-color: lightgrey;
+                height: auto;"
+         data-name="first div">
+      <h2>Descartes' Breath</h2>
+<div id="descartes-breath" style="opacity: 0.0">
+Ruminating upon Sufi Hazrat Inayat Khan’s assertion that the ‘the fundamental error of philosophy is its constant “forgetting of breathing” (x) Škof and Berndtson argue that in Western philosophy such forgetfulness has ‘made it possible for the dangerous idea of dualism to become a paradigm of modern philosophy.’ (xiii)
+
+<p>Perhaps inevitably the blame is placed squarely on the shoulders of René Descartes and the third of his Meditations on First Philosophy. As summarised by Škof and Berndtson, in the relevant section Descartes seeks to ‘address only himself by looking deeper and deeper into himself’ so that he might be more better known and familiar to himself (xii). Such self-knowledge can only be achieved via a withdrawal from the so-called deceptive world of the senses.
+
+<p>Škof and Berndtson point out that even though Descartes describes his withdrawal, from the visual by closing his eyes, from the auditory by blocking his ears, it is impossible for him to block his nostrils and mouth, as these are required to breathe. Descartes’ description is therefore erroneous, ‘as he forgets breathing he is not at all truthful in what he writes.’
+
+<p>Had his pursuit of obtaining ‘pure and indubitable self-knowledge’ lead to him blocking his respiratory openings he would have experienced, according to Škof and Berndtson ‘a dreadful experience of anxiety… his sole thought would have been I am feeling terrible. How long can I hold my breath? I really need to breathe.’
+
+<p>Had the philosopher experienced this train of thought, argue the editors of Atmospheres of Breath, Cartesian philosophy would have been absolutely different as would Western philosophy. Tying into Kahn’s proposition, Škof and Berndtson surmise that had Descartes been more aware of own breathing he never would have arrived at his dualistic philosophy (xiii). If the starting principle of philosophy is the experience of breathing, which ‘perpetually intertwines the self, the body and the world,’ then dualism becomes untenable.
+</div>
+    </div>
+    <div class="story scrollStoryItem"
+         style="background-color: lightgreen; height: 1300px;"
+         data-name="second div">
+      <h2>Story 2</h2>
+      <p>second item</p>
+    </div>
+  </div>
+
+  <script>
+    $(function(){
+      console.log("initializing scrollStory");
+      $("#container").scrollStory({triggerOffset: 400, debug: true});
+      $("#container").on('itemfocus', function(event, item){
+         console.log("itemfocus: " + item.data.name);
+         x['item'] = item
+         if(item.data.name === 'first div'){
+            console.log(item.el.context.childNodes)
+            //debugger;
+            x['item'].el.children()[1].style['transition'] = "opacity 3s"
+            x['item'].el.children()[1].style['opacity'] = 1;
+            }
+         });
+      $("#container").on('itemblur', function(event, item){
+         console.log("item focus lost: " + item.data.name);
+         if(item.data.name === 'first div'){
+            //debugger;
+            console.log(item.el.context.childNodes)
+            x['item'].el.children()[1].style['transition'] = "opacity 1s"
+            x['item'].el.children()[1].style['opacity'] = 0;
+            }
+
+         });
+     }) // on load
+  </script>
+</body>
+

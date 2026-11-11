@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8"/>
+    <title> zoom and center</title>
+    <script src="https://code.jquery.com/jquery-3.6.3.min.js"></script>
+
+    <!--
+        with just those two properties (transform: scale(2) and
+        transform-origin: 100% 0%),
+        you get exactly the zoom effect you wanted.
+          Top-left: transform-origin: 0% 0%
+       Bottom-left: transform-origin: 0% 100%
+      Bottom-right: transform-origin: 100% 100%
+            Center: transform-origin: 50% 50%
+     -->
+
+<style>
+
+body{
+   margin: 100px;
+   margin-top: 30px;
+   font-family: "New York Times-Roman";
+   font-size: 22px;
+   height: 100%;
+   }
+
+.img-container {
+  overflow: hidden; 
+  margin: 0 auto;
+  width: 600px;
+  float: left;
+  }
+
+.zoom-normal {
+    transform: scale(1);
+    transform-origin: 0% 0%; /* top-right corner */
+    transition: transform 1.6s;
+}
+
+
+.zoom-white-horse {
+    transform: scale(4);
+    transform-origin: 97% 35%; /* top-right corner */
+    transition: transform 2s;
+}
+
+.zoom-red-horse {
+   transform: scale(2.5);
+   transform-origin: 87% 25%; /* top-right corner */
+   transition: transform 1.6s;
+   }
+
+.zoom-black-horse {
+   transform: scale(1.6);
+   transform-origin: 40% 25%; /* top-right corner */
+   transition: transform 1.6s;
+   }
+
+.zoom-pale-horse {
+   transform: scale(1.7);
+   transform-origin: 12% 95%; /* top-right corner */
+   transition: transform 1.6s;
+   }
+
+.zoom-angel {
+   transform: scale(2);
+   transform-origin: 75% 0%; /* top-right corner */
+   transition: transform 1.6s;
+   }
+
+
+</style>
+
+<script>
+$(document).ready(function(){
+  console.log("document ready")
+  });
+
+</script>
+
+</head>
+<body>
+  <button id="normalZoomButton">default</button>
+  <button id="zoomTopRightButton">white horse</button>
+  <button id="redHorseButton">red horse</button>
+  <button id="blackHorseButton">black horse</button>
+  <button id="paleHorseButton">pale horse</button>
+  <button id="angelButton">angel</button>
+<br><br>              
+<div class="img-container">
+   <img src="horsemen.jpg" class="zoom-normal" width=600>
+</div>
+<div id="text-container" style="margin-left: 40px; border: 1px solid black;
+                                border-radius: 5px">
+  text goes here
+  </div>
+<script>
+  $("#redHorseButton").on("click", function(){
+      $(".img-container img").addClass('zoom-normal');
+      $(".img-container img").removeClass()
+      $(".img-container img").addClass('zoom-red-horse')
+  })
+
+  $("#zoomTopRightButton").on("click", function(){
+      $(".img-container img").removeClass()
+      $(".img-container img").addClass('zoom-white-horse')
+  })
+
+  $("#normalZoomButton").on("click", function(){
+      $(".img-container img").removeClass()
+      $(".img-container img").addClass('zoom-normal')
+  })
+
+  $("#blackHorseButton").on("click", function(){
+      $(".img-container img").removeClass()
+      $(".img-container img").addClass('zoom-black-horse')
+  })
+
+  $("#paleHorseButton").on("click", function(){
+      $(".img-container img").removeClass()
+      $(".img-container img").addClass('zoom-pale-horse')
+  })
+
+  $("#angelButton").on("click", function(){
+      $(".img-container img").removeClass()
+      $(".img-container img").addClass('zoom-angel')
+  })
+
+
+</script>
+</body>
+</html>

@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Trajectories </title>
+    <script src="https://code.jquery.com/jquery-3.6.3.min.js"></script>
+<style>
+
+body{
+   font-family: "New York Times-Roman";
+   font-size: 22px;
+   }
+
+/* Basic styling for visibility */
+.container > * {
+  border: 2px solid #79b9e3;
+  padding: 10px;
+  border-radius: 5px;
+  background-color: #FCF5E5;
+}
+
+.container {
+  display: grid;
+  gap: 10px; /* Provides space between items */
+  min-height: 97vh; /* Optional: ensures container takes full viewport height */
+}
+
+.container {
+   grid-template-areas:
+     "header header"
+     "nav    main";
+   grid-template-columns: 150px 1fr; /* Fixed width sidebars, growing content */
+   grid-template-rows: 120px 1fr; /* Auto height header growing middle row */
+   }
+
+
+
+/* Assigning names to items */
+header { grid-area: header; }
+nav { grid-area: nav; }
+
+main{
+   grid-area: main;
+   height: calc(97vh - 140px);
+   }
+
+/* Adaptive layout for screens wider than 600px (e.g., tablet/desktop) */
+@media (min-width: 600px) {
+  .container {
+    grid-template-areas:
+      "header header"
+      "nav    main";
+    grid-template-columns: 150px 1fr; /* Fixed width sidebars, growing content */
+    grid-template-rows: 100px 1fr; /* Auto height header growing middle row */
+  }
+}
+
+</style>
+
+<script>
+$(document).ready(function(){
+  console.log("document ready")
+  });
+
+</script>
+
+</head>
+<body>
+
+<div class="container">
+  <header>Header</header>
+  <nav>Navigation</nav>
+
+<main style="overflow-y: auto;">
+
+<div id="bedeTextDiv">
+  
+<h4>Bede's Plague</h4>
+
+<img src="bede.jpg" style="float: left; margin: 10px; width: 200px;">
+A year after the plague of 686, young Bede (672-735) later canonized
+and known as The Venerable, was only 14-years old.  Taken into a
+Northumbrian monastery at the age of seven, with his teacher,
+Coelfrith, the only survivors of this early Eurpoean plague, sang all
+the canonical hours in Roman plainchant: Matins, Lauds, Prime, Terce,
+Sext, None, Vespers, and Compline.  This practice was the heart of
+early medieval monastic life.  At the Jarrow monastery, and throughout
+Britain and Ireland, All but these two had died. Young Bede and his teacher carried on
+when all everyone else had dies.   As Bede later wrote of the Plague:
+
+<blockquote style="margin-left: 30xp;">
+
+it ravaged the country far and near, and destroyed a great multitude of
+men, ... scarcely any inhabitants [were] left in villages
+and places which had been thickly populated, and some towns were
+wholly deserted.
+</blockquote>
+
+
+
+but two members of the community had died from the Plague.
+
+<p>Bede went on to become the great scholar of early medieval Britain, 
+<p>
+
+  Bede's lifetime of scholarship set the tone for Northumbria.
+  Including the York Cathedral School, where Alcuin (735-805)
+  trained, later recrutied by Charlemagne, becoming the
+  core figure in the intellectual  aspects of the Carolingian
+  Renaissance.
+
+<p>
+  
+The relationship between Bede and Alcuin illustrates a powerful
+intellectual current: from Bede's foundational scholarship in England,
+through the flourishing York school, to Alcuin's pivotal role in
+revitalizing learning and culture across the Carolingian Empire,
+establishing a crucial link in medieval intellectual history.
+  
+Only these two had survived the plague. Only they remained of 
+several hundred monks.
+yet a monkBede accompanied his
+<p>
+After four centuries, Roman rule ended in Britain in 410 AD.  The army
+left Britain to DEFEND against the invasion of Rome by Visigoths.
+Unified administration in Roman Britain, road building, some
+urbanization and Christianity, the use of Latin, all gave way to
+decentralized, localized and less prosperous lives.  <p>
+
+Anglo-Saxon invasion ensued along with widespread return to paganism.
+<p>
+
+By the seventh century, with missionaries from Rome and Ireland, Christianity saw some resurgence.
+<p>
+
+In 686 Europe's first bubonic plague swept Ireland and England.   it
+"ravaged the country far and near, and destroyed a great multitude of
+men,"[10] and that "scarcely any inhabitants [were] left in villages
+and places which had been thickly populated, and some towns were
+wholly deserted."
+<p>
+Bede: 673-735
+<p>
+
+<img src="bede.jpg" style="float: right; margin: 10px; width: 200px;">
+Bede's "The Life of Ceolfrith", written in about 710, records that
+only two surviving monks were capable of singing the full offices; one
+was Ceolfrith and the other a young boy, who according to the
+anonymous writer had been taught by Ceolfrith. The two managed to do
+the entire service of the liturgy until others could be trained. The
+young boy was almost certainly Bede, who would have been about 14. <a
+href="https://en.wikipedia.org/wiki/Bede" target="_blank">w</a>
+
+</div>
+
+
+</main>
+</div>
+
+</body>
+</html>
