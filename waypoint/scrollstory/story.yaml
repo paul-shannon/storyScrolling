@@ -3,8 +3,11 @@ scenes:
   - layout: full
     id: title
     fallback: "linear-gradient(160deg, #18261f, #2e4a3c)"
-    heading: Florilegium
-    subheading: Passages gathered from the green world
+    heading: |-
+          Leaf and Lung
+          Branch and Bone
+    subheading: |-
+         Lessons from a small forest
 
   - layout: overlay
     id: snyder
@@ -18,7 +21,7 @@ scenes:
     id: rexroth
     steps:
       - text: ../florilegium/kennethRexrothPoetics.html
-        note: Quoted in David Hinton, The Wilds of Poetry, p. 76.
+        note: "Quoted in David Hinton\nThe Wilds of Poetry, p. 76."
 
   - layout: overlay
     id: mitochondria

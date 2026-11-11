@@ -23,14 +23,14 @@
 {%- if sc.layout == 'full' %}
 <section class="scene full" id="{{ sc.id }}" style="{{ sc.style }}">
   <div class="pin-media">{% for m in sc.medias %}{{ media_html(m) }}{% endfor %}</div>
-  <div class="full-text"><h1>{{ sc.heading }}</h1>{% if sc.subheading %}<p>{{ sc.subheading }}</p>{% endif %}</div>
+  <div class="full-text"><h1>{{ sc.heading|br }}</h1>{% if sc.subheading %}<p>{{ sc.subheading|br }}</p>{% endif %}</div>
 </section>
 {%- elif sc.layout == 'overlay' %}
 <section class="scene overlay" id="{{ sc.id }}" style="{{ sc.style }}">
   <div class="pin-media">{% for m in sc.medias %}{{ media_html(m) }}{% endfor %}</div>
   <div class="steps">
     {%- for s in sc.steps %}
-    <article class="step card"{% if s.view %} data-view='{{ s.view|tojson }}'{% endif %}>{{ s.html|safe }}{% if s.note %}<p class="note">{{ s.note }}</p>{% endif %}</article>
+    <article class="step card"{% if s.view %} data-view='{{ s.view|tojson }}'{% endif %}>{{ s.html|safe }}{% if s.note %}<p class="note">{{ s.note|br }}</p>{% endif %}</article>
     {%- endfor %}
   </div>
 </section>
@@ -39,7 +39,7 @@
   <div class="pin-media">{% for m in sc.medias %}{{ media_html(m) }}{% endfor %}</div>
   <div class="col">
     {%- for s in sc.steps %}
-    <article class="step"{% if s.view %} data-view='{{ s.view|tojson }}'{% endif %}>{{ s.html|safe }}{% if s.note %}<p class="note">{{ s.note }}</p>{% endif %}</article>
+    <article class="step"{% if s.view %} data-view='{{ s.view|tojson }}'{% endif %}>{{ s.html|safe }}{% if s.note %}<p class="note">{{ s.note|br }}</p>{% endif %}</article>
     {%- endfor %}
   </div>
 </section>
@@ -47,7 +47,7 @@
 <section class="scene reading" id="{{ sc.id }}">
   <div class="col">
     {%- for s in sc.steps %}
-    <article class="step"{% if s.view %} data-view='{{ s.view|tojson }}'{% endif %}>{{ s.html|safe }}{% if s.note %}<p class="note">{{ s.note }}</p>{% endif %}</article>
+    <article class="step"{% if s.view %} data-view='{{ s.view|tojson }}'{% endif %}>{{ s.html|safe }}{% if s.note %}<p class="note">{{ s.note|br }}</p>{% endif %}</article>
     {%- endfor %}
   </div>
 </section>

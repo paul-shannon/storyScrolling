@@ -7,6 +7,7 @@ import sys
 from pathlib import Path
 import yaml, markdown
 from jinja2 import Environment, FileSystemLoader
+from markupsafe import Markup, escape
 
 def main(yaml_file):
     here = Path(yaml_file).resolve().parent
@@ -35,8 +36,11 @@ def main(yaml_file):
                     else: print(f'  MISSING media: {m[key]} (scene "{sc["id"]}" uses its fallback background)')
         for s in sc.get('steps') or []:
             s['html'] = text_of(s['text'])
+    # |br: escape the text, then turn each newline into <br>, so headings can have line breaks
+    br = lambda s: Markup(escape(s).replace('\n', Markup('<br>')))
     story['uses_ngl'] = any(m.get('ngl') for sc in story['scenes'] for m in sc['medias'])
     env = Environment(loader=FileSystemLoader(str(here)), autoescape=True)
+    env.filters['br'] = br
     out = env.get_template('template.html.j2').render(**story)
     (here / 'index.html').write_text(out, encoding='utf-8')
     print(f'wrote {here / "index.html"} ({len(story["scenes"])} scenes)')
