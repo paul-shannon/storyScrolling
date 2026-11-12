@@ -3,10 +3,8 @@ default:
 	@echo build
 	@echo server
 	@echo view-local
-	@echo all
+	@echo view-remote
 
-link:
-	ln -sfn ../florilegium/img media
 
 build:
 	python build.py story.yaml
@@ -22,4 +20,12 @@ pid:
 view-local:
 	open http://localhost:$(PORT)/
 
-all: build view-local
+view-remote:
+	open https://pshannon.net/story
+
+publish:
+	scp index.html paulshannnon@pshannon.net:public_html/pshannon.net/story/
+	rsync -a story.css  paulshannnon@pshannon.net:public_html/pshannon.net/story/
+	rsync -a *.js  paulshannnon@pshannon.net:public_html/pshannon.net/story/
+	rsync -a media/  paulshannnon@pshannon.net:public_html/pshannon.net/story/media
+	rsync -a text/ paulshannnon@pshannon.net:public_html/pshannon.net/story/text

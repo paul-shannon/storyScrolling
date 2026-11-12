@@ -1,11 +1,22 @@
-	git add   build.py
+	git rm     big-trees.html
 	git add   index.html
+	git add   junk
 	git add   makefile
-	git add   story.css
-	git add   story.js
+	git rm     media
 	git add   story.yaml
-	git add   template.html.j2
 	git add   text/big-trees.html
-	git rm    text/#big-trees.html#
-   git rm    text/.#big-trees.html
-   
+	git rm     text/ngl-scene-broken.js
+	git rm     text/ngl-scene.js
+
+git add text/branchingPatterns.html
+git add text/contraKant.html
+git add text/garySnyderFrontLines.html
+git add text/intro-kansas.html
+git add text/intro-seward.html
+git add text/kennethRexrothPoetics.html
+git add text/levi-strauss-prospectus.html
+git add text/mitochondriaStretchedOutFlat.html
+git add text/neilClaremonAnswersKant.html
+git add text/template.html
+git add text/thinkingWithTheForest.html
+

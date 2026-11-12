@@ -1,27 +1,49 @@
-title: Florilegium
+title: Branch and Bone
 scenes:
   - layout: full
     id: title
-    fallback: "linear-gradient(160deg, #18261f, #2e4a3c)"
+    fallback: "linear-gradient(160deg, #18261f, #2E6F40)"  
     heading: |-
           Leaf and Lung
           Branch and Bone
     subheading: |-
          Lessons from a small forest
 
-  - layout: overlay
-    id: snyder
+  - layout: split
+    id: firstForest
     fallback: "linear-gradient(180deg, #1b2a3a, #0f1a14)"
-    media: {img: media/night-forest.jpg, alt: "Forest at night, trunks dark against the sky"}   # drop your own photo here
+    media: {img: media/missouri-forest-with-small-stream.webp, alt: "Kansas forest"}   # drop your own photo here
     steps:
-      - text: ../florilegium/garySnyderFrontLines.html
-        note: Concluding lines of Gary Snyder's 1974 poem, Front Lines.
+      - text: text/intro-kansas.html
+
+  - layout: overlay
+    id: currentForest
+    fallback: "linear-gradient(180deg, #1b2a3a, #0f1a14)"
+    media: {img: media/hatcheryTrail-healthy.jpeg, alt: "Seward Forest with hazelnuts"}   # drop your own photo here
+    steps:
+      - text: text/intro-seward.html
+
+  - layout: split
+    id: branchingPatterns
+    fallback: "linear-gradient(180deg, #1b2a3a, #0f1a14)"
+    media: {img: media/branchingPatternExample.jpeg, alt: "branching patternst"}
+    steps:
+      - text: text/branchingPatterns.html
+
+
+
+#   - layout: overlay
+#     id: snyder
+#     fallback: "linear-gradient(180deg, #1b2a3a, #0f1a14)"
+#     media: {img: media/night-forest.jpg, alt: "Forest at night, trunks dark against the sky"}   # drop your own photo here
+#     steps:
+#       - text: text/garySnyderFrontLines.html
+#         note: Concluding lines of Gary Snyder's 1974 poem, Front Lines.
 
   - layout: reading
     id: rexroth
     steps:
-      - text: ../florilegium/kennethRexrothPoetics.html
-        note: "Quoted in David Hinton\nThe Wilds of Poetry, p. 76."
+      - text: text/kennethRexrothPoetics.html
 
   - layout: overlay
     id: mitochondria
@@ -61,13 +83,15 @@ scenes:
     id: big-trees
     media:
       - video: https://sewardpark.org/wp-content/uploads/2025/03/bigTree-7.mov
-        controls: true
+        controls: false
         muted: true
         loop: true
         alt: "Video of the mature Douglas-fir"
-      - youtube: NRlrcbBItVQ
-        start: 955
-        end: 957
-        alt: "The mature Douglas-fir of the Seward Park peninsula"
     steps:
       - text: text/big-trees.html
+
+#  - layout: reading
+#    id: wildMind
+#    steps:
+#      - text: text/levi-strauss-prospectus.html
+#        note: "Quoted in David Hinton\nThe Wilds of Poetry, p. 76."
