@@ -9,6 +9,7 @@
 </head>
 <body>
 <div id="progress" aria-hidden="true"></div>
+{% if tabs|length > 1 %}<nav class="tabs" aria-label="Sections of this story">{% for t in tabs %}<a href="{{ t.href }}"{% if t.href == current %} aria-current="page"{% endif %}>{{ t.label }}</a>{% endfor %}</nav>{% endif %}
 {% macro media_html(m) -%}
   {%- if m.ok -%}
     {%- if m.video -%}<video{% if m.controls %} controls{% if m.muted %} muted{% endif %}{% if m.loop %} loop{% endif %}{% else %} muted loop{% endif %} playsinline preload="metadata"{% if m.poster %} poster="{{ m.poster }}"{% endif %} aria-label="{{ m.alt }}"><source src="{{ m.video }}"></video>
@@ -26,7 +27,7 @@
   <div class="full-text"><h1>{{ sc.heading|br }}</h1>{% if sc.subheading %}<p>{{ sc.subheading|br }}</p>{% endif %}</div>
 </section>
 {%- elif sc.layout == 'overlay' %}
-<section class="scene overlay" id="{{ sc.id }}" style="{{ sc.style }}">
+<section class="scene overlay{% if sc.has_ngl %} has-ngl{% endif %}" id="{{ sc.id }}" style="{{ sc.style }}">
   <div class="pin-media">{% for m in sc.medias %}{{ media_html(m) }}{% endfor %}</div>
   <div class="steps">
     {%- for s in sc.steps %}

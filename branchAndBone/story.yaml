@@ -1,11 +1,11 @@
 title: Branch and Bone
+tab: Story
+output: index.html
 scenes:
   - layout: full
     id: title
     fallback: "linear-gradient(160deg, #18261f, #2E6F40)"  
-    heading: |-
-          Leaf and Lung
-          Branch and Bone
+    heading: Branch and Bone
     subheading: |-
          Lessons from a small forest
 
@@ -58,7 +58,7 @@ scenes:
     media:
       ngl:
         structure: rcsb://1S5L              # or a URL / local path to a .pdb or .cif file
-        background: "#14201b"
+        background: "#FFF8DC"#14201b"
         components:
           - {name: A.cartoon,     selection: ":A",          representation: cartoon,    colorScheme: residueIndex, visible: true}
           - {name: A.ballStick,   selection: ":A",          representation: ball+stick, colorScheme: residueIndex, visible: false}

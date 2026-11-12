@@ -1,22 +1,16 @@
 #!/usr/bin/env python3
-"""build.py -- story YAML files + template.html.j2 -> one HTML page per YAML file, linked by tabs.
-usage: python build.py story.yaml [backstory.yaml ...]        (pip install jinja2 markdown pyyaml)
-The first file becomes index.html; the others become <name>.html unless they set `output:`.
-Each file's `tab:` is its tab label (default: its title). Tab order follows the command line.
+"""build.py -- story.yaml + template.html.j2 -> index.html
+usage: python build.py story.yaml        (pip install jinja2 markdown pyyaml)
 Text files may be .md (converted) or .html (used as is). Missing media is reported and the scene
 falls back to its 'fallback' CSS background, so the story always builds."""
 import sys
 from pathlib import Path
 import yaml, markdown
 from jinja2 import Environment, FileSystemLoader
-from markupsafe import Markup, escape
 
-def load(yaml_file, first):
-    path = Path(yaml_file).resolve()
-    here = path.parent
-    story = yaml.safe_load(open(path, encoding='utf-8'))
-    story.setdefault('output', 'index.html' if first else path.stem + '.html')
-    story.setdefault('tab', story.get('title', path.stem))
+def main(yaml_file):
+    here = Path(yaml_file).resolve().parent
+    story = yaml.safe_load(open(yaml_file, encoding='utf-8'))
     md = markdown.Markdown(extensions=['nl2br'])
     exists = lambda ref: ref.startswith('http') or (here / ref).exists()
 
@@ -38,24 +32,14 @@ def load(yaml_file, first):
             for key in ('video', 'img'):
                 if m.get(key):
                     if exists(m[key]): m['ok'] = True
-                    else: print(f'  MISSING media: {m[key]} ({path.name}, scene "{sc["id"]}" uses its fallback background)')
-        sc['has_ngl'] = any(m.get('ngl') for m in sc['medias'])
+                    else: print(f'  MISSING media: {m[key]} (scene "{sc["id"]}" uses its fallback background)')
         for s in sc.get('steps') or []:
             s['html'] = text_of(s['text'])
-    story['uses_ngl'] = any(sc['has_ngl'] for sc in story['scenes'])
-    return story
-
-def main(files):
-    outdir = Path(files[0]).resolve().parent
-    stories = [load(f, i == 0) for i, f in enumerate(files)]
-    tabs = [{'label': s['tab'], 'href': s['output']} for s in stories]
-    env = Environment(loader=FileSystemLoader(str(outdir)), autoescape=True)
-    # |br: escape the text, then turn each newline into <br>, so headings and notes can have line breaks
-    env.filters['br'] = lambda s: Markup(escape(s).replace('\n', Markup('<br>')))
-    template = env.get_template('template.html.j2')
-    for s in stories:
-        (outdir / s['output']).write_text(template.render(**s, tabs=tabs, current=s['output']), encoding='utf-8')
-        print(f'wrote {outdir / s["output"]} ({len(s["scenes"])} scenes)')
+    story['uses_ngl'] = any(m.get('ngl') for sc in story['scenes'] for m in sc['medias'])
+    env = Environment(loader=FileSystemLoader(str(here)), autoescape=True)
+    out = env.get_template('template.html.j2').render(**story)
+    (here / 'index.html').write_text(out, encoding='utf-8')
+    print(f'wrote {here / "index.html"} ({len(story["scenes"])} scenes)')
 
 if __name__ == '__main__':
-    main(sys.argv[1:] or ['story.yaml'])
+    main(sys.argv[1] if len(sys.argv) > 1 else 'story.yaml')

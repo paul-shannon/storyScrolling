@@ -7,7 +7,7 @@ default:
 
 
 build:
-	python build.py story.yaml
+	python build.py story.yaml backstory.yaml
 
 PORT = 4441
 
@@ -24,7 +24,7 @@ view-remote:
 	open https://pshannon.net/story
 
 publish:
-	scp index.html paulshannnon@pshannon.net:public_html/pshannon.net/story/
+	scp index.html backstory.html paulshannnon@pshannon.net:public_html/pshannon.net/story/
 	rsync -a story.css  paulshannnon@pshannon.net:public_html/pshannon.net/story/
 	rsync -a *.js  paulshannnon@pshannon.net:public_html/pshannon.net/story/
 	rsync -a media/  paulshannnon@pshannon.net:public_html/pshannon.net/story/media
