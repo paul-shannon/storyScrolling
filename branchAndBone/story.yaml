@@ -1,0 +1,97 @@
+title: Branch and Bone
+scenes:
+  - layout: full
+    id: title
+    fallback: "linear-gradient(160deg, #18261f, #2E6F40)"  
+    heading: |-
+          Leaf and Lung
+          Branch and Bone
+    subheading: |-
+         Lessons from a small forest
+
+  - layout: split
+    id: firstForest
+    fallback: "linear-gradient(180deg, #1b2a3a, #0f1a14)"
+    media: {img: media/missouri-forest-with-small-stream.webp, alt: "Kansas forest"}   # drop your own photo here
+    steps:
+      - text: text/intro-kansas.html
+
+  - layout: overlay
+    id: currentForest
+    fallback: "linear-gradient(180deg, #1b2a3a, #0f1a14)"
+    media: {img: media/hatcheryTrail-healthy.jpeg, alt: "Seward Forest with hazelnuts"}   # drop your own photo here
+    steps:
+      - text: text/intro-seward.html
+
+  - layout: split
+    id: branchingPatterns
+    fallback: "linear-gradient(180deg, #1b2a3a, #0f1a14)"
+    media: {img: media/branchingPatternExample.jpeg, alt: "branching patternst"}
+    steps:
+      - text: text/branchingPatterns.html
+
+
+
+#   - layout: overlay
+#     id: snyder
+#     fallback: "linear-gradient(180deg, #1b2a3a, #0f1a14)"
+#     media: {img: media/night-forest.jpg, alt: "Forest at night, trunks dark against the sky"}   # drop your own photo here
+#     steps:
+#       - text: text/garySnyderFrontLines.html
+#         note: Concluding lines of Gary Snyder's 1974 poem, Front Lines.
+
+  - layout: reading
+    id: rexroth
+    steps:
+      - text: text/kennethRexrothPoetics.html
+
+  - layout: overlay
+    id: mitochondria
+    fallback: "linear-gradient(180deg, #2a1b33, #120d18)"
+    media: {img: media/mitochondria.webp, alt: "Illustration accompanying the passage on mitochondrial membranes"}
+    steps:
+      - text: text/mitochondria.md
+        note: Nick Lane, Transformer - The Deep Chemistry of Life and Death, p. 66.
+
+  - layout: overlay
+    id: oec
+    media:
+      ngl:
+        structure: rcsb://1S5L              # or a URL / local path to a .pdb or .cif file
+        background: "#14201b"
+        components:
+          - {name: A.cartoon,     selection: ":A",          representation: cartoon,    colorScheme: residueIndex, visible: true}
+          - {name: A.ballStick,   selection: ":A",          representation: ball+stick, colorScheme: residueIndex, visible: false}
+          - {name: OEC.spacefill, selection: "OEC AND :A",  representation: spacefill,  colorScheme: element,      visible: true}
+          - {name: OEC.line,      selection: "OEC AND :A",  representation: ball+stick, colorScheme: element,      visible: true}
+          - {name: CLA.348, selection: "[CLA] AND 348 AND :A", representation: ball+stick, colorScheme: element, visible: true}
+          - {name: CLA.349, selection: "[CLA] AND 349 AND :A", representation: ball+stick, colorScheme: element, visible: true}
+          - {name: CLA.350, selection: "[CLA] AND 350 AND :A", representation: ball+stick, colorScheme: element, visible: true}
+          - {name: CLA.352, selection: "[CLA] AND 352 AND :A", representation: ball+stick, colorScheme: element, visible: true}
+        alt: "Interactive 3D model of Photosystem II (PDB 1S5L), with the oxygen-evolving complex at its edge"
+    steps:
+      - text: text/oec-1.html
+        view: {only: [A.cartoon, OEC.spacefill], fit: true, spin: false}
+      - text: text/oec-2.html
+        view: {only: [OEC.line], center: "OEC AND :A", spin: true}
+      - text: text/oec-3.html
+        view: {only: [A.cartoon, OEC.line, CLA.348, CLA.349, CLA.350, CLA.352], center: ":A", spin: false}
+      - text: text/oec-4.html
+        view: {only: [A.cartoon, OEC.spacefill, CLA.348, CLA.349, CLA.350, CLA.352], fit: true, spin: true}
+
+  - layout: split
+    id: big-trees
+    media:
+      - video: https://sewardpark.org/wp-content/uploads/2025/03/bigTree-7.mov
+        controls: false
+        muted: true
+        loop: true
+        alt: "Video of the mature Douglas-fir"
+    steps:
+      - text: text/big-trees.html
+
+#  - layout: reading
+#    id: wildMind
+#    steps:
+#      - text: text/levi-strauss-prospectus.html
+#        note: "Quoted in David Hinton\nThe Wilds of Poetry, p. 76."

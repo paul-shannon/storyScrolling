@@ -1,0 +1,15 @@
+title: Branch and Bone, backstory
+tab: Backstory
+output: backstory.html
+scenes:
+  - layout: full
+    id: title
+    fallback: "linear-gradient(160deg, #2a2418, #4a3a22)"
+    heading: Backstory
+    subheading: |-
+      How this story came to be
+
+  - layout: reading
+    id: how
+    steps:
+      - text: text/backstory-1.md

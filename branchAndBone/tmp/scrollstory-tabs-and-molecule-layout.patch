@@ -1,0 +1,245 @@
+diff --git a/waypoint/scrollstory/backstory.yaml b/waypoint/scrollstory/backstory.yaml
+new file mode 100644
+index 0000000..2490151
+--- /dev/null
++++ b/waypoint/scrollstory/backstory.yaml
+@@ -0,0 +1,15 @@
++title: Branch and Bone, backstory
++tab: Backstory
++output: backstory.html
++scenes:
++  - layout: full
++    id: title
++    fallback: "linear-gradient(160deg, #2a2418, #4a3a22)"
++    heading: Backstory
++    subheading: |-
++      How this story came to be
++
++  - layout: reading
++    id: how
++    steps:
++      - text: text/backstory-1.md
+diff --git a/waypoint/scrollstory/build.py b/waypoint/scrollstory/build.py
+index d788c89..f8c8f1b 100644
+--- a/waypoint/scrollstory/build.py
++++ b/waypoint/scrollstory/build.py
+@@ -1,6 +1,8 @@
+ #!/usr/bin/env python3
+-"""build.py -- story.yaml + template.html.j2 -> index.html
+-usage: python build.py story.yaml        (pip install jinja2 markdown pyyaml)
++"""build.py -- story YAML files + template.html.j2 -> one HTML page per YAML file, linked by tabs.
++usage: python build.py story.yaml [backstory.yaml ...]        (pip install jinja2 markdown pyyaml)
++The first file becomes index.html; the others become <name>.html unless they set `output:`.
++Each file's `tab:` is its tab label (default: its title). Tab order follows the command line.
+ Text files may be .md (converted) or .html (used as is). Missing media is reported and the scene
+ falls back to its 'fallback' CSS background, so the story always builds."""
+ import sys
+@@ -9,9 +11,12 @@ import yaml, markdown
+ from jinja2 import Environment, FileSystemLoader
+ from markupsafe import Markup, escape
+ 
+-def main(yaml_file):
+-    here = Path(yaml_file).resolve().parent
+-    story = yaml.safe_load(open(yaml_file, encoding='utf-8'))
++def load(yaml_file, first):
++    path = Path(yaml_file).resolve()
++    here = path.parent
++    story = yaml.safe_load(open(path, encoding='utf-8'))
++    story.setdefault('output', 'index.html' if first else path.stem + '.html')
++    story.setdefault('tab', story.get('title', path.stem))
+     md = markdown.Markdown(extensions=['nl2br'])
+     exists = lambda ref: ref.startswith('http') or (here / ref).exists()
+ 
+@@ -33,17 +38,24 @@ def main(yaml_file):
+             for key in ('video', 'img'):
+                 if m.get(key):
+                     if exists(m[key]): m['ok'] = True
+-                    else: print(f'  MISSING media: {m[key]} (scene "{sc["id"]}" uses its fallback background)')
++                    else: print(f'  MISSING media: {m[key]} ({path.name}, scene "{sc["id"]}" uses its fallback background)')
++        sc['has_ngl'] = any(m.get('ngl') for m in sc['medias'])
+         for s in sc.get('steps') or []:
+             s['html'] = text_of(s['text'])
+-    # |br: escape the text, then turn each newline into <br>, so headings can have line breaks
+-    br = lambda s: Markup(escape(s).replace('\n', Markup('<br>')))
+-    story['uses_ngl'] = any(m.get('ngl') for sc in story['scenes'] for m in sc['medias'])
+-    env = Environment(loader=FileSystemLoader(str(here)), autoescape=True)
+-    env.filters['br'] = br
+-    out = env.get_template('template.html.j2').render(**story)
+-    (here / 'index.html').write_text(out, encoding='utf-8')
+-    print(f'wrote {here / "index.html"} ({len(story["scenes"])} scenes)')
++    story['uses_ngl'] = any(sc['has_ngl'] for sc in story['scenes'])
++    return story
++
++def main(files):
++    outdir = Path(files[0]).resolve().parent
++    stories = [load(f, i == 0) for i, f in enumerate(files)]
++    tabs = [{'label': s['tab'], 'href': s['output']} for s in stories]
++    env = Environment(loader=FileSystemLoader(str(outdir)), autoescape=True)
++    # |br: escape the text, then turn each newline into <br>, so headings and notes can have line breaks
++    env.filters['br'] = lambda s: Markup(escape(s).replace('\n', Markup('<br>')))
++    template = env.get_template('template.html.j2')
++    for s in stories:
++        (outdir / s['output']).write_text(template.render(**s, tabs=tabs, current=s['output']), encoding='utf-8')
++        print(f'wrote {outdir / s["output"]} ({len(s["scenes"])} scenes)')
+ 
+ if __name__ == '__main__':
+-    main(sys.argv[1] if len(sys.argv) > 1 else 'story.yaml')
++    main(sys.argv[1:] or ['story.yaml'])
+diff --git a/waypoint/scrollstory/makefile b/waypoint/scrollstory/makefile
+index 819f33e..ff5eb26 100644
+--- a/waypoint/scrollstory/makefile
++++ b/waypoint/scrollstory/makefile
+@@ -7,7 +7,7 @@ default:
+ 
+ 
+ build:
+-	python build.py story.yaml
++	python build.py story.yaml backstory.yaml
+ 
+ PORT = 4441
+ 
+@@ -24,7 +24,7 @@ view-remote:
+ 	open https://pshannon.net/story
+ 
+ publish:
+-	scp index.html paulshannnon@pshannon.net:public_html/pshannon.net/story/
++	scp index.html backstory.html paulshannnon@pshannon.net:public_html/pshannon.net/story/
+ 	rsync -a story.css  paulshannnon@pshannon.net:public_html/pshannon.net/story/
+ 	rsync -a *.js  paulshannnon@pshannon.net:public_html/pshannon.net/story/
+ 	rsync -a media/  paulshannnon@pshannon.net:public_html/pshannon.net/story/media
+diff --git a/waypoint/scrollstory/story.css b/waypoint/scrollstory/story.css
+index 5bf5c23..ff612ca 100644
+--- a/waypoint/scrollstory/story.css
++++ b/waypoint/scrollstory/story.css
+@@ -5,7 +5,7 @@ body { margin: 0; font: 1.2rem/1.6 Georgia, "Iowan Old Style", serif; color: var
+ img { max-width: 100%; height: auto; }
+ 
+ /* reading progress: CSS only; browsers without scroll-driven animations just show no bar */
+-#progress { position: fixed; top: 0; left: 0; z-index: 10; width: 100%; height: 4px; background: var(--accent);
++#progress { position: fixed; top: 0; left: 0; z-index: 30; width: 100%; height: 4px; background: var(--accent);
+   transform: scaleX(0); transform-origin: 0 50%; }
+ @supports (animation-timeline: scroll()) {
+   #progress { animation: grow linear both; animation-timeline: scroll(root); }
+@@ -63,3 +63,20 @@ html.js .card.is-active { opacity: 1; }
+   .card { margin: 55vh 1rem; }
+ }
+ @media (prefers-reduced-motion: reduce) { * { transition: none !important; animation: none !important; } }
++
++/* tabs, as in the Times' Snow Fall: a slim bar over the page, one link per YAML file */
++.tabs { position: fixed; top: 0; left: 0; right: 0; z-index: 20; display: flex; gap: 1.6rem; padding: .75rem 1.4rem;
++  background: rgba(14, 24, 19, .8); backdrop-filter: blur(6px); font: .95rem/1 system-ui, sans-serif; letter-spacing: .06em; }
++.tabs a { color: var(--ink); text-decoration: none; opacity: .75; padding-bottom: .3rem; border-bottom: 2px solid transparent; }
++.tabs a:hover { opacity: 1; }
++.tabs a[aria-current="page"] { opacity: 1; border-bottom-color: var(--accent); }
++
++/* Scenes with a molecule: keep the cards and the molecule from covering each other */
++@media (min-width: 1100px) {      /* wide: cards on the left, the molecule fills the space to their right */
++  .overlay.has-ngl .pin-media { padding-left: calc(8vw + var(--measure) + 2rem); }
++}
++@media (max-width: 1099px) {      /* narrow: molecule pinned across the top half, cards scroll up beneath it */
++  .overlay.has-ngl .pin-media { z-index: 2; height: 50vh; }
++  .overlay.has-ngl .steps { padding-top: 50vh; }
++  .overlay.has-ngl .card { margin: 0 1rem 40vh; }
++}
+diff --git a/waypoint/scrollstory/story.js b/waypoint/scrollstory/story.js
+index b007df3..e685e8f 100644
+--- a/waypoint/scrollstory/story.js
++++ b/waypoint/scrollstory/story.js
+@@ -4,14 +4,35 @@ const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+ // the card nearest the middle of the screen is "active"
+ // NGL molecular stages are created when their scene nears the screen; each step's data-view steers the camera
+ function nglFor(el) { return el._ngl || (el._ngl = new NglScene(el, JSON.parse(el.dataset.ngl))); }
+-const stepObserver = new IntersectionObserver(entries => entries.forEach(e => {
+-  e.target.classList.toggle('is-active', e.isIntersecting);
+-  const stageEl = e.target.closest('.scene')?.querySelector('.ngl-stage');
+-  if (e.isIntersecting && e.target.dataset.view && stageEl && typeof NglScene !== 'undefined') {
+-    nglFor(stageEl).apply(JSON.parse(e.target.dataset.view), reduce);
+-  }
+-}), {rootMargin: '-35% 0px -35% 0px'});
+-document.querySelectorAll('.step').forEach(el => stepObserver.observe(el));
++const stacked = matchMedia('(max-width: 1099px)');   // narrow screens: molecule on top, cards scroll beneath it
++function makeStepObserver(rootMargin) {
++  return new IntersectionObserver(entries => entries.forEach(e => {
++    e.target.classList.toggle('is-active', e.isIntersecting);
++    const stageEl = e.target.closest('.scene')?.querySelector('.ngl-stage');
++    if (e.isIntersecting && e.target.dataset.view && stageEl && typeof NglScene !== 'undefined') {
++      nglFor(stageEl).apply(JSON.parse(e.target.dataset.view), reduce);
++    }
++  }), {rootMargin});
++}
++const stepObserver = makeStepObserver('-35% 0px -35% 0px');
++document.querySelectorAll('.scene:not(.has-ngl) .step').forEach(el => stepObserver.observe(el));
++
++// Scenes with a molecule. When stacked, the active band starts just below the pinned molecule,
++// so a card sliding up beneath it stops counting as the current one.
++let nglStepObserver;
++function watchNglSteps() {
++  const steps = document.querySelectorAll('.has-ngl .step');
++  if (!steps.length) return;
++  nglStepObserver?.disconnect();
++  const top = stacked.matches ? Math.round(innerHeight * 0.5) + 40 : Math.round(innerHeight * 0.35);
++  const bottom = Math.round(innerHeight * (stacked.matches ? 0.15 : 0.35));
++  nglStepObserver = makeStepObserver(`-${top}px 0px -${bottom}px 0px`);
++  steps.forEach(el => nglStepObserver.observe(el));
++}
++watchNglSteps();
++stacked.addEventListener('change', watchNglSteps);
++let resizeTimer;
++addEventListener('resize', () => { clearTimeout(resizeTimer); resizeTimer = setTimeout(watchNglSteps, 200); });
+ const stageObserver = new IntersectionObserver((entries, obs) => entries.forEach(e => {
+   if (e.isIntersecting) { nglFor(e.target); obs.unobserve(e.target); }
+ }), {rootMargin: '100% 0px'});
+@@ -20,7 +41,7 @@ if (typeof NglScene !== 'undefined') document.querySelectorAll('.ngl-stage').for
+ // background videos play only while their scene is on screen, and not at all if motion is reduced
+ const videoObserver = new IntersectionObserver(entries => entries.forEach(e => {
+   const v = e.target;
+-  if (e.isIntersecting && !reduce) v.play().catch(() => {}); else v.pause();
++  if (e.isIntersecting && !reduce) v.play()?.catch(() => {}); else v.pause();
+ }), {threshold: 0.25});
+ document.querySelectorAll('video:not([controls])').forEach(v => videoObserver.observe(v));
+ 
+diff --git a/waypoint/scrollstory/story.yaml b/waypoint/scrollstory/story.yaml
+index 74b00e7..ac873b3 100644
+--- a/waypoint/scrollstory/story.yaml
++++ b/waypoint/scrollstory/story.yaml
+@@ -1,4 +1,6 @@
+ title: Branch and Bone
++tab: Story
++output: index.html
+ scenes:
+   - layout: full
+     id: title
+diff --git a/waypoint/scrollstory/template.html.j2 b/waypoint/scrollstory/template.html.j2
+index 5e78b3f..79c3121 100644
+--- a/waypoint/scrollstory/template.html.j2
++++ b/waypoint/scrollstory/template.html.j2
+@@ -9,6 +9,7 @@
+ </head>
+ <body>
+ <div id="progress" aria-hidden="true"></div>
++{% if tabs|length > 1 %}<nav class="tabs" aria-label="Sections of this story">{% for t in tabs %}<a href="{{ t.href }}"{% if t.href == current %} aria-current="page"{% endif %}>{{ t.label }}</a>{% endfor %}</nav>{% endif %}
+ {% macro media_html(m) -%}
+   {%- if m.ok -%}
+     {%- if m.video -%}<video{% if m.controls %} controls{% if m.muted %} muted{% endif %}{% if m.loop %} loop{% endif %}{% else %} muted loop{% endif %} playsinline preload="metadata"{% if m.poster %} poster="{{ m.poster }}"{% endif %} aria-label="{{ m.alt }}"><source src="{{ m.video }}"></video>
+@@ -26,7 +27,7 @@
+   <div class="full-text"><h1>{{ sc.heading|br }}</h1>{% if sc.subheading %}<p>{{ sc.subheading|br }}</p>{% endif %}</div>
+ </section>
+ {%- elif sc.layout == 'overlay' %}
+-<section class="scene overlay" id="{{ sc.id }}" style="{{ sc.style }}">
++<section class="scene overlay{% if sc.has_ngl %} has-ngl{% endif %}" id="{{ sc.id }}" style="{{ sc.style }}">
+   <div class="pin-media">{% for m in sc.medias %}{{ media_html(m) }}{% endfor %}</div>
+   <div class="steps">
+     {%- for s in sc.steps %}
+diff --git a/waypoint/scrollstory/text/backstory-1.md b/waypoint/scrollstory/text/backstory-1.md
+new file mode 100644
+index 0000000..2b076e9
+--- /dev/null
++++ b/waypoint/scrollstory/text/backstory-1.md
+@@ -0,0 +1,7 @@
++### Placeholder
++
++This is where the backstory goes: how the story began, what you read and saw along the way, who helped, and what you left out.
++
++Each scene can use any layout (`reading`, `split`, `overlay` or `full`), just as in the main story, and a scene can hold media as well as text.
++
++*Edit this file, or add new files and list them as steps in `backstory.yaml`.*

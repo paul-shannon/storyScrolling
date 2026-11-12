@@ -1,0 +1,82 @@
+:root { --ink: #f4f1e8; --card: rgba(14, 24, 19, .82); --paper: #f6f3ea; --text: #232019;
+  --accent: #6f9f90; --measure: 34rem; }
+* { box-sizing: border-box; }
+body { margin: 0; font: 1.2rem/1.6 Georgia, "Iowan Old Style", serif; color: var(--text); background: var(--paper); }
+img { max-width: 100%; height: auto; }
+
+/* reading progress: CSS only; browsers without scroll-driven animations just show no bar */
+#progress { position: fixed; top: 0; left: 0; z-index: 30; width: 100%; height: 4px; background: var(--accent);
+  transform: scaleX(0); transform-origin: 0 50%; }
+@supports (animation-timeline: scroll()) {
+  #progress { animation: grow linear both; animation-timeline: scroll(root); }
+  @keyframes grow { to { transform: scaleX(1); } }
+}
+
+.scene { position: relative; background: var(--fallback, #1f2d26); color: var(--ink); }
+.pin-media img, .pin-media video { display: block; width: 100%; height: 100%; object-fit: cover; }
+
+/* overlay: media pinned full-bleed, text cards scroll over it */
+.overlay { display: grid; }
+.overlay .pin-media { grid-area: 1 / 1; position: sticky; top: 0; height: 100vh; align-self: start; }
+.overlay .steps { grid-area: 1 / 1; position: relative; z-index: 1; padding: 20vh 0; }
+.card { max-width: var(--measure); margin: 55vh 0 55vh 8vw; padding: 1.4rem 1.7rem; background: var(--card);
+  color: var(--ink); border-radius: 6px; }
+.card hr { display: none; }
+
+/* reading: plain column on paper */
+.reading, .split { background: var(--paper); color: var(--text); }
+.reading .col { max-width: var(--measure); margin: 14vh auto; padding: 0 1.2rem; }
+.reading hr, .split hr { display: none; }
+
+/* split: pinned media left, text right (the old layout, kept as an option) */
+.split { display: grid; grid-template-columns: 1fr 1fr; }
+.split .pin-media { position: sticky; top: 0; height: 100vh; display: flex; flex-direction: column; justify-content: center; gap: 1rem; padding: 2rem; }
+.split .pin-media video { width: 100%; height: auto; aspect-ratio: 16 / 9; object-fit: contain; background: #000; }
+.split .pin-media iframe, .split .pin-media img { width: 100%; height: auto; aspect-ratio: 16 / 9; border: 0; }
+.split .col { padding: 14vh 3rem; max-width: 40rem; }
+
+/* full: title or media alone */
+.full { min-height: 100vh; display: grid; place-items: center; text-align: center; overflow: hidden; }
+.full .pin-media { position: absolute; inset: 0; }
+.full-text { position: relative; padding: 2rem; }
+.full h1 { font-size: clamp(2.6rem, 8vw, 6rem); margin: 0 0 .3em; font-weight: 600; letter-spacing: .02em; }
+.full p { font-size: 1.3rem; opacity: .85; margin: 0; }
+
+.note { font-size: .85rem; opacity: .75; font-style: italic; margin-bottom: 0; }
+h3, h4 { margin: .2em 0 .5em; }
+
+/* molecular viewer */
+.ngl-stage { width: 100%; height: 100%; }
+@media (hover: hover) and (pointer: fine) {          /* with a mouse, the molecule can be dragged between the cards */
+  .overlay .steps { pointer-events: none; }
+  .card { pointer-events: auto; }
+}
+
+/* with JavaScript, the step in view is bright and the rest recede; without it everything stays readable */
+html.js .card { opacity: .3; transition: opacity .5s; }
+html.js .card.is-active { opacity: 1; }
+
+@media (max-width: 800px) {
+  .split { grid-template-columns: 1fr; }
+  .split .pin-media { position: static; height: auto; padding: 1rem; }
+  .split .col { padding: 2rem 1.2rem; }
+  .card { margin: 55vh 1rem; }
+}
+@media (prefers-reduced-motion: reduce) { * { transition: none !important; animation: none !important; } }
+
+/* tabs, as in the Times' Snow Fall: a slim bar over the page, one link per YAML file */
+.tabs { position: fixed; top: 0; left: 0; right: 0; z-index: 20; display: flex; gap: 1.6rem; padding: .75rem 1.4rem;
+  background: rgba(14, 24, 19, .8); backdrop-filter: blur(6px); font: .95rem/1 system-ui, sans-serif; letter-spacing: .06em; }
+.tabs a { color: var(--ink); text-decoration: none; opacity: .75; padding-bottom: .3rem; border-bottom: 2px solid transparent; }
+.tabs a:hover { opacity: 1; }
+.tabs a[aria-current="page"] { opacity: 1; border-bottom-color: var(--accent); }
+
+/* Scenes with a molecule: keep the cards and the molecule from covering each other */
+@media (min-width: 1100px) {      /* wide: cards on the left, the molecule fills the space to their right */
+  .overlay.has-ngl .pin-media { padding-left: calc(8vw + var(--measure) + 2rem); }
+}
+@media (max-width: 1099px) {      /* narrow: molecule pinned across the top half, cards scroll up beneath it */
+  .overlay.has-ngl .pin-media { z-index: 2; height: 50vh; }
+  .overlay.has-ngl .steps { padding-top: 50vh; }
+  .overlay.has-ngl .card { margin: 0 1rem 40vh; }
+}
