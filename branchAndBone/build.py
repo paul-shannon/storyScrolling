@@ -30,6 +30,9 @@ def load(yaml_file, first):
     for i, sc in enumerate(story['scenes']):
         sc.setdefault('id', f'scene{i + 1}')
         sc['style'] = '--fallback: %s' % sc.get('fallback', '#1f2d26')
+        for key in ('lead', 'trail', 'gap'):
+            if key in sc:
+                sc['style'] += '; --%s: %svh' % (key, sc[key])
         raw = sc.get('media') or {}
         sc['medias'] = raw if isinstance(raw, list) else [raw]      # a scene may hold one item or a list
         for m in sc['medias']:

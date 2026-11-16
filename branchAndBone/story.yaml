@@ -2,22 +2,32 @@ title: Branch and Bone
 tab: Story
 output: index.html
 scenes:
+
   - layout: full
     id: title
     fallback: "linear-gradient(160deg, #18261f, #2E6F40)"  
     heading: Branch and Bone
     subheading: |-
          Lessons from a small forest
+    media:
+      - video: media/peninsula-drone-loop.mp4
+        controls: false
+        muted: true
+        loop: true
+        alt: "Video of the mature Douglas-fir"
 
   - layout: overlay
     id: firstForest
-    fallback: "linear-gradient(180deg, #1b2a3a, #0f1a14)"
+    lead: 90      # photo alone on screen for ~90vh of scrolling before the text arrives
+    trail: 70     # photo alone again after the text passes    fallback: "linear-gradient(180deg, #1b2a3a, #0f1a14)"
     media: {img: media/missouri-forest-with-small-stream.webp, alt: "Kansas forest"}   # drop your own photo here
     steps:
       - text: text/intro-kansas.html
 
   - layout: overlay
     id: currentForest
+    lead: 90      # photo alone on screen for ~90vh of scrolling before the text arrives
+    trail: 70     # photo alone again after the text passes    fallback: "linear-gradient(180deg, #1b2a3a, #0f1a14)"
     fallback: "linear-gradient(180deg, #1b2a3a, #0f1a14)"
     media: {img: media/hatcheryTrail-healthy.jpeg, alt: "Seward Forest with hazelnuts"}   # drop your own photo here
     steps:
@@ -58,7 +68,7 @@ scenes:
     media:
       ngl:
         structure: rcsb://1S5L              # or a URL / local path to a .pdb or .cif file
-        background: "#FFF8DC"#14201b"
+        background: "#f6f3ea"
         components:
           - {name: A.cartoon,     selection: ":A",          representation: cartoon,    colorScheme: residueIndex, visible: true}
           - {name: A.ballStick,   selection: ":A",          representation: ball+stick, colorScheme: residueIndex, visible: false}
@@ -70,14 +80,14 @@ scenes:
           - {name: CLA.352, selection: "[CLA] AND 352 AND :A", representation: ball+stick, colorScheme: element, visible: true}
         alt: "Interactive 3D model of Photosystem II (PDB 1S5L), with the oxygen-evolving complex at its edge"
     steps:
+      - text: text/oec-0.html
+        view: {only: [A.cartoon, OEC.spacefill, CLA.348, CLA.349, CLA.350, CLA.352], center: ":A", spin: true}
       - text: text/oec-1.html
-        view: {only: [A.cartoon, OEC.spacefill], fit: true, spin: false}
+        view: {only: [OEC.spacefill], center: "OEC AND :A", spin: true}
       - text: text/oec-2.html
         view: {only: [OEC.line], center: "OEC AND :A", spin: true}
       - text: text/oec-3.html
-        view: {only: [A.cartoon, OEC.line, CLA.348, CLA.349, CLA.350, CLA.352], center: ":A", spin: false}
-      - text: text/oec-4.html
-        view: {only: [A.cartoon, OEC.spacefill, CLA.348, CLA.349, CLA.350, CLA.352], fit: true, spin: true}
+        view: {only: [A.cartoon, OEC.line, CLA.348, CLA.349, CLA.350, CLA.352], center: ":A", spin: true}
 
   - layout: split
     id: big-trees
@@ -89,6 +99,17 @@ scenes:
         alt: "Video of the mature Douglas-fir"
     steps:
       - text: text/big-trees.html
+
+  - layout: overlay
+    id: overgrownIvy
+    lead: 90      # photo alone on screen for ~90vh of scrolling before the text arrives
+    trail: 70     # photo alone again after the text passes    fallback: "linear-gradient(180deg, #1b2a3a, #0f1a14)"
+    fallback: "linear-gradient(180deg, #1b2a3a, #0f1a14)"
+    media: {img: media/ivyInfestation.jpg, alt: "ivy infestation"}
+    steps:
+      - text: text/ivyInfestation.html
+
+
 
 #  - layout: reading
 #    id: wildMind

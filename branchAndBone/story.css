@@ -3,7 +3,8 @@
 * { box-sizing: border-box; }
 body { margin: 0; font: 1.2rem/1.6 Georgia, "Iowan Old Style", serif; color: var(--text); background: var(--paper); }
 img { max-width: 100%; height: auto; }
-
+a{color: white}
+a:hover{color: gray;}
 /* reading progress: CSS only; browsers without scroll-driven animations just show no bar */
 #progress { position: fixed; top: 0; left: 0; z-index: 30; width: 100%; height: 4px; background: var(--accent);
   transform: scaleX(0); transform-origin: 0 50%; }
@@ -12,15 +13,26 @@ img { max-width: 100%; height: auto; }
   @keyframes grow { to { transform: scaleX(1); } }
 }
 
-.scene { position: relative; background: var(--fallback, #1f2d26); color: var(--ink); }
+/* .scene { position: relative; background: var(--fallback, #1f2d26); color: var(--ink); margin: 2vh;} */
+.scene { position: relative; background: var(--fallback, #1f2d26); color: var(--ink); margin: 2vh;}
 .pin-media img, .pin-media video { display: block; width: 100%; height: 100%; object-fit: cover; }
 
 /* overlay: media pinned full-bleed, text cards scroll over it */
 .overlay { display: grid; }
 .overlay .pin-media { grid-area: 1 / 1; position: sticky; top: 0; height: 100vh; align-self: start; }
+/*****
 .overlay .steps { grid-area: 1 / 1; position: relative; z-index: 1; padding: 20vh 0; }
 .card { max-width: var(--measure); margin: 55vh 0 55vh 8vw; padding: 1.4rem 1.7rem; background: var(--card);
   color: var(--ink); border-radius: 6px; }
+*******/
+
+.overlay .steps { grid-area: 1 / 1; position: relative; z-index: 1;
+                  padding: var(--lead, 20vh) 0 var(--trail, 20vh); }
+.card { max-width: var(--measure); margin: var(--gap, 55vh) 0 var(--gap, 55vh) 8vw;
+        padding: 1.4rem 1.7rem; background: var(--card);
+        color: var(--ink); border-radius: 6px; }
+
+
 .card hr { display: none; }
 
 /* reading: plain column on paper */
@@ -32,14 +44,16 @@ img { max-width: 100%; height: auto; }
 .split { display: grid; grid-template-columns: 1fr 1fr; }
 .split .pin-media { position: sticky; top: 0; height: 100vh; display: flex; flex-direction: column; justify-content: center; gap: 1rem; padding: 2rem; }
 .split .pin-media video { width: 100%; height: auto; aspect-ratio: 16 / 9; object-fit: contain; background: #000; }
-.split .pin-media iframe, .split .pin-media img { width: 100%; height: auto; aspect-ratio: 16 / 9; border: 0; }
+.split .pin-media iframe, .split .pin-media img { width: 100%; height: 70vh; object-fit: contain; aspect-ratio: auto; border: 0; }
+/* .split .pin-media iframe, .split .pin-media img { width: 100%; height: auto; aspect-ratio: 16 / 9; border: 0; } */
 .split .col { padding: 14vh 3rem; max-width: 40rem; }
 
 /* full: title or media alone */
 .full { min-height: 100vh; display: grid; place-items: center; text-align: center; overflow: hidden; }
-.full .pin-media { position: absolute; inset: 0; }
+.full .pin-media { position: absolute; inset: 0; margin: 20px;}
 .full-text { position: relative; padding: 2rem; }
-.full h1 { font-size: clamp(2.6rem, 8vw, 6rem); margin: 0 0 .3em; font-weight: 600; letter-spacing: .02em; }
+.full h1 { font-size: 2rem; margin: 0 0 .3em; font-weight: 600; letter-spacing: .02em; }
+/* .full h1 { font-size: clamp(2.6rem, 5vw, 6rem); margin: 0 0 .3em; font-weight: 600; letter-spacing: .02em; } */
 .full p { font-size: 1.3rem; opacity: .85; margin: 0; }
 
 .note { font-size: .85rem; opacity: .75; font-style: italic; margin-bottom: 0; }

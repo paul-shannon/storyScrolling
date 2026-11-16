@@ -7,9 +7,16 @@ scenes:
     fallback: "linear-gradient(160deg, #2a2418, #4a3a22)"
     heading: Backstory
     subheading: |-
-      How this story came to be
+      History and Theory
 
-  - layout: reading
-    id: how
+  - layout: split
+    id: felicitousFalsehoods
+    heading: Cartoons - Felicitous Falsehoods
+    media: {img: media/nixon-pinnochio.jpg, alt: "Descartes in Stove-heated Room"}
     steps:
-      - text: text/backstory-1.md
+      - text: text/cartoons.html
+
+#  - layout: reading
+#    id: livingInTwoWorlds
+#    steps:
+#      - text: text/backstory-1.html
