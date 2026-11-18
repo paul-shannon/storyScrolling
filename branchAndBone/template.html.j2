@@ -56,7 +56,9 @@
 {% endfor %}
 </main>
 {% if uses_ngl %}<script src="https://cdn.jsdelivr.net/npm/ngl@2.4.0/dist/ngl.js"></script>
-<script src="ngl-scene.js"></script>
-{% endif %}<script src="story.js"></script>
+{% endif %}{% if uses_stage %}<script src="ngl-scene.js"></script>
+{% if uses_etc %}<script src="etc-scene.js"></script>
+{% endif %}{% if uses_tableau %}<script src="tableau-scene.js"></script>
+{% endif %}{% endif %}<script src="story.js"></script>
 </body>
 </html>

@@ -24,7 +24,7 @@
 import { Molecule } from './molecule.js';
 
 //const CLA_URL = "http://127.0.0.1:5519/pdb/cla-no-tail.pdb";
-const CLA_URL = "pdb/cla-no-tail.pdb";
+const CLA_URL = new globalThis.URL("pdb/cla-no-tail.pdb", import.meta.url).href;   // relative to this file
 
 const PORPHYRIN_RING = [
   // "MG",

@@ -4,7 +4,7 @@
 
 import {Molecule} from './molecule.js';
 //const server = "http://127.0.0.1:5519/pdb/"
-const server = "pdb/"
+const server = new globalThis.URL("pdb/", import.meta.url).href   // relative to this file, so any page can import it (globalThis: this file has its own const URL)
 const pdb = "7NHO.pdb"
 const URL = server + pdb;
 

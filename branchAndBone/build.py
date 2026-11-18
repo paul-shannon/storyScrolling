@@ -37,6 +37,11 @@ def load(yaml_file, first):
         sc['medias'] = raw if isinstance(raw, list) else [raw]      # a scene may hold one item or a list
         for m in sc['medias']:
             m.setdefault('alt', '')
+            if m.get('tableau'):                  # a stage of pictures: same pinned-stage plumbing as the molecules
+                m['ngl'] = {'kind': 'tableau', **m.pop('tableau')}
+                for it in m['ngl'].get('items', []):
+                    if it.get('img') and not exists(it['img']):
+                        print(f'  MISSING media: {it["img"]} ({path.name}, scene "{sc["id"]}", item "{it["id"]}" shows a placeholder box)')
             m['ok'] = bool(m.get('youtube') or m.get('ngl'))
             for key in ('video', 'img'):
                 if m.get(key):
@@ -45,7 +50,11 @@ def load(yaml_file, first):
         sc['has_ngl'] = any(m.get('ngl') for m in sc['medias'])
         for s in sc.get('steps') or []:
             s['html'] = text_of(s['text'])
-    story['uses_ngl'] = any(sc['has_ngl'] for sc in story['scenes'])
+    kinds = [(m['ngl'].get('kind') or 'molecule') for sc in story['scenes'] for m in sc['medias'] if m.get('ngl')]
+    story['uses_stage'] = bool(kinds)                                  # any pinned stage at all
+    story['uses_ngl'] = any(k in ('molecule', 'etc') for k in kinds)   # only these need the NGL library itself
+    story['uses_etc'] = 'etc' in kinds
+    story['uses_tableau'] = 'tableau' in kinds
     return story
 
 def main(files):

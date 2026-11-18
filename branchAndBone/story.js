@@ -2,8 +2,14 @@ document.documentElement.classList.add('js');
 const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
 
 // the card nearest the middle of the screen is "active"
-// NGL molecular stages are created when their scene nears the screen; each step's data-view steers the camera
-function nglFor(el) { return el._ngl || (el._ngl = new NglScene(el, JSON.parse(el.dataset.ngl))); }
+// Pinned stages (NGL molecules, the ETC, picture tableaux) are created when their scene nears the screen; each step's data-view steers the camera
+function nglFor(el) {
+  if (el._ngl) return el._ngl;
+  const cfg = JSON.parse(el.dataset.ngl);                       // kind: etc -> the electron-transport-chain scene
+  // (a top-level class is not a window property, so ask with typeof) anything else is a molecule
+  const scenes = {etc: typeof EtcScene !== 'undefined' && EtcScene, tableau: typeof TableauScene !== 'undefined' && TableauScene};
+  return el._ngl = new (scenes[cfg.kind] || NglScene)(el, cfg);
+}
 const stacked = matchMedia('(max-width: 1099px)');   // narrow screens: molecule on top, cards scroll beneath it
 function makeStepObserver(rootMargin) {
   return new IntersectionObserver(entries => entries.forEach(e => {

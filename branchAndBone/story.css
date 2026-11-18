@@ -61,6 +61,20 @@ h3, h4 { margin: .2em 0 .5em; }
 
 /* molecular viewer */
 .ngl-stage { width: 100%; height: 100%; }
+
+/* tableau: pictures on a stage with a bit of light thrown between them (tableau-scene.js) */
+.ngl-stage.tableau { display: grid; place-items: center; }
+.tab-canvas { position: relative; --move: 1.2s; }
+.tab-item { position: absolute; transition: left var(--move) ease-in-out, top var(--move) ease-in-out, opacity .6s, filter .6s; }
+.tab-item img, .tab-item svg { display: block; width: 100%; height: auto; }
+.tab-item.dim { opacity: .3; }
+.tab-item.has-light { filter: drop-shadow(0 0 .7rem rgba(255, 180, 30, .95)); }
+.tab-item.missing { aspect-ratio: 4 / 3; display: grid; place-items: center; text-align: center; padding: .3rem;
+  border: 2px dashed #bbb; color: #888; font-size: .8rem; }
+.tab-light { position: absolute; z-index: 2; aspect-ratio: 1; transform: translate(-50%, -50%); pointer-events: none;
+  transition: left var(--move) ease-in-out, top var(--move) ease-in-out; }
+.tab-dot { width: 100%; height: 100%; border-radius: 50%; background: radial-gradient(circle at 35% 35%, #ffe9a0, #f5a623 60%, #d9800a);
+  box-shadow: 0 0 .9rem .25rem rgba(255, 190, 40, .75); }
 @media (hover: hover) and (pointer: fine) {          /* with a mouse, the molecule can be dragged between the cards */
   .overlay .steps { pointer-events: none; }
   .card { pointer-events: auto; }

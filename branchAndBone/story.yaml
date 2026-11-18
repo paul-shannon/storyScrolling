@@ -98,6 +98,48 @@ scenes:
       - text: text/oec-3.html
         view: {only: [A.cartoon, OEC.line, CLA.348, CLA.349, CLA.350, CLA.352], center: ":A", spin: true}
 
+  # Upper Skagit: Mink steals daylight and a bit of light is thrown from Mink to Raven and back, to the canoe and home
+  # (see tableau-scene.js: x, y, w are % of the stage; each card's view says where the light is)
+  - layout: overlay
+    id: daylight
+    media:
+      alt: "Animated picture: a bit of daylight is thrown from Mink to Raven and back to Mink, carried in a canoe to the longhouse"
+      tableau:
+        aspect: 1.767
+        background: "#ffffff"
+        light: {size: 1.4}
+        items:
+          - {id: sun,        img: media/daylight-sun.png,        x: 58.1, y: 0,    w: 11.0, alt: "The sun"}
+          - {id: blackMink,  img: media/daylight-black-mink.jpg, x: 34.4, y: 9.8,  w: 15.0, alt: "Mink, the trickster", hold: [0.5, 0.35]}
+          - {id: raven,      img: media/daylight-raven.jpg,      x: 17.9, y: 37.1, w: 17.7, alt: "Raven in flight",     hold: [0.5, 0.45]}
+          - {id: brownMink,  img: media/daylight-brown-mink.jpg, x: 12.5, y: 70.8, w: 16.4, alt: "Mink",                hold: [0.5, 0.4]}
+          - {id: canoe,      img: media/daylight-canoe.jpg,      x: 32.5, y: 76.4, w: 13.2, alt: "A canoe",             hold: [0.5, 0.35]}
+          - {id: arrow,      shape: arrow,                       x: 51.4, y: 80.5, w: 16.7}
+          - {id: longhouse,  img: media/daylight-longhouse.jpg,  x: 74.0, y: 69.7, w: 21.0, alt: "A longhouse on the shore"}
+    steps:
+      - {text: text/daylight-0.html, view: {light: [51.7, 9.7], focus: [sun, blackMink]}}
+      - {text: text/daylight-1.html, view: {light: blackMink,  focus: [sun, blackMink]}}
+      - {text: text/daylight-2.html, view: {light: raven,      focus: [blackMink, raven]}}
+      - {text: text/daylight-3.html, view: {light: brownMink,  focus: [raven, brownMink]}}
+      - {text: text/daylight-4.html, view: {light: canoe,      focus: [brownMink, canoe]}}
+      - {text: text/daylight-5.html, view: {light: canoe,      focus: [canoe, arrow, longhouse], place: {canoe: [59.8, 76.4]}}}
+      - {text: text/daylight-6.html, view: {light: longhouse,  focus: [canoe, longhouse],        place: {canoe: [59.8, 76.4]}}}
+
+  # the electron transport chain: one card per step; scrolling moves the charge (see etc-scene.js)
+  - layout: overlay
+    id: etc
+    media:
+      alt: "Animated 3D model of the electron transport chain, from a photon striking chlorophyll to Photosystem I"
+      ngl: {kind: etc, background: "#f6f3ea"}
+    steps:
+      - {text: text/etc-0.html, view: {step: 0}}
+      - {text: text/etc-1.html, view: {step: 1}}
+      - {text: text/etc-2.html, view: {step: 2}}
+      - {text: text/etc-3.html, view: {step: 3}}
+      - {text: text/etc-4.html, view: {step: 4}}
+      - {text: text/etc-5.html, view: {step: 5}}
+      - {text: text/etc-6.html, view: {step: 6}}
+
   - layout: split
     id: big-trees
     media:
@@ -109,16 +151,16 @@ scenes:
     steps:
       - text: text/big-trees.html
 
-  - layout: overlay
-    id: big-trees-full
-    media:
-      - video: https://sewardpark.org/wp-content/uploads/2025/03/bigTree-7.mov
-        controls: false
-        muted: true
-        loop: true
-        alt: "Video of the mature Douglas-fir"
-    steps:
-      - text: text/big-trees.html
+#  - layout: overlay
+#    id: big-trees-full
+#    media:
+#      - video: https://sewardpark.org/wp-content/uploads/2025/03/bigTree-7.mov
+#        controls: false
+#        muted: true
+#        loop: true
+#        alt: "Video of the mature Douglas-fir"
+#    steps:
+#      - text: text/big-trees.html
 
 
 
