@@ -1,5 +1,6 @@
 default:
 	@echo link 
+	@echo venv
 	@echo build
 	@echo server
 	@echo view-local
@@ -10,6 +11,9 @@ build:
 	python build.py story.yaml backstory.yaml
 
 PORT = 4441
+
+venv:
+	@echo source /Users/paul/github/slexil2/py3119slexil/bin/activate
 
 server:
 	 python -m http.server $(PORT) &

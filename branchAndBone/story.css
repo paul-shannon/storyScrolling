@@ -50,7 +50,7 @@ a:hover{color: gray;}
 
 /* full: title or media alone */
 .full { min-height: 100vh; display: grid; place-items: center; text-align: center; overflow: hidden; }
-.full .pin-media { position: absolute; inset: 0; margin: 20px;}
+.full .pin-media { position: absolute; inset: 0; margin: 0px;}
 .full-text { position: relative; padding: 2rem; }
 .full h1 { font-size: 2rem; margin: 0 0 .3em; font-weight: 600; letter-spacing: .02em; }
 /* .full h1 { font-size: clamp(2.6rem, 5vw, 6rem); margin: 0 0 .3em; font-weight: 600; letter-spacing: .02em; } */

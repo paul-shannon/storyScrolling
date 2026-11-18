@@ -5,7 +5,7 @@ scenes:
 
   - layout: full
     id: title
-    fallback: "linear-gradient(160deg, #18261f, #2E6F40)"  
+    #fallback: "linear-gradient(160deg, #18261f, #2E6F40)"  
     heading: Branch and Bone
     subheading: |-
          Lessons from a small forest
@@ -23,6 +23,15 @@ scenes:
     media: {img: media/missouri-forest-with-small-stream.webp, alt: "Kansas forest"}   # drop your own photo here
     steps:
       - text: text/intro-kansas.html
+
+  - layout: split
+    id: leavenworth
+    lead: 20      # photo alone on screen for ~90vh of scrolling before the text arrives
+    trail: 70     # photo alone again after the text passes    fallback: "linear-gradient(180deg, #1b2a3a, #0f1a14)"
+    media: {img: media/leavenworth2.jpg, alt: "Fort Leavenworth"}   # drop your own photo here
+    steps:
+      - text: text/fort-leavenworth.html
+
 
   - layout: overlay
     id: currentForest
@@ -82,8 +91,8 @@ scenes:
     steps:
       - text: text/oec-0.html
         view: {only: [A.cartoon, OEC.spacefill, CLA.348, CLA.349, CLA.350, CLA.352], center: ":A", spin: true}
-      - text: text/oec-1.html
-        view: {only: [OEC.spacefill], center: "OEC AND :A", spin: true}
+#      - text: text/oec-1.html
+#        view: {only: [OEC.spacefill], center: "OEC AND :A", spin: true}
       - text: text/oec-2.html
         view: {only: [OEC.line], center: "OEC AND :A", spin: true}
       - text: text/oec-3.html
@@ -101,6 +110,19 @@ scenes:
       - text: text/big-trees.html
 
   - layout: overlay
+    id: big-trees-full
+    media:
+      - video: https://sewardpark.org/wp-content/uploads/2025/03/bigTree-7.mov
+        controls: false
+        muted: true
+        loop: true
+        alt: "Video of the mature Douglas-fir"
+    steps:
+      - text: text/big-trees.html
+
+
+
+  - layout: overlay
     id: overgrownIvy
     lead: 90      # photo alone on screen for ~90vh of scrolling before the text arrives
     trail: 70     # photo alone again after the text passes    fallback: "linear-gradient(180deg, #1b2a3a, #0f1a14)"
@@ -108,6 +130,11 @@ scenes:
     media: {img: media/ivyInfestation.jpg, alt: "ivy infestation"}
     steps:
       - text: text/ivyInfestation.html
+
+  - layout: full
+    id: toBeContinued
+    fallback: "linear-gradient(160deg, #18261f, #2E6F40)"  
+    heading: To be continued.  Lots more to come.
 
 
 
