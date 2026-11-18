@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>etcClass</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      }
+    body {
+      background: white;
+      color: #ccc;
+      display: flex; height: 100vh;
+      font-family: "New York Times-Roman";
+      }
+    h3, h4{
+      color: black;
+      font-color: black;
+      }
+    #viewport {
+      flex: 1;
+        margin: 10px;
+        border: 1px solid gray;
+        border-radius: 10px;
+      }
+    button{
+       padding: 10px;
+       font-size: 18px;
+       background: white;
+       border: 1px solid gray;
+       border-radius: 8px;
+       }
+    .sidebar{
+        width: 200px;
+        background: #f5f5f5;
+        margin: 10px;
+        margin-right: 0px;
+        padding: 10px;
+        border: 1px solid gray;
+        border-radius: 10px;
+        }
+   
+  </style>
+  <script src="https://code.jquery.com/jquery-3.6.3.min.js"></script>
+  <script src="https://unpkg.com/ngl@2.0.0-dev.37/dist/ngl.js"></script>
+
+</head>
+
+<body>
+  <div class="sidebar">
+    <div><button id="ps2Button">Photosystem II</button></div>
+    <div style="margin-top: 5px;"><button id="ps2CofactorButton">Cofactors</button></div>
+    <div style="margin-top: 5px;"><button id="etcButton">ETC</button></div>
+    <div style="margin-top: 5px;"><button id="launchPhotonButton"> Launch Photon to Chlorophyll</button></div>
+    <div style="margin-top: 5px;"><button id="spinButton"> Spin</button></div>
+    <div style="margin-top: 20px;">
+       <h4> Electron Transport Chain</h4>
+    </div>
+    <div style="margin-top: 5px;"><button id="etcStep1-button">to Pheophytin</button></div>
+    <div style="margin-top: 5px;"><button id="etcStep2-button">to Plastoquinone</button></div>
+    <div style="margin-top: 5px;"><button id="etcStep3-button">to Cytochrome</button></div>
+    <div style="margin-top: 5px;"><button id="etcStep4-button">to Plastocyanin</button></div>
+    <div style="margin-top: 5px;"><button id="etcStep5-button">to PSI</button></div>
+
+    <div style="margin-top: 20px;"></div>
+    <div style="margin-top: 5px;"><button id="resetView-button">Reset View</button></div>
+    <div style="margin-top: 5px;"><button id="etcOnlyView-button">ETC View</button></div>
+  </div>
+  <div id="viewport"></div>
+</body>
+
+<script type="module">
+
+
+
+//---------------------------------------------------------------------------
+// define, create, initialize the basics
+//--------------------------------------
+
+const DEG = Math.PI / 180;
+
+
+    $("#lauchPhotonButton").attr('disabled', false);
+    $("#etcStep1-button").attr('disabled', true);
+    $("#etcStep2-button").attr('disabled', true);
+    $("#etcStep3-button").attr('disabled', true);
+    $("#etcStep4-button").attr('disabled', true);
+    $("#etcStep5-button").attr('disabled', true);
+    
+    document.addEventListener("DOMContentLoaded", async () => {
+      console.log("dom content loaded");
+      //const stage = new NGL.Stage("viewport", { backgroundColor: "beige" });
+      //window.stage = stage;
+      window.spinning = false;
+      //stage.mouseControls.remove("clickPick-left");
+      //window.addEventListener("resize", () => stage.handleResize());
+
+
+      /******
+      const photon = new Photon(stage)
+      await photon.load()
+      photon.buildRepresentations()
+      photon.setLocation(100,0,0)
+      photon.afterLoad()
+      window.photon = photon;
+      
+      const cla = new Chlorophyll(stage);
+      await cla.load()
+      cla.buildRepresentations()
+      cla.setLocation(20, -43, -53.8)
+      cla.afterLoad()
+      window.cla = cla
+
+      const ps2 = new Photosystem2(stage)
+      await ps2.load()
+      ps2.buildRepresentations()
+      ps2.setLocation(0,0,0)      
+      window.ps2 = ps2
+
+      const pheo = new Pheophytin(stage);
+      await pheo.load()
+      pheo.buildRepresentations()
+      pheo.setLocation(0, 0, 2.12)
+      pheo.afterLoad()
+      window.pheo = pheo;
+
+      const plasto = new Plastoquinone(stage);
+      await plasto.load()
+      plasto.buildRepresentations()
+      plasto.setLocation(16,-20,15)
+      plasto.afterLoad()
+      window.plasto = plasto;
+
+      const cytochrome = new Cytochrome(stage);
+      await cytochrome.load()
+      cytochrome.buildRepresentations()
+      cytochrome.setLocation(-147, -205, -178)
+      cytochrome.afterLoad()
+      window.cytochrome = cytochrome;
+
+      const plastocyanin = new Plastocyanin(stage);
+      await plastocyanin.load()
+      plastocyanin.buildRepresentations()
+      plastocyanin.setLocation(40, -80, 8)
+      plastocyanin.afterLoad()
+      window.plastocyanin = plastocyanin;
+
+
+      const ps1 = new Photosystem1(stage);
+      await ps1.load()
+      ps1.buildRepresentations()
+      ps1.setLocation(-360,-220,-60)
+      ps1.afterLoad()
+      window.ps1 = ps1;
+      ps1.remove()
+      ****/  
+
+      }) // DOMContentLoaded
+//---------------------------------------------------------------------------
+</script>
+
+
+<script type="module">
+
+import {Photosystem1} from './ps1.js';  
+import {Photosystem2} from './ps2.js';  
+import {Chlorophyll} from './chlorophyll.js';  
+import {Photon} from './photon.js';  
+import {Pheophytin} from './pheophytin.js';  
+import {Plastoquinone} from './plastoquinone.js';  
+import {Cytochrome} from './cytochromeBF6.js';  
+import {Plastocyanin} from './plastocyanin.js';  
+
+window.ps = null;
+
+document.addEventListener("DOMContentLoaded", async () => {
+   const stage = new NGL.Stage("viewport", { backgroundColor: "beige" });
+   window.addEventListener("resize", () => stage.handleResize());
+   stage.mouseControls.remove("clickPick-left");
+   window.stage = stage;
+   const ps1 = new Photosystem1(stage);
+   await ps1.load()
+   ps1.buildRepresentations()
+   ps1.setLocation(-360,-220,-60)
+   ps1.afterLoad()
+   window.ps1 = ps1;
+   ps1.remove()
+   })
+
+
+      $("#ps2Button").on('click', function(){
+         async function go(){
+            const ps2 = new Photosystem2(stage)
+            await ps2.load()
+            ps2.buildRepresentations()
+            ps2.setLocation(0,0,0)      
+            window.ps2 = ps2
+            stage.autoView()
+            }
+          go()
+          })
+
+      $("#ps2CofactorButton").on('click', function(){
+          console.log("ps2CofactorButton")
+          ps2.proteinRep.setVisibility(false)
+          ps2.oecRep.setVisibility(false)
+          })
+
+      $("#etcButton").on('click', function(){
+         async function go(){
+           if (typeof ps2 !== 'undefined'){
+              ps2.remove()
+              }
+           const photon = new Photon(stage)
+           await photon.load()
+           photon.buildRepresentations()
+           photon.setLocation(100,0,0)
+           photon.afterLoad()
+           window.photon = photon;
+           
+           const cla = new Chlorophyll(stage);
+           await cla.load()
+           cla.buildRepresentations()
+           cla.setLocation(20, -43, -53.8)
+           cla.afterLoad()
+           window.cla = cla
+     
+           const pheo = new Pheophytin(stage);
+           await pheo.load()
+           pheo.buildRepresentations()
+           pheo.setLocation(0, 0, 2.12)
+           pheo.afterLoad()
+           window.pheo = pheo;
+     
+           const plasto = new Plastoquinone(stage);
+           await plasto.load()
+           plasto.buildRepresentations()
+           plasto.setLocation(16,-20,15)
+           plasto.afterLoad()
+           window.plasto = plasto;
+     
+           const cytochrome = new Cytochrome(stage);
+           await cytochrome.load()
+           cytochrome.buildRepresentations()
+           cytochrome.setLocation(-147, -205, -178)
+           cytochrome.afterLoad()
+           window.cytochrome = cytochrome;
+     
+           const plastocyanin = new Plastocyanin(stage);
+           await plastocyanin.load()
+           plastocyanin.buildRepresentations()
+           plastocyanin.setLocation(40, -80, 8)
+           plastocyanin.afterLoad()
+           window.plastocyanin = plastocyanin;
+           stage.autoView()
+     
+           //const ps1 = new Photosystem1(stage);
+           //await ps1.load()
+           //ps1.buildRepresentations()
+           //ps1.setLocation(-360,-220,-60)
+           //ps1.afterLoad()
+           //window.ps1 = ps1;
+           }     
+          go()
+          })
+
+      $("#launchPhotonButton").on('click', function(){
+         photon.travel()
+         $("#etcStep1-button").attr('disabled', false);
+         $("#etcStep2-button").attr('disabled', true);
+         $("#etcStep3-button").attr('disabled', true);
+         $("#etcStep4-button").attr('disabled', true);
+         })
+
+      $("#etcStep1-button").on('click', function(){
+         console.log("transport electron button")
+         cla.relax()
+         pheo.excite()
+         $("#etcStep1-button").attr('disabled', true);
+         $("#etcStep2-button").attr('disabled', false);
+         $("#etcStep3-button").attr('disabled', true);
+         $("#etcStep4-button").attr('disabled', true);
+
+
+         })
+
+      $("#etcStep2-button").on('click', function(){
+         console.log("transport electron button")
+         pheo.relax()
+         plasto.excite()
+         $("#etcStep1-button").attr('disabled', true);
+         $("#etcStep2-button").attr('disabled', true);
+         $("#etcStep3-button").attr('disabled', false);
+         $("#etcStep4-button").attr('disabled', true);
+         })
+
+      $("#etcStep3-button").on('click', function(){
+         console.log("transport electron button")
+         plasto.relax()
+         cytochrome.excite()
+         $("#etcStep1-button").attr('disabled', true);
+         $("#etcStep2-button").attr('disabled', true);
+         $("#etcStep3-button").attr('disabled', true);
+         $("#etcStep4-button").attr('disabled', false);
+         })
+
+      $("#etcStep4-button").on('click', function(){
+         $("#etcStep1-button").attr('disabled', true);
+         $("#etcStep2-button").attr('disabled', true);
+         $("#etcStep3-button").attr('disabled', true);
+         $("#etcStep4-button").attr('disabled', true);
+         $("#etcStep5-button").attr('disabled', false);
+         console.log("transport electron button")
+         cytochrome.relax()
+         plastocyanin.excite()
+         })
+
+      $("#etcStep5-button").on('click', function(){
+         $("#etcStep1-button").attr('disabled', true);
+         $("#etcStep2-button").attr('disabled', true);
+         $("#etcStep3-button").attr('disabled', true);
+         $("#etcStep4-button").attr('disabled', true);
+         $("#etcStep5-button").attr('disabled', true);
+         ps1.restore()
+         stage.animationControls.zoomMove({x: -89, y: -67, z: 50}, -600, 2000)
+         plastocyanin.travel()
+         //stage.animationControls.zoomMove({x: -120, y: -67, z: 29}, -200, 2000)
+         //stage.animationControls.zoomMove({x: -120, y: -67, z: 29}, -200, 2000)
+         })
+
+      $("#resetView-button").on('click', function(){
+        excitedRepB.setVisibility(false);
+        excitedRepC.setVisibility(false);
+        excitedRepD.setVisibility(false);
+        excitedRepE.setVisibility(false);
+
+        stage.viewerControls.orient(initialView)
+        compA.setPosition ([20,   -43,   -53.8])
+        compB.setPosition( [0,       0,  2.12])
+        compC.setPosition([16,-20,15])
+        compD.setPosition([-147, -205, -178])
+        compE.setPosition([40,-80,8])        
+        compSun.setPosition([100,0,0])
+        compSun.setVisibility(true)
+        compPS1.setPosition([-360,-220,-60])
+        stage.autoView()
+         })
+
+     $("#spinButton").on('click', function(){
+        console.log("window.spinning? " + window.spinning)
+        if(window.spinning){
+          stage.setSpin(false)
+          window.spinning = false
+          }
+        else{
+          stage.setSpin(true)
+          window.spinning = true;
+          }
+        })
+        
+     $("#etcOnlyView-button").on('click', function(){
+        stage.animationControls.zoomMove(pheo.component.getCenter(), -250, 2000)
+        })
+
+</script> 
+
+
+</html>
+  
