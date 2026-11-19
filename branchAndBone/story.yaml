@@ -5,11 +5,9 @@ scenes:
 
   - layout: full
     id: title
-    #fallback: "linear-gradient(160deg, #18261f, #2E6F40)"  
-    more: {page: oec-furtherDiscussion, label: "Credits"}
     heading: Branch and Bone
     subheading: |-
-         Lessons from a small forest
+         Lessons from a small forest (and places nearby)
     media:
       - video: media/peninsula-drone-loop.mp4
         controls: false
@@ -24,6 +22,11 @@ scenes:
     media: {img: media/leavenworth2.jpg, alt: "Fort Leavenworth"}   # drop your own photo here
     steps:
       - text: text/fort-leavenworth.html
+
+  - layout: reading
+    id: onTheBike
+    steps:
+      - text: text/onTheBike.html
 
 
   - layout: overlay
