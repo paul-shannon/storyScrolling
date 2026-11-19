@@ -6,6 +6,7 @@ scenes:
   - layout: full
     id: title
     #fallback: "linear-gradient(160deg, #18261f, #2E6F40)"  
+    more: {page: oec-furtherDiscussion, label: "Credits"}
     heading: Branch and Bone
     subheading: |-
          Lessons from a small forest
@@ -74,6 +75,7 @@ scenes:
 #
   - layout: overlay
     id: oec
+    more: {page: oec-furtherDiscussion, label: "Further discussion"}
     media:
       ngl:
         structure: rcsb://1S5L              # or a URL / local path to a .pdb or .cif file
@@ -107,7 +109,7 @@ scenes:
       tableau:
         aspect: 1.767
         background: "#ffffff"
-        light: {size: 1.4}
+        light: {size: 2.4}
         items:
           - {id: sun,        img: media/daylight-sun.png,        x: 58.1, y: 0,    w: 11.0, alt: "The sun"}
           - {id: blackMink,  img: media/daylight-black-mink.jpg, x: 34.4, y: 9.8,  w: 15.0, alt: "Mink, the trickster", hold: [0.5, 0.35]}

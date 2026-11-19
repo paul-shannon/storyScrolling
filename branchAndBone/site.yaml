@@ -1,0 +1,7 @@
+# The pages of the site. Paths are relative to this file; build with:  python build.py site.yaml
+site: Branch and Bone
+tabs:                       # one tab each, in this order; the first is index.html
+  - story.yaml
+  - backstory.yaml
+background:                 # deep-dive pages: no tab, reached from a scene's `more:` link
+  - text/oec-furtherDiscussion.html     # a bare text file is a whole page; a .yaml here gives full control

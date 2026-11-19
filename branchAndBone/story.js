@@ -56,3 +56,11 @@ const controlledObserver = new IntersectionObserver(entries => entries.forEach(e
   if (!e.isIntersecting) e.target.pause();
 }), {threshold: 0});
 document.querySelectorAll('video[controls]').forEach(v => controlledObserver.observe(v));
+
+// "Back" on a background page: when the reader came from this site, return to exactly where they were;
+// otherwise the link itself goes to the scene that links here.
+document.querySelector('.tabs .back')?.addEventListener('click', e => {
+  try {
+    if (history.length > 1 && new URL(document.referrer).origin === location.origin) { e.preventDefault(); history.back(); }
+  } catch (err) { /* no usable referrer: follow the link */ }
+});

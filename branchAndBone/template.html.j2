@@ -9,7 +9,7 @@
 </head>
 <body>
 <div id="progress" aria-hidden="true"></div>
-{% if tabs|length > 1 %}<nav class="tabs" aria-label="Sections of this story">{% for t in tabs %}<a href="{{ t.href }}"{% if t.href == current %} aria-current="page"{% endif %}>{{ t.label }}</a>{% endfor %}</nav>{% endif %}
+{% if tabs|length > 1 or back %}<nav class="tabs" aria-label="Sections of this story">{% if back %}<a class="back" href="{{ back.href }}">&larr; {{ back.label }}</a>{% endif %}{% for t in tabs %}<a href="{{ t.href }}"{% if t.href == current %} aria-current="page"{% endif %}>{{ t.label }}</a>{% endfor %}</nav>{% endif %}
 {% macro media_html(m) -%}
   {%- if m.ok -%}
     {%- if m.video -%}<video{% if m.controls %} controls{% if m.muted %} muted{% endif %}{% if m.loop %} loop{% endif %}{% else %} muted loop{% endif %} playsinline preload="metadata"{% if m.poster %} poster="{{ m.poster }}"{% endif %} aria-label="{{ m.alt }}"><source src="{{ m.video }}"></video>
@@ -19,19 +19,23 @@
     {%- endif -%}
   {%- endif -%}
 {%- endmacro %}
+{% macro more_html(sc) -%}
+  {%- if sc.more %}<p class="more"><a href="{{ sc.more.href }}">{{ sc.more.label }} &rarr;</a></p>{% endif -%}
+{%- endmacro %}
 <main>
-{% for sc in scenes %}
+{% if lede %}<header class="lede">{% if lede.label %}<p class="label">{{ lede.label }}</p>{% endif %}<p>{{ lede.text|br }}</p></header>
+{% endif %}{% for sc in scenes %}
 {%- if sc.layout == 'full' %}
 <section class="scene full" id="{{ sc.id }}" style="{{ sc.style }}">
   <div class="pin-media">{% for m in sc.medias %}{{ media_html(m) }}{% endfor %}</div>
-  <div class="full-text"><h1>{{ sc.heading|br }}</h1>{% if sc.subheading %}<p>{{ sc.subheading|br }}</p>{% endif %}</div>
+  <div class="full-text"><h1>{{ sc.heading|br }}</h1>{% if sc.subheading %}<p>{{ sc.subheading|br }}</p>{% endif %}{{ more_html(sc) }}</div>
 </section>
 {%- elif sc.layout == 'overlay' %}
 <section class="scene overlay{% if sc.has_ngl %} has-ngl{% endif %}" id="{{ sc.id }}" style="{{ sc.style }}">
   <div class="pin-media">{% for m in sc.medias %}{{ media_html(m) }}{% endfor %}</div>
   <div class="steps">
     {%- for s in sc.steps %}
-    <article class="step card"{% if s.view %} data-view='{{ s.view|tojson }}'{% endif %}>{{ s.html|safe }}{% if s.note %}<p class="note">{{ s.note|br }}</p>{% endif %}</article>
+    <article class="step card"{% if s.view %} data-view='{{ s.view|tojson }}'{% endif %}>{{ s.html|safe }}{% if s.note %}<p class="note">{{ s.note|br }}</p>{% endif %}{% if loop.last %}{{ more_html(sc) }}{% endif %}</article>
     {%- endfor %}
   </div>
 </section>
@@ -40,7 +44,7 @@
   <div class="pin-media">{% for m in sc.medias %}{{ media_html(m) }}{% endfor %}</div>
   <div class="col">
     {%- for s in sc.steps %}
-    <article class="step"{% if s.view %} data-view='{{ s.view|tojson }}'{% endif %}>{{ s.html|safe }}{% if s.note %}<p class="note">{{ s.note|br }}</p>{% endif %}</article>
+    <article class="step"{% if s.view %} data-view='{{ s.view|tojson }}'{% endif %}>{{ s.html|safe }}{% if s.note %}<p class="note">{{ s.note|br }}</p>{% endif %}{% if loop.last %}{{ more_html(sc) }}{% endif %}</article>
     {%- endfor %}
   </div>
 </section>
@@ -48,7 +52,7 @@
 <section class="scene reading" id="{{ sc.id }}">
   <div class="col">
     {%- for s in sc.steps %}
-    <article class="step"{% if s.view %} data-view='{{ s.view|tojson }}'{% endif %}>{{ s.html|safe }}{% if s.note %}<p class="note">{{ s.note|br }}</p>{% endif %}</article>
+    <article class="step"{% if s.view %} data-view='{{ s.view|tojson }}'{% endif %}>{{ s.html|safe }}{% if s.note %}<p class="note">{{ s.note|br }}</p>{% endif %}{% if loop.last %}{{ more_html(sc) }}{% endif %}</article>
     {%- endfor %}
   </div>
 </section>

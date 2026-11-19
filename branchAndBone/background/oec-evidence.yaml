@@ -1,0 +1,10 @@
+title: The oxygen-evolving complex, the evidence
+id: oec-evidence
+# claim: is filled in from the scene that links here (the oec scene); set it here to override
+scenes:
+  - layout: reading
+    id: evidence
+    steps:
+      - text: text/oec-evidence-1.html
+      - text: text/oec-evidence-2.html
+      - text: text/oec-evidence-3.html
