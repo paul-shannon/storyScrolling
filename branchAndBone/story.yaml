@@ -17,14 +17,6 @@ scenes:
         loop: true
         alt: "Video of the mature Douglas-fir"
 
-  - layout: overlay
-    id: firstForest
-    lead: 90      # photo alone on screen for ~90vh of scrolling before the text arrives
-    trail: 70     # photo alone again after the text passes    fallback: "linear-gradient(180deg, #1b2a3a, #0f1a14)"
-    media: {img: media/missouri-forest-with-small-stream.webp, alt: "Kansas forest"}   # drop your own photo here
-    steps:
-      - text: text/intro-kansas.html
-
   - layout: split
     id: leavenworth
     lead: 20      # photo alone on screen for ~90vh of scrolling before the text arrives
@@ -35,13 +27,35 @@ scenes:
 
 
   - layout: overlay
+    id: firstForest
+    lead: 90      # photo alone on screen for ~90vh of scrolling before the text arrives
+    trail: 70     # photo alone again after the text passes    fallback: "linear-gradient(180deg, #1b2a3a, #0f1a14)"
+    media: {img: media/missouri-forest-with-small-stream.webp, alt: "Kansas forest"}   # drop your own photo here
+    steps:
+      - text: text/intro-kansas.html
+
+  - layout: reading
+    id: livingInTwoWorlds
+    steps:
+      - text: text/livingInTwoWorlds.html
+
+
+
+  - layout: overlay
     id: currentForest
     lead: 90      # photo alone on screen for ~90vh of scrolling before the text arrives
     trail: 70     # photo alone again after the text passes    fallback: "linear-gradient(180deg, #1b2a3a, #0f1a14)"
     fallback: "linear-gradient(180deg, #1b2a3a, #0f1a14)"
-    media: {img: media/hatcheryTrail-healthy.jpeg, alt: "Seward Forest with hazelnuts"}   # drop your own photo here
+#    media: {img: media/hatcheryTrail-healthy.jpeg, alt: "Seward Forest with hazelnuts"}   # drop your own photo here
+    media: 
+      - video: media/forestTour-fast.mp4
+        controls: false
+        muted: true
+        loop: true
+        alt: "A video tour of the forest"
     steps:
       - text: text/intro-seward.html
+
 
   - layout: split
     id: branchingPatterns
@@ -116,7 +130,6 @@ scenes:
           - {id: raven,      img: media/daylight-raven.jpg,      x: 17.9, y: 37.1, w: 17.7, alt: "Raven in flight",     hold: [0.5, 0.45]}
           - {id: brownMink,  img: media/daylight-brown-mink.jpg, x: 12.5, y: 70.8, w: 16.4, alt: "Mink",                hold: [0.5, 0.4]}
           - {id: canoe,      img: media/daylight-canoe.jpg,      x: 32.5, y: 76.4, w: 13.2, alt: "A canoe",             hold: [0.5, 0.35]}
-          - {id: arrow,      shape: arrow,                       x: 51.4, y: 80.5, w: 16.7}
           - {id: longhouse,  img: media/daylight-longhouse.jpg,  x: 74.0, y: 69.7, w: 21.0, alt: "A longhouse on the shore"}
     steps:
       - {text: text/daylight-0.html, view: {light: [51.7, 9.7], focus: [sun, blackMink]}}
